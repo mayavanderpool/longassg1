@@ -1,3 +1,5 @@
+package model;
+
 /*
  * File: Song.java
  * Author: Maya Vanderpool
@@ -44,5 +46,9 @@ public class Song {
     public boolean getFavorite() {
         return favorite;
     }
+    
+    public static Song copySong(Song song) {
+		return new Song (song.title, song.artist);
+	}
 
 }

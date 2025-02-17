@@ -45,7 +45,7 @@ public class Album {
 	public ArrayList<Song> getSongList(){
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for(Song s: songList) {
-			songs.add(Song.copyCourse(s));
+			songs.add(Song.copySong(s));
 		}
 		return songs;
 	}
