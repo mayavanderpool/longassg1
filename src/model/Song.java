@@ -47,6 +47,7 @@ public class Song {
         return favorite;
     }
     
+    //ENCAPSULATION BAD
     public static Song copySong(Song song) {
 		return new Song (song.title, song.artist);
 	}
