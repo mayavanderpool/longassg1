@@ -1,3 +1,5 @@
+package model;
+
 /*
  * File: PlayList.java
  * Author: Maya Vanderpool
