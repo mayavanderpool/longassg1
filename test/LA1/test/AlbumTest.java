@@ -8,10 +8,7 @@ class AlbumTest {
 
 	@Test
 	void testGetters() {
-		Album spinsAlbum = new Album ("Chicken Wings and Fries", "Crispy");
-		spinsAlbum.setYear(1996);
-		spinsAlbum.setGenre("Expeirmental Hip-Hop");
-		
+		Album spinsAlbum = new Album ("Chicken Wings and Fries", "Crispy", 1996, "Expeirmental Hip-Hop");
 		assertEquals("Crispy", spinsAlbum.getArtist());
 		assertEquals("Chicken Wings and Fries", spinsAlbum.getTitle());
 		assertEquals(1996, spinsAlbum.getYear());
@@ -20,10 +17,7 @@ class AlbumTest {
 	
 	@ Test
 	void testSongList() {
-		Album spinsAlbum = new Album ("Chicken Wings and Fries", "Crispy");
-		spinsAlbum.setYear(1996);
-		spinsAlbum.setGenre("Expeirmental Hip-Hop");
-		
+		Album spinsAlbum = new Album ("Chicken Wings and Fries", "Crispy", 1996, "Expeirmental Hip-Hop");
 		assertEquals(0, spinsAlbum.getSongList().size());
 		
 		Song supaSauce = new Song("Supa Sauce", "Crispy");
@@ -45,7 +39,7 @@ class AlbumTest {
 		spinsAlbum.addSong(ice);
 		
 		Song moist = new Song("Moist Towelette", "Crispy");
-		spinsAlbum.addSong(moist);
+		spinsAlbum.addSong(tShirt);
 		
 		assertEquals(6, spinsAlbum.getSongList().size());
 	}

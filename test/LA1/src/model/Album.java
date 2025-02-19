@@ -17,11 +17,11 @@ public class Album {
 	private ArrayList<Song> songList;
 	
 	/* CONSTRUCTOR*/
-	public Album( String title, String artist) {
+	public Album( String title, String artist, int year, String genre) {
 		this.title = title;
 		this.artist = artist;
-		this.year = 0;
-		this.genre = "genre";
+		this.year = year;
+		this.genre = genre;
 		this.songList = new ArrayList<Song>();
 	}
 	
@@ -42,14 +42,6 @@ public class Album {
 		return this.genre;
 	}
 	
-	public void setYear(int year) {
-		this.year = year;
-	}
-	
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	
 	public ArrayList<Song> getSongList(){
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for(Song s: songList) {
@@ -61,11 +53,6 @@ public class Album {
 	// addSong(Song song) -- adds a song to the songList
 	public void addSong(Song song) {
 		songList.add(song);
-	}
-
-	public static void main(String[] args) {
-		System.out.println("File does not exist");
-		            System.exit(1);
 	}
 
 }
