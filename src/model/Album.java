@@ -63,7 +63,7 @@ public class Album {
 
 	// addSong(Song song) -- adds a song to the songList
 	public void addSong(Song song) {
-		songList.add(song);
+		songList.add(new Song(song));
 	}
 
 	public static void main(String[] args) {
