@@ -8,13 +8,15 @@ package model;
 
 public class Song {
 
-    // instance variables
+    /* INSTANCE VARIABLES */
+
     private String title;
     private String artist;
     private int rating;
     private boolean favorite;
 
-    // constructor
+    /* CONSTRUCTOR */
+
     public Song(String title, String artist) {
         this.title = title;
         this.artist = artist;
@@ -22,7 +24,16 @@ public class Song {
         this.favorite = false;
     }
 
-    // methods
+    // copy constructor
+    public Song(Song song) {
+        this.title = song.title;
+        this.artist = song.artist;
+        this.rating = song.getRating();
+        this.favorite = song.getFavorite();
+    }
+
+    /* METHODS */
+
     public void setRating(int rating) {
         this.rating = rating;
     }
@@ -46,10 +57,5 @@ public class Song {
     public boolean getFavorite() {
         return favorite;
     }
-    
-    //ENCAPSULATION BAD
-    public static Song copySong(Song song) {
-		return new Song (song.title, song.artist);
-	}
 
 }

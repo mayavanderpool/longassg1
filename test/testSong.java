@@ -1,5 +1,11 @@
 package model;
 
+/*
+ * File: Song.java
+ * Author: Maya Vanderpool
+ * Purpose: This is a test class for Song.java.
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;

@@ -10,17 +10,18 @@ import java.util.ArrayList;
 
 public class PlayList {
 
-    // instance variables
+    /* INSTANCE VARIABLES */
     private ArrayList<Song> playlist;
     private String name;
 
-    // constructor
+    /* CONSTRUCTOR */
     public PlayList() {
         this.playlist = new ArrayList<Song>();
         this.name = null;
     }
 
-    // methods
+    /* METHODS */
+
     public void setName(String name) {
         this.name = name;
     }
@@ -32,7 +33,7 @@ public class PlayList {
     public ArrayList<Song> getPlaylist() {
         ArrayList<Song> list = new ArrayList<>();
         for (Song s : playlist) {
-            list.add(s);
+            list.add(new Song(s));
         }
         return list;
     }
