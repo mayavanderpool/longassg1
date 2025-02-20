@@ -1,4 +1,5 @@
 package model;
+
 /*
  * File: testPlayList.java
  * Author: Maya Vanderpool
@@ -10,23 +11,23 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 class testPlayList {
-	
-	@Test 
-	void testName(){
-		PlayList list = new PlayList();
-		
-		assertEquals(list.getName(), null);
-		list.setName("fun");
-		assertEquals(list.getName(), "fun");
-	}
-	
-	@Test
-	void testAdd() {
-		PlayList list = new PlayList();
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
-		
-		list.addSong("Red Wine Supernova", "Chappelle Roan");
-		assertEquals(1, list.size());
-	
-	}
+
+    @Test
+    void testName() {
+        PlayList list = new PlayList();
+
+        assertEquals(list.getName(), null);
+        list.setName("fun");
+        assertEquals(list.getName(), "fun");
+    }
+
+    @Test
+    void testAdd() {
+        PlayList list = new PlayList();
+        Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
+
+        list.addSong("Red Wine Supernova", "Chappelle Roan");
+        assertEquals(1, list.size());
+
+    }
 }
