@@ -6,7 +6,6 @@ package model;
  * Purpose: This is a test class for PlayList.java.
  */
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ class testPlayList {
         Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
 
         list.addSong("Red Wine Supernova", "Chappelle Roan");
-        assertEquals(1, list.size());
+        assertEquals(1, list.getPlaylist().size());
 
     }
 }
