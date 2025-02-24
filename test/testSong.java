@@ -10,6 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 class testSong {
 
 	@Test
@@ -20,6 +24,9 @@ class testSong {
 
 		song1.setRating(5);
 		assertEquals(song1.getRating(), 5);
+
+		Song song2 = new Song(song1);
+		assertEquals(song2.getRating(), 5);
 
 	}
 
@@ -47,16 +54,6 @@ class testSong {
 		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
 
 		assertEquals(song1.getArtist(), "Chappelle Roan");
-
-	}
-
-	@Test
-	void testCopySong() {
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
-
-		Song songCopy = song1.copySong(song1);
-
-		assertEquals(songCopy.getArtist(), "Chappelle Roan");
 
 	}
 
