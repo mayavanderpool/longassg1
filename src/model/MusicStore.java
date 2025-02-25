@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
 
 /*
 * File: MusicStore.java
@@ -12,26 +10,43 @@ import java.io.File;
 public class MusicStore {
 	/* INSTANCE VARIABLES */
 	private ArrayList<Album> albumList;
+	private ArrayList<Song> songList;
 	
 	/* CONSTRUCTOR*/
-	public MusicStore(String filename) {
+	public MusicStore() {
 		this.albumList = new ArrayList<Album>();
-		try {
-			Scanner scanner = new Scanner(new File(filename));
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				createAlbum(line);
-			}
-		} catch (Exception e) {
-			System.out.println("File error");
-            System.exit(1);
+		this.songList = new ArrayList<Song>();
+	}
+		
+	public void addAlbum(Album album) {
+		albumList.add(album);
+	}
+	
+	public void addSongs(Album album) {
+		ArrayList<Song> albumsSongs = album.getSongList();
+		for (Song s: albumsSongs) {
+			songList.add(Song.copySong(s));
 		}
 	}
-
-	private Album createAlbum(String line) {
-		return null;
-		
-		
+	
+	public void searchSongsByTitle (String title) {
+		for(Song s: songList) {
+			if (s.getTitle() == title) {
+				String artist = s.getArtist();
+				String album = s.getAlbum().getTitle();
+				System.out.println(title + "," + artist + "," + album);
+			}
+		}
+	}
+	
+	public void searchSongsByArtist (String artist) {
+		for(Song s: songList) {
+			if (s.getArtist() == artist) {
+				String title = s.getTitle();
+				String album = s.getAlbum().getTitle();
+				System.out.println(title + "," + artist + "," + album);
+			}
+		}
 	}
 	
 }

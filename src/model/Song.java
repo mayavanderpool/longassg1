@@ -13,6 +13,7 @@ public class Song {
     private String artist;
     private int rating;
     private boolean favorite;
+    private Album album;
 
     // constructor
     public Song(String title, String artist) {
@@ -20,6 +21,7 @@ public class Song {
         this.artist = artist;
         this.rating = 0;
         this.favorite = false;
+        this.album = null;
     }
 
     // methods
@@ -30,6 +32,10 @@ public class Song {
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
+    
+    public void setFavorite(Album album) {
+        this.album = album;
+    }
 
     public String getTitle() {
         return title;
@@ -37,6 +43,10 @@ public class Song {
 
     public String getArtist() {
         return artist;
+    }
+    
+    public Album getAlbum() {
+        return album;
     }
 
     public int getRating() {
