@@ -49,4 +49,20 @@ public class MusicStore {
 		}
 	}
 	
+	public void searchAlbumByTitle(String title) {
+		for (Album a: albumList) {
+			if(a.getTitle() == title) {
+				System.out.println(title + "by" + a.getArtist());
+			}
+		}
+	}
+	
+	public void searchAlbumByArtist(String artist) {
+		for (Album a: albumList) {
+			if(a.getArtist() == artist) {
+				System.out.println(a.getTitle() + "by" + artist);
+			}
+		}
+	}
+	
 }
