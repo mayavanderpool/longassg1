@@ -1,7 +1,16 @@
-package model;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class AlbumTest {
+import com.sun.tools.javac.Main;
+
+class MusicStoreTest {
+
+	@Test
+	void test() {
+		
+	}
+
+}
