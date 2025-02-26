@@ -23,7 +23,7 @@ public class Song {
         this.artist = artist;
         this.rating = 0;
         this.favorite = false;
-        this.album = null;
+        this.album = null; // this isn't right
     }
 
     // copy constructor
@@ -32,10 +32,12 @@ public class Song {
         this.artist = song.artist;
         this.rating = song.getRating();
         this.favorite = song.getFavorite();
+        this.album = song.getAlbum();
     }
 
     /* METHODS */
 
+    //needs ENUM class
     public void setRating(int rating) {
         this.rating = rating;
     }
@@ -44,8 +46,8 @@ public class Song {
         this.favorite = favorite;
     }
     
-    public void setFavorite(Album album) {
-        this.album = album;
+    public void setFavorite() {
+        this.favorite = true;
     }
 
     public String getTitle() {
