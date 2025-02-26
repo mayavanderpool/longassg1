@@ -25,7 +25,7 @@ public class MusicStore {
 	public void addSongs(Album album) {
 		ArrayList<Song> albumsSongs = album.getSongList();
 		for (Song s: albumsSongs) {
-			songList.add(Song.copySong(s));
+			songList.add(new Song(s));
 		}
 	}
 	
