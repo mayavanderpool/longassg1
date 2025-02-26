@@ -55,7 +55,7 @@ public class MusicStore {
 			
 		}
 		if (found == false) {
-			System.out.println("Song not found");
+			System.out.println("This song does not exist in the music store.");
 		}
 		
 	}
@@ -71,7 +71,7 @@ public class MusicStore {
 			
 		}
 		if (found == false) {
-			System.out.println("Song not found");
+			System.out.println("This song does not exist in the music store.");
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class MusicStore {
 			}
 		}
 		if (found == false) {
-			System.out.println("Album not found");
+			System.out.println("This album does not exist in the music store.");
 		}
 	}
 	
@@ -97,7 +97,7 @@ public class MusicStore {
 			}
 		}
 		if (found == false) {
-			System.out.println("Album not found");
+			System.out.println("This album does not exist in the music store.");
 		}
 	}
 	
