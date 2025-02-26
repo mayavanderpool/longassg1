@@ -69,5 +69,10 @@ public class Song {
     public boolean getFavorite() {
         return favorite;
     }
+    
+    public void printSong() {
+    	String albumName = (this.getAlbum()).getTitle();
+    	System.out.println(this.getTitle() + "," + this.getArtist() + "," + albumName);
+    }
 
 }
