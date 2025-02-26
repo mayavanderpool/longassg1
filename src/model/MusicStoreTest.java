@@ -29,9 +29,34 @@ class MusicStoreTest {
 	@Test 
 	void testSearchSongsByTitle() {
 		MusicStore store = new MusicStore();
-		
-		
-		store.searchAlbumByArtist(" Adele");
+		store.searchSongsByTitle("Daydreamer");
+		store.searchSongsByTitle("Dayd");
 	}
 	
+	@Test 
+	void testSearchSongsByArtist() {
+		MusicStore store = new MusicStore();
+		store.searchSongsByArtist("Adele");
+		store.searchSongsByArtist("Rees");
+	}
+	
+	@Test 
+	void testSearchSAlbumByTitle() {
+		MusicStore store = new MusicStore();
+		store.searchAlbumByTitle("19");
+		store.searchAlbumByTitle("Rees");
+	}
+	
+	@Test 
+	void testSearchSAlbumByArist() {
+		MusicStore store = new MusicStore();
+		store.searchAlbumByArtist("Adele");
+		store.searchAlbumByArtist("Rees");
+	}
+	
+	@Test
+	void testGetSongList() {
+		MusicStore store = new MusicStore();
+		assertFalse(store.getSongList().size()==0);
+	}
 } 
