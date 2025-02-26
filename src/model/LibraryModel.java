@@ -29,9 +29,83 @@ public class LibraryModel {
         playLists.add(playlist);
     }
 
-    public void addAlbum(Album album){
-        albums.add(album);
-    }
+	public void addAlbum(Album album) {
+		MusicStore store = new MusicStore();
+		for (Album a : store.getAlbumList()) {
+			if (a.getTitle().equals(album.getTitle()) && a.getArtist().equals(album.getArtist())) {
+				albums.add(album);
+			}
+		}
+	}
 
-    
+	public void searchSongsByTitle(String title) {
+		boolean found = false;
+		for (Song s : songs) {
+			if (s.getTitle().equals(title)) {
+				found = true;
+				s.printSong();
+			}
+
+		}
+		if (found == false) {
+			System.out.println("This song does not exist in the library.");
+		}
+	}
+
+	public void searchSongsByArtist(String artist) {
+		boolean found = false;
+		for (Song s : songs) {
+			if (s.getArtist().equals(artist)) {
+				found = true;
+				s.printSong();
+			}
+		}
+		if (found == false) {
+			System.out.println("This song does not exist in the library.");
+		}
+	}
+
+	public void searchAlbumByTitle(String title) {
+		boolean found = false;
+		for (Album a : albums) {
+			if (a.getTitle().equals(title)) {
+				found = true;
+				a.printAlbum();
+			}
+		}
+		if (found == false) {
+			System.out.println("This album does not exist in the library.");
+		}
+	}
+
+	public void searchAlbumByArtist(String artist) {
+		boolean found = false;
+		for (Album a : albums) {
+			if (a.getArtist().equals(artist)) {
+				found = true;
+				a.printAlbum();
+			}
+		}
+		if (found == false) {
+			System.out.println("This album does not exist in the library.");
+		}
+	}
+
+	public void searchPlayList(String name) {
+		for (PlayList playList : playLists) {
+			if (playList.getName().equals(name)) {
+				for (Song s : playList.getPlaylist()) {
+					System.out.println(s.getTitle() + "," + s.getArtist());
+				}
+			}
+		}
+		System.out.println("This playlist does not exist in the library.");
+	}
+
+	public void getSongs() {
+		for (Song s : songs) {
+			s.printSong();
+		}
+	}
+
 }
