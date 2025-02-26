@@ -22,31 +22,66 @@ public class MusicStore {
 		albumList.add(album);
 	}
 	
+	public ArrayList<Album> getAlbumList(){
+		ArrayList<Album> albums = new ArrayList<Album>();
+		for (Album a : albumList) {
+			albums.add(new Album(a.getTitle(), a.getArtist()));
+		}
+		return albums;
+	}
+	
+	public ArrayList<Song> getSongList(){
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for (Song s : songList) {
+			songs.add(new Song(s));
+		}
+		return songs;
+	}
+	
 	public void addSongs(Album album) {
 		ArrayList<Song> albumsSongs = album.getSongList();
 		for (Song s: albumsSongs) {
-			songList.add(new Song(s));
+			songList.add(s);
 		}
 	}
 	
-	public void searchSongsByTitle (String title) {
+	public String searchSongsByTitle (String title) {
 		for(Song s: songList) {
 			if (s.getTitle() == title) {
-				String artist = s.getArtist();
-				String album = s.getAlbum().getTitle();
-				System.out.println(title + "," + artist + "," + album);
+				return s.getTitle();
 			}
+			
 		}
+		return null;
 	}
 	
-	public void searchSongsByArtist (String artist) {
+	// work on these 
+	public String searchSongsByArtist (String artist) {
 		for(Song s: songList) {
 			if (s.getArtist() == artist) {
-				String title = s.getTitle();
-				String album = s.getAlbum().getTitle();
-				System.out.println(title + "," + artist + "," + album);
+				return s.getTitle();
+			}
+			
+		}
+		return null;
+	}
+	
+	public String searchAlbumByTitle(String title) {
+		for (Album a: albumList) {
+			if(a.getTitle() == title) {
+				return a.getTitle();
 			}
 		}
+		return null;
+	}
+	
+	public String searchAlbumByArtist(String artist) {
+		for (Album a: albumList) {
+			if(a.getArtist() == artist) {
+				return a.getTitle();
+			}
+		}
+		return null;
 	}
 	
 }

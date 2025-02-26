@@ -26,6 +26,8 @@ public class Main {
 					
 					songFile(album);
 					
+					store.addSongs(album);
+					
 				} else {
 					System.out.println("Invalid line");
 				}
@@ -36,6 +38,8 @@ public class Main {
 			System.out.println("File does not exist");
 			exception.printStackTrace();
 		}
+		
+		
 		
 	}
 	
@@ -62,8 +66,9 @@ public class Main {
 					}
 				}
 				
-				scanner.close();
+				
 			}
+			scanner.close();
 		} catch (FileNotFoundException exception) {
 			System.out.println("File does not exist");
 			exception.printStackTrace();
