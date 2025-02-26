@@ -47,7 +47,7 @@ public class LibraryModel {
 	public void searchSongsByTitle(String title) {
 		boolean found = false;
 		for (Song s : songs) {
-			if (s.getTitle() == title) {
+			if (s.getTitle().equals(title)) {
 				found = true;
 				s.printSong();
 			}
@@ -61,7 +61,7 @@ public class LibraryModel {
 	public void searchSongsByArtist(String artist) {
 		boolean found = false;
 		for (Song s : songs) {
-			if (s.getArtist() == artist) {
+			if (s.getArtist().equals(artist)) {
 				found = true;
 				s.printSong();
 			}
@@ -74,7 +74,7 @@ public class LibraryModel {
 	public void searchAlbumByTitle(String title) {
 		boolean found = false;
 		for (Album a : albums) {
-			if (a.getTitle() == title) {
+			if (a.getTitle().equals(title)) {
 				found = true;
 				a.printAlbum();
 			}
@@ -87,7 +87,7 @@ public class LibraryModel {
 	public void searchAlbumByArtist(String artist) {
 		boolean found = false;
 		for (Album a : albums) {
-			if (a.getArtist() == artist) {
+			if (a.getArtist().equals(artist)) {
 				found = true;
 				a.printAlbum();
 			}
@@ -99,7 +99,7 @@ public class LibraryModel {
 
 	public void searchPlayList(String name) {
 		for (PlayList playList : playLists) {
-			if (playList.getName() == name) {
+			if (playList.getName().equals(name)) {
 				for (Song s : playList.getPlaylist()) {
 					System.out.println(s.getTitle() + "," + s.getArtist());
 				}
