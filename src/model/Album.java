@@ -66,9 +66,12 @@ public class Album {
 		songList.add(new Song(song));
 	}
 
-	public static void main(String[] args) {
-		System.out.println("File does not exist");
-		            System.exit(1);
+	public void printAlbum() {
+		System.out.println(this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear());
+		for(Song s : songList) {
+			s.printSong();
+		}
 	}
+	
 
 }

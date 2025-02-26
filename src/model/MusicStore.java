@@ -45,43 +45,60 @@ public class MusicStore {
 		}
 	}
 	
-	public String searchSongsByTitle (String title) {
+	public void searchSongsByTitle (String title) {
+		boolean found = false;
 		for(Song s: songList) {
 			if (s.getTitle() == title) {
-				return s.getTitle();
+				found = true;
+				s.printSong();
 			}
 			
 		}
-		return null;
+		if (found == false) {
+			System.out.println("Song not found");
+		}
+		
 	}
 	
 	// work on these 
-	public String searchSongsByArtist (String artist) {
+	public void searchSongsByArtist (String artist) {
+		boolean found = false;
 		for(Song s: songList) {
 			if (s.getArtist() == artist) {
-				return s.getTitle();
+				found = true;
+				s.printSong();
 			}
 			
 		}
-		return null;
+		if (found == false) {
+			System.out.println("Song not found");
+		}
 	}
 	
-	public String searchAlbumByTitle(String title) {
+	public void searchAlbumByTitle(String title) {
+		boolean found = false;
 		for (Album a: albumList) {
 			if(a.getTitle() == title) {
-				return a.getTitle();
+				a.printAlbum();
+				found = true;
 			}
 		}
-		return null;
+		if (found == false) {
+			System.out.println("Album not found");
+		}
 	}
 	
-	public String searchAlbumByArtist(String artist) {
+	public void searchAlbumByArtist(String artist) {
+		boolean found = false;
 		for (Album a: albumList) {
 			if(a.getArtist() == artist) {
-				return a.getTitle();
+				a.printAlbum();
+				found = true;
 			}
 		}
-		return null;
+		if (found == false) {
+			System.out.println("Album not found");
+		}
 	}
 	
 }
