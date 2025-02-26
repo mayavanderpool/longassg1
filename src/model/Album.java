@@ -69,7 +69,7 @@ public class Album {
 	public void printAlbum() {
 		System.out.println(this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear());
 		for(Song s : songList) {
-			s.printSong();
+			System.out.println(s.getTitle());
 		}
 	}
 	
