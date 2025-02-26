@@ -122,7 +122,7 @@ public class MusicStore {
 	public void searchSongsByTitle (String title) {
 		boolean found = false;
 		for(Song s: songList) {
-			if (s.getTitle() == title) {
+			if (s.getTitle().equals(title)) {
 				found = true;
 				s.printSong();
 			}
@@ -138,7 +138,7 @@ public class MusicStore {
 	public void searchSongsByArtist (String artist) {
 		boolean found = false;
 		for(Song s: songList) {
-			if (s.getArtist() == artist) {
+			if (s.getArtist().equals(artist)) {
 				found = true;
 				s.printSong();
 			}
@@ -152,7 +152,7 @@ public class MusicStore {
 	public void searchAlbumByTitle(String title) {
 		boolean found = false;
 		for (Album a: albumList) {
-			if(a.getTitle() == title) {
+			if(a.getTitle().equals(title)) {
 				a.printAlbum();
 				found = true;
 			}
@@ -165,7 +165,7 @@ public class MusicStore {
 	public void searchAlbumByArtist(String artist) {
 		boolean found = false;
 		for (Album a: albumList) {
-			if(a.getArtist() == artist) {
+			if(a.getArtist().equals(artist)) {
 				a.printAlbum();
 				found = true;
 			}

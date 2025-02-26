@@ -10,30 +10,24 @@ import java.util.ArrayList;
 
 public class LibraryModel {
 
-	/* INSTANCE VARIABLES */
-	private ArrayList<Song> songs;
-	private ArrayList<PlayList> playLists;
-	private ArrayList<Album> albums;
+    /* INSTANCE VARIABLES */
+    private ArrayList<Song> songs;
+    private ArrayList<PlayList> playLists;
+    private ArrayList<Album> albums;
 
-	public LibraryModel() {
-		this.songs = new ArrayList<Song>();
-		this.playLists = new ArrayList<PlayList>();
-		this.albums = new ArrayList<Album>();
-	}
+    public LibraryModel(){
+        this.songs = new ArrayList<Song>();
+        this.playLists = new ArrayList<PlayList>();
+        this.albums = new ArrayList<Album>();
+    }
 
-	public void addSong(Song song) {
-		MusicStore store = new MusicStore();
-		for (Song s : store.getSongList()) {
-			if (s.getTitle() == song.getTitle() && s.getArtist() == song.getArtist()) {
-				songs.add(song);
-			}
-		}
-		songs.add(new Song(song));
-	}
+    public void addSong(Song song){
+        songs.add(new Song(song));
+    }
 
-	public void addPlaylist(PlayList playlist) {
-		playLists.add(playlist);
-	}
+    public void addPlaylist(PlayList playlist){
+        playLists.add(playlist);
+    }
 
 	public void addAlbum(Album album) {
 		MusicStore store = new MusicStore();
