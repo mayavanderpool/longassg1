@@ -38,7 +38,7 @@ public class PlayList {
         return list;
     }
 
-    public void addSong(String title, String author) {
-        playlist.add(new Song(title, author));
+    public void addSong(Song song) {
+        playlist.add(new Song(song));
     }
 }
