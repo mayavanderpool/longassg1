@@ -61,7 +61,7 @@ public class Main {
 				while (scanner.hasNextLine()) {
 					String songLine = scanner.nextLine().trim();
 					if(!songLine.isEmpty()) {
-						Song song = new Song(songLine, album.getArtist());
+						Song song = new Song(songLine, album.getArtist(), album);
 						album.addSong(song);
 					}
 				}

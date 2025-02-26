@@ -18,12 +18,12 @@ public class Song {
 
     /* CONSTRUCTOR */
 
-    public Song(String title, String artist) {
+    public Song(String title, String artist, Album album) {
         this.title = title;
         this.artist = artist;
         this.rating = 0;
         this.favorite = false;
-        this.album = null; // this isn't right
+        this.album = album;
     }
 
     // copy constructor
