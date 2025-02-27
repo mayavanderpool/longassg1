@@ -1,10 +1,13 @@
-package model;
+package test;
 
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import model.Album;
+import model.MusicStore;
 
 
 
@@ -30,6 +33,7 @@ class MusicStoreTest {
 	void testSearchSongsByTitle() {
 		MusicStore store = new MusicStore();
 		store.searchSongsByTitle("Daydreamer");
+		
 		store.searchSongsByTitle("Dayd");
 	}
 	
