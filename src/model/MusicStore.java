@@ -124,7 +124,7 @@ public class MusicStore {
 		for(Song s: songList) {
 			if (s.getTitle().equals(title)) {
 				found = true;
-				s.printSong();
+				System.out.println(s.printSong());
 			}
 			
 		}
@@ -140,7 +140,7 @@ public class MusicStore {
 		for(Song s: songList) {
 			if (s.getArtist().equals(artist)) {
 				found = true;
-				s.printSong();
+				System.out.println(s.printSong());
 			}
 			
 		}
@@ -153,7 +153,7 @@ public class MusicStore {
 		boolean found = false;
 		for (Album a: albumList) {
 			if(a.getTitle().equals(title)) {
-				a.printAlbum();
+				System.out.println(a.printAlbum());
 				found = true;
 			}
 		}
@@ -166,7 +166,7 @@ public class MusicStore {
 		boolean found = false;
 		for (Album a: albumList) {
 			if(a.getArtist().equals(artist)) {
-				a.printAlbum();
+				System.out.println(a.printAlbum());
 				found = true;
 			}
 		}

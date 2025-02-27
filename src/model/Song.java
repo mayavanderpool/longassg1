@@ -70,9 +70,10 @@ public class Song {
         return favorite;
     }
     
-    public void printSong() {
+    public String printSong() {
     	String albumName = (this.getAlbum()).getTitle();
-    	System.out.println(this.getTitle() + "," + this.getArtist() + "," + albumName);
+    	String songStr = this.getTitle() + "," + this.getArtist() + "," + albumName;
+    	return songStr;
     }
 
 }

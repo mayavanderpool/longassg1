@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /*
 * File: Album.java
-* Author:Rees Hart
+* Author:Rees Hart and Maya Vanderpool
 * Purpose: This class represents an album.
 */
 
@@ -66,11 +66,16 @@ public class Album {
 		songList.add(new Song(song));
 	}
 
-	public void printAlbum() {
-		System.out.println(this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear());
-		for(Song s : songList) {
-			System.out.println(s.getTitle());
+	public String printAlbum() {
+		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear() + "\n";
+		String songs = "";
+		for (Song s : songList) {
+			songs += s.getTitle();
+			songs += "\n";
 		}
+		albumInfo += songs;
+		return albumInfo;
+		
 	}
 	
 
