@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Test;
 import model.Album;
 import model.Song;
 
+/*
+* File: AlbumTest.java
+* Author:Rees Hart and Maya Vanderpool
+* Purpose: This test files tests the Album.java class and acheives 90% (or 
+* greater) code coverage
+*/
+
 class AlbumTest {
 
 	@Test

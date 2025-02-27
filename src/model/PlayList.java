@@ -15,16 +15,12 @@ public class PlayList {
     private String name;
 
     /* CONSTRUCTOR */
-    public PlayList() {
+    public PlayList(String name) {
         this.playlist = new ArrayList<Song>();
-        this.name = null;
+        this.name = name;
     }
 
     /* METHODS */
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getName() {
         return name;

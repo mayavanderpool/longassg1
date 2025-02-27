@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 import model.Album;
 import model.MusicStore;
 
-
+/*
+* File: MusicStoreTest.java
+* Author: Rees Hart and Maya Vanderpool
+* Purpose: This test file tests the various methods in the MusicStore.java class
+*  and acheives 90% (or greater) code coverage.  
+*/
 
 class MusicStoreTest {
 	
@@ -32,30 +37,29 @@ class MusicStoreTest {
 	@Test 
 	void testSearchSongsByTitle() {
 		MusicStore store = new MusicStore();
-		store.searchSongsByTitle("Daydreamer");
-		
-		store.searchSongsByTitle("Dayd");
+		assertEquals(store.searchSongsByTitle("Daydreamer"), "Daydreamer,Adele,19");
+		assertEquals(store.searchSongsByTitle("Dayd"), "This song does not exist in the music store.");
 	}
 	
 	@Test 
 	void testSearchSongsByArtist() {
 		MusicStore store = new MusicStore();
-		store.searchSongsByArtist("Adele");
-		store.searchSongsByArtist("Rees");
+		assertTrue(store.searchSongsByArtist("Adele").length() != 0);
+		assertEquals(store.searchSongsByArtist("Rees"), "This artist does not exist in the music store.");
 	}
 	
 	@Test 
 	void testSearchSAlbumByTitle() {
 		MusicStore store = new MusicStore();
-		store.searchAlbumByTitle("19");
-		store.searchAlbumByTitle("Rees");
+		assertTrue(store.searchAlbumByTitle("19").length() != 0);
+		assertEquals(store.searchAlbumByTitle("Rees"), "This album does not exist in the music store.");
 	}
 	
 	@Test 
 	void testSearchSAlbumByArist() {
 		MusicStore store = new MusicStore();
-		store.searchAlbumByArtist("Adele");
-		store.searchAlbumByArtist("Rees");
+		assertTrue(store.searchAlbumByArtist("Adele").length() != 0);
+		assertEquals(store.searchAlbumByArtist("Rees"), "This artist does not exist in the music store.");
 	}
 	
 	@Test
