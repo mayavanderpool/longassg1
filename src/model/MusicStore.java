@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 /*
 * File: MusicStore.java
-* Author: Rees Hart
-* Purpose: This class represents the music store  
+* Author: Rees Hart and Maya Vanderpool
+* Purpose: This class represents the music store. It loads the store using a 
+* text file with all the albums and various text files that representing the 
+* album contents.   
 */
 public class MusicStore {
 	/* INSTANCE VARIABLES */
@@ -23,6 +25,7 @@ public class MusicStore {
 		loadStore();
 	}
 	
+	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
 		String file = "albums.txt";
 		
@@ -58,7 +61,8 @@ public class MusicStore {
 		
 		
 	}
-
+	
+	// songFile(Album album) -- adds the songs to the music store from each album
 	private void songFile(Album album) {
 		String file = album.getTitle() + "_" + album.getArtist() +".txt";
 		
@@ -91,11 +95,12 @@ public class MusicStore {
 		}
 	}
 		
-		
+	// addAlbum(Album album) -- adds an album to the music stores album list
 	public void addAlbum(Album album) {
 		albumList.add(album);
 	}
 	
+	// getter
 	public ArrayList<Album> getAlbumList(){
 		ArrayList<Album> albums = new ArrayList<Album>();
 		for (Album a : albumList) {
@@ -104,6 +109,7 @@ public class MusicStore {
 		return albums;
 	}
 	
+	// getter
 	public ArrayList<Song> getSongList(){
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for (Song s : songList) {
@@ -112,6 +118,7 @@ public class MusicStore {
 		return songs;
 	}
 	
+	// addSongs(Album album) -- adds the songs from album to the music store song list
 	public void addSongs(Album album) {
 		ArrayList<Song> albumsSongs = album.getSongList();
 		for (Song s: albumsSongs) {
@@ -119,60 +126,69 @@ public class MusicStore {
 		}
 	}
 	
-	public void searchSongsByTitle (String title) {
+	// searchSongsByTitle (String title) -- searches for a song by title and returns the song info if found
+	public String searchSongsByTitle (String title) {
 		boolean found = false;
+		String out = "";
 		for(Song s: songList) {
 			if (s.getTitle().equals(title)) {
 				found = true;
-				s.printSong();
+				out += s.printSong();
 			}
-			
 		}
 		if (found == false) {
-			System.out.println("This song does not exist in the music store.");
+			out += "This song does not exist in the music store.";
 		}
-		
+		return out;
 	}
 	
-	
-	public void searchSongsByArtist (String artist) {
+	//searchSongsByArtist (String artist) -- returns songs by artist if there are any 
+	public String searchSongsByArtist (String artist) {
 		boolean found = false;
+		String out = "";
 		for(Song s: songList) {
 			if (s.getArtist().equals(artist)) {
 				found = true;
-				s.printSong();
+				out += s.printSong() + "\n";
 			}
 			
 		}
 		if (found == false) {
-			System.out.println("This song does not exist in the music store.");
+			out += "This artist does not exist in the music store.";
 		}
+		return out;
 	}
 	
-	public void searchAlbumByTitle(String title) {
+	// String searchAlbumByTitle(String title) -- return albums that have the title 
+	public String searchAlbumByTitle(String title) {
 		boolean found = false;
+		String out = "";
 		for (Album a: albumList) {
 			if(a.getTitle().equals(title)) {
-				a.printAlbum();
+				out+= a.printAlbum() + "\n";
 				found = true;
 			}
 		}
 		if (found == false) {
-			System.out.println("This album does not exist in the music store.");
+			out += "This album does not exist in the music store.";
 		}
+		return out;
 	}
 	
-	public void searchAlbumByArtist(String artist) {
+	// searchAlbumByArtist(String artist) -- returns albums by artist
+	public String searchAlbumByArtist(String artist) {
 		boolean found = false;
+		String out = "";
 		for (Album a: albumList) {
 			if(a.getArtist().equals(artist)) {
-				a.printAlbum();
+				out += a.printAlbum() + "\n";
 				found = true;
 			}
 		}
 		if (found == false) {
-			System.out.println("This album does not exist in the music store.");
+			out += "This artist does not exist in the music store.";
 		}
+		return out;
 	}
 	
 }

@@ -1,8 +1,18 @@
-package model;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import model.Album;
+import model.Song;
+
+/*
+* File: AlbumTest.java
+* Author:Rees Hart and Maya Vanderpool
+* Purpose: This test files tests the Album.java class and acheives 90% (or 
+* greater) code coverage
+*/
 
 class AlbumTest {
 
@@ -27,28 +37,39 @@ class AlbumTest {
 		
 		assertEquals(0, spinsAlbum.getSongList().size());
 		
-		Song supaSauce = new Song("Supa Sauce", "Crispy");
+		Song supaSauce = new Song("Supa Sauce", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(supaSauce);
 		assertEquals(1, spinsAlbum.getSongList().size());
 		
-		Song napkin = new Song("Wheres My Napkin?", "Crispy");
+		Song napkin = new Song("Wheres My Napkin?", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(napkin);
 		
-		Song lick = new Song("Lick My Finger", "Crispy");
+		Song lick = new Song("Lick My Finger", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(lick);
 		
-		Song tShirt = new Song("T-Shirt Stain", "Crispy");
+		Song tShirt = new Song("T-Shirt Stain", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(tShirt);
 		
 		assertEquals(4, spinsAlbum.getSongList().size());
 		
-		Song ice = new Song("Ice in the Deep Fryer", "Crispy");
+		Song ice = new Song("Ice in the Deep Fryer", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(ice);
 		
-		Song moist = new Song("Moist Towelette", "Crispy");
+		Song moist = new Song("Moist Towelette", "Crispy", spinsAlbum);
 		spinsAlbum.addSong(moist);
 		
 		assertEquals(6, spinsAlbum.getSongList().size());
+	}
+	
+	@Test 
+	void testPrint() {
+		Album cornAlbum = new Album ("Globalization", "Cornelius Westerfinch");
+		cornAlbum.setYear(2025);
+		cornAlbum.setGenre("economic policy");
+		Song fragile = new Song("fragile supply chain", "Cornelius Westerfinch", cornAlbum);
+		cornAlbum.addSong(fragile);
+		
+		assertEquals("Globalization" + "," + "Cornelius Westerfinch" + "," + "economic policy" + "," + "2025\n" + "fragile supply chain\n", cornAlbum.printAlbum());
 	}
 	
 	
