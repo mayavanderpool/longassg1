@@ -41,10 +41,6 @@ public class Song {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
     
     public void setFavorite() {
         this.favorite = true;
@@ -75,5 +71,7 @@ public class Song {
     	String songStr = this.getTitle() + "," + this.getArtist() + "," + albumName;
     	return songStr;
     }
+
+    
 
 }
