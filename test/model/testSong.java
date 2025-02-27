@@ -18,7 +18,8 @@ class testSong {
 
 	@Test
 	void testRating() {
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
 
 		assertEquals(song1.getRating(), 0);
 

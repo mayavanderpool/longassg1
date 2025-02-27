@@ -8,6 +8,7 @@ class AlbumTest {
 
 	@Test
 	void testGetters() {
+		
 		Album spinsAlbum = new Album ("Chicken Wings and Fries", "Crispy");
 		spinsAlbum.setYear(1996);
 		spinsAlbum.setGenre("Expeirmental Hip-Hop");

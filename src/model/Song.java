@@ -41,10 +41,6 @@ public class Song {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
     
     public void setFavorite() {
         this.favorite = true;
