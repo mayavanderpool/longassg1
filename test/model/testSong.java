@@ -33,29 +33,40 @@ class testSong {
 
 	@Test
 	void testFavorite() {
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
 
 		assertFalse(song1.getFavorite());
 
-		song1.setFavorite(true);
+		song1.setFavorite();
 		assertTrue(song1.getFavorite());
 
 	}
 
 	@Test
 	void testGetTitle() {
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
 
-		assertEquals(song1.getTitle(), "Red Wine Supernova");
+		assertEquals(song1.getTitle(), "Daydreamer");
 
 	}
 
 	@Test
 	void testGetArtist() {
-		Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
 
-		assertEquals(song1.getArtist(), "Chappelle Roan");
+		assertEquals(song1.getArtist(), "Adele");
 
+	}
+	
+	@Test
+	void testPrintSong() {
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
+		String test = "Daydreamer,Adele,19\n";
+		assertTrue(song1.printSong().equals(test));
 	}
 
 }

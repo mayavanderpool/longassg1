@@ -23,9 +23,9 @@ class testPlayList {
     @Test
     void testAdd() {
         PlayList list = new PlayList();
-        Song song1 = new Song("Red Wine Supernova", "Chappelle Roan");
-
-        list.addSong("Red Wine Supernova", "Chappelle Roan");
+        MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
+        list.addSong(song1);
         assertEquals(1, list.getPlaylist().size());
 
     }
