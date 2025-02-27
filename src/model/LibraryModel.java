@@ -32,7 +32,7 @@ public class LibraryModel {
 	public void addAlbum(Album album) {
 		MusicStore store = new MusicStore();
 		for (Album a : store.getAlbumList()) {
-			if (a.getTitle() == album.getTitle() && a.getArtist() == album.getArtist()) {
+			if (a.getTitle().equals(album.getTitle()) && a.getArtist().equals(album.getArtist())) {
 				albums.add(album);
 			}
 		}
