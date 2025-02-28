@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class View {
 	private Scanner scanner;
 	private LibraryModel model;
-	private MusicStore store;
+	private MusicStore store; 
 
 	public View() {
 		this.model = new LibraryModel();
@@ -259,22 +259,26 @@ public class View {
 			case "1":
 				System.out.println("Enter song title: ");
 				String title = scanner.nextLine().trim();
-				System.out.println(store.searchSongsByTitle(title));
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchSongsByTitle(title) + "\n");
 				break;
 			case "2":
 				System.out.println("Enter song artist: ");
 				String artist = scanner.nextLine().trim();
-				System.out.println(store.searchSongsByArtist(artist));
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchSongsByArtist(artist) + "\n");
 				break;
 			case "3":
 				System.out.println("Enter album title: ");
 				String albName = scanner.nextLine().trim();
-				System.out.println(store.searchAlbumByTitle(albName));
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchAlbumByTitle(albName) + "\n");
 				break;
 			case "4":
 				System.out.println("Enter album artist: ");
 				String name = scanner.nextLine().trim();
-				System.out.println(store.searchAlbumByArtist(name));
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchAlbumByArtist(name) + "\n");
 				break;
 			default:
 				System.out.println("Invalid Entry");
@@ -297,5 +301,11 @@ public class View {
 		System.out.println("9 - EXIT");
 
 	}
+	
+	public static void main(String[] args) {
+		View view = new View();
+		view.run();
+	}
+	
 
 }
