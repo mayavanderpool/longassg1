@@ -10,102 +10,191 @@ import java.util.ArrayList;
 
 public class LibraryModel {
 
-    /* INSTANCE VARIABLES */
-    private ArrayList<Song> songs;
-    private ArrayList<PlayList> playLists;
-    private ArrayList<Album> albums;
+	/* INSTANCE VARIABLES */
+	private ArrayList<Song> songs;
+	private ArrayList<PlayList> playLists;
+	private ArrayList<Album> albums;
+	private ArrayList<String> artists;
 
-    public LibraryModel(){
-        this.songs = new ArrayList<Song>();
-        this.playLists = new ArrayList<PlayList>();
-        this.albums = new ArrayList<Album>();
-    }
+	public LibraryModel() {
+		this.songs = new ArrayList<Song>();
+		this.playLists = new ArrayList<PlayList>();
+		this.albums = new ArrayList<Album>();
+	}
 
-    public void addSong(Song song){
-        songs.add(new Song(song));
-    }
-
-    public void addPlaylist(PlayList playlist){
-        playLists.add(playlist);
-    }
-
-	public void addAlbum(Album album) {
+	public void addSong(String song) {
 		MusicStore store = new MusicStore();
-		for (Album a : store.getAlbumList()) {
-			if (a.getTitle().equals(album.getTitle()) && a.getArtist().equals(album.getArtist())) {
-				albums.add(album);
+		for (Song s : store.getSongList()) {
+			if (song.equals(s.getTitle())) {
+				songs.add(s);
+			}
+			if (!artists.contains(s.getArtist())) {
+				artists.add(s.getArtist());
 			}
 		}
 	}
 
-	public void searchSongsByTitle(String title) {
+	public void addPlaylist(PlayList playlist) {
+		playLists.add(playlist);
+	}
+
+	public void addAlbum(String album) {
+		MusicStore store = new MusicStore();
+		for (Album a : store.getAlbumList()) {
+			if (album.equals(a.getTitle())) {
+				albums.add(a);
+			}
+			for (Song s : a.getSongList()) {
+				songs.add(s);
+			}
+		}
+	}
+
+	public String searchSongsByTitle(String title) {
 		boolean found = false;
+		String out = "";
 		for (Song s : songs) {
 			if (s.getTitle().equals(title)) {
 				found = true;
-				s.printSong();
+				out += s.printSong();
 			}
 
 		}
 		if (found == false) {
-			System.out.println("This song does not exist in the library.");
+			out += "This song does not exist in the library.";
 		}
+		return out;
+
 	}
 
-	public void searchSongsByArtist(String artist) {
+	public String searchSongsByArtist(String artist) {
 		boolean found = false;
+		String out = "";
 		for (Song s : songs) {
 			if (s.getArtist().equals(artist)) {
 				found = true;
-				s.printSong();
+				out += s.printSong();
 			}
 		}
 		if (found == false) {
-			System.out.println("This song does not exist in the library.");
+			out +="This song does not exist in the library.";
 		}
+		return out;
 	}
 
-	public void searchAlbumByTitle(String title) {
+	public String searchAlbumByTitle(String title) {
+		String out = "";
 		boolean found = false;
 		for (Album a : albums) {
 			if (a.getTitle().equals(title)) {
 				found = true;
-				a.printAlbum();
+				out += a.printAlbum();
 			}
 		}
 		if (found == false) {
-			System.out.println("This album does not exist in the library.");
+			out += "This album does not exist in the library.";
 		}
+		return out;
 	}
 
-	public void searchAlbumByArtist(String artist) {
+	public String searchAlbumByArtist(String artist) {
 		boolean found = false;
+		String out = "";
 		for (Album a : albums) {
 			if (a.getArtist().equals(artist)) {
 				found = true;
-				a.printAlbum();
+				out += a.printAlbum();
 			}
 		}
 		if (found == false) {
-			System.out.println("This album does not exist in the library.");
+			out += "This album does not exist in the library.";
 		}
+		return out;
 	}
 
-	public void searchPlayList(String name) {
+	public String searchPlayList(String name) {
+		boolean found = false;
+		String out = "";
 		for (PlayList playList : playLists) {
 			if (playList.getName().equals(name)) {
 				for (Song s : playList.getPlaylist()) {
-					System.out.println(s.getTitle() + "," + s.getArtist());
+					out += s.printSong();
+
 				}
 			}
 		}
-		System.out.println("This playlist does not exist in the library.");
+		if (found == false) {
+			out += "This playlist does not exist in the library.";
+		}
+		return out;
 	}
 
-	public void getSongs() {
-		for (Song s : songs) {
-			s.printSong();
+	public PlayList getPlayList(String name) {
+		for (PlayList list : playLists) {
+			if (list.getName().equals(name)) {
+				return list;
+			}
 		}
+		return null;
+	}
+
+	public String getSongs() {
+		String out = "";
+		for (Song s : songs) {
+			out += s.printSong();
+		}
+		return out;
+	}
+
+	public ArrayList<Song> allSongs(){
+		ArrayList<Song> all = new ArrayList<Song>();
+		for(Song s : songs){
+			all.add(new Song(s));
+		}
+		return all;
+	}
+
+	public String getFavorites() {
+		String out = "";
+		for (Song s : songs) {
+			if (s.getFavorite()) {
+				out += s.printSong();
+			}
+		}
+		return out;
+	}
+
+	public String getArtists() {
+		String out = "";
+		for (String artist : artists) {
+			out += artist;
+		}
+		return out;
+	}
+
+	public String getPlaylists() {
+		String out = "";
+		for (PlayList list : playLists) {
+			out += list.getName();
+		}
+		return out;
+	}
+
+	public String getAlbums() {
+		String out = "";
+		for (Album album : albums) {
+			out += album.getTitle();
+		}
+		return out;
+	}
+
+	public Song getSong(String title){
+		for(Song s : songs){
+			if(s.getTitle().equals(title)){
+				return s;
+			}
+		}
+		return null;
 	}
 
 }
