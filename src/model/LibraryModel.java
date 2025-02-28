@@ -62,10 +62,9 @@ public class LibraryModel {
 	}
 
 	public PlayList getPlayList(String name) {
-		ArrayList<PlayList> matches = new ArrayList<PlayList>();
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
-				
+				return new
 			}
 		}
 		System.out.println("This playlist does not exist in the library.");
@@ -158,8 +157,8 @@ public class LibraryModel {
 	}
 
 
-	public  ArrayList<String> getAlbums() {
-		ArrayList<String> list = new ArrayList<>();
+	public  ArrayList<Album> getAlbums() {
+		ArrayList<Album> list = new ArrayList<>();
 		for (Album album : albums) {
 			list.add(album.getTitle());
 		}

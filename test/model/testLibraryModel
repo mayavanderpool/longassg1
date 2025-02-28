@@ -35,7 +35,8 @@ public class testLibraryModel {
 		assertEquals(2, model.getSongs().size());
 		
 		String name = song1.getTitle();
-		assertEquals(model.getSong(name).getTitle(), song1.getTitle());
+	
+		assertEquals(model.getSong(name).get(0).getTitle(), song1.getTitle());
 		
 	}
 	
@@ -64,7 +65,29 @@ public class testLibraryModel {
 		assertEquals(ab.getSongList(), model.getSongs());
 	}
 	
+	@Test
+	void testSearchSongsByArtist() {
+		MusicStore store = new MusicStore();
+		LibraryModel model = new LibraryModel();
+		
+		Song song1 = store.getSongList().get(0);
+		
+		model.addSong(song1.getTitle());
+	
+		String out = "";
+		for(Song s: model.getSongs()) {
+			if(s.getArtist().equals(song1.getArtist())) {
+				out += s.printSong();
+			}
+		}
+		assertTrue(out.equals(model.searchSongsByArtist(song1.getArtist())));
+		
+		String other = "This song does not exist in the library.";
+		
+		assertTrue(other.equals(model.searchSongsByArtist("WRONG")));
+	}
+	
+
+	
 	
 }
-
-

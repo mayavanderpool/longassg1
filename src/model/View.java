@@ -179,9 +179,9 @@ public class View {
 				}
 				break;
 			case "3":
-				ArrayList<String> albums = model.getAlbums();
-				for (String al : albums) {
-					System.out.println(al);
+				ArrayList<Album> albums = model.getAlbums();
+				for (Album al : albums) {
+					System.out.println(al.printAlbum());
 				}
 				break;
 			case "4":
