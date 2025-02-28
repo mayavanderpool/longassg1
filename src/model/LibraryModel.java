@@ -43,7 +43,7 @@ public class LibraryModel {
 		MusicStore store = new MusicStore();
 		for (Album a : store.getAlbumList()) {
 			if (album.equals(a.getTitle())) {
-				albums.add(a);
+				albums.add(a.deepCopy());
 				for (Song s : a.getSongList()) {
 					songs.add(s);
 				}

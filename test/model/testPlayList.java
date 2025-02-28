@@ -1,4 +1,4 @@
-package model;
+package test;
 
 /*
  * File: testPlayList.java
@@ -7,6 +7,12 @@ package model;
  */
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import model.Album;
+import model.MusicStore;
+import model.PlayList;
+import model.Song;
+
 import java.util.ArrayList;
 
 class testPlayList {
