@@ -26,6 +26,7 @@ class testPlayList {
 		Song song2 = store.getSongList().get(1);
 		
         list.addSong(song1);
+        list.addSong(song2);
         list.removeSong(song2);
         
         assertEquals(1, list.getPlaylist().size());
@@ -49,7 +50,14 @@ class testPlayList {
     @Test
     void testDeepCopy() {
     	 PlayList list = new PlayList("fun");
-    	 assertTrue(list.deepCopy().getName().equals("fun"));
+    	 Album album = new Album("rees", "hart");
+    	 Song song = new Song("r", "h", album);
+    	 list.addSong(song);
+    	 PlayList copy = list.deepCopy();
+    	 assertEquals(list.getName(), copy.getName());
+    	 assertEquals(list.getPlaylist().size(), copy.getPlaylist().size());
     }
+    
+    
 }
     

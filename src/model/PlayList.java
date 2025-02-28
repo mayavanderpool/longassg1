@@ -23,7 +23,7 @@ public class PlayList {
     public PlayList deepCopy() {
     	PlayList copy = new PlayList(this.getName());
     	for(Song s : this.getPlaylist()) {
-    		copy.addSong(new Song(s));
+    		copy.addSong(new Song(s)); 
  
     		
     	}
