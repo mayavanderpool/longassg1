@@ -27,6 +27,16 @@ public class Album {
 		this.genre = "genre";
 		this.songList = new ArrayList<Song>();
 	}
+	
+	public Album deepCopy() {
+		Album copy = new Album(this.getTitle(), this.getArtist());
+		copy.setGenre(this.genre);
+		copy.setYear(this.getYear());
+		for (Song s : this.getSongList()) {
+			copy.addSong(s);
+		}
+		return copy;
+	}
 
 	/* GETTERS */
 
