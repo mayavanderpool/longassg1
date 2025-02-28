@@ -65,6 +65,7 @@ public class LibraryModel {
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
 				return list.deepCopy();
+
 			}
 		}
 		System.out.println("This playlist does not exist in the library.");
@@ -157,8 +158,8 @@ public class LibraryModel {
 	}
 
 
-	public  ArrayList<String> getAlbums() {
-		ArrayList<String> list = new ArrayList<>();
+	public  ArrayList<Album> getAlbums() {
+		ArrayList<Album> list = new ArrayList<>();
 		for (Album album : albums) {
 			list.add(album.getTitle());
 		}
