@@ -35,6 +35,15 @@ public class PlayList {
     }
 
     public void addSong(Song song) {
-        playlist.add(new Song(song));
+        LibraryModel model = new LibraryModel();
+        if(model.allSongs().contains(song)){
+            playlist.add(song);
+        }
+    }
+
+    public void removeSong(Song song){
+        if(playlist.contains(song)){
+            playlist.remove(song);
+        }
     }
 }
