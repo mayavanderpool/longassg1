@@ -161,7 +161,7 @@ public class LibraryModel {
 	public  ArrayList<Album> getAlbums() {
 		ArrayList<Album> list = new ArrayList<>();
 		for (Album album : albums) {
-			list.add(album.getTitle());
+			list.add(album.deepCopy());
 		}
 		return list;
 	}

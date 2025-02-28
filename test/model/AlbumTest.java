@@ -1,4 +1,4 @@
-package model;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,6 +72,20 @@ class AlbumTest {
 		assertEquals("Globalization" + "," + "Cornelius Westerfinch" + "," + "economic policy" + "," + "2025\n" + "fragile supply chain\n", cornAlbum.printAlbum());
 	}
 	
+	@Test
+	void testDeepCopy() {
+		Album cornAlbum = new Album ("Globalization", "Cornelius Westerfinch");
+		cornAlbum.setYear(2025);
+		cornAlbum.setGenre("economic policy");
+		Song fragile = new Song("fragile supply chain", "Cornelius Westerfinch", cornAlbum);
+		cornAlbum.addSong(fragile);
+		
+		Album copy = cornAlbum.deepCopy();
+		
+		assertEquals(cornAlbum.getTitle(),copy.getTitle());
+		assertEquals(cornAlbum.getGenre(),copy.getGenre());
+		assertEquals(cornAlbum.getYear(),copy.getYear());
+	}
 	
 
 }
