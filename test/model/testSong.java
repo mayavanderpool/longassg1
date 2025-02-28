@@ -1,4 +1,4 @@
-ppackage model;
+package model;
 
 /*
  * File: Song.java
