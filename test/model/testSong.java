@@ -1,4 +1,4 @@
-package model;
+ppackage model;
 
 /*
  * File: Song.java
@@ -65,7 +65,7 @@ class testSong {
 	void testPrintSong() {
 		MusicStore store = new MusicStore();
 		Song song1 = store.getSongList().get(0);
-		String test = "Daydreamer,Adele,19\n";
+		String test = "Daydreamer,Adele,19";
 		assertTrue(song1.printSong().equals(test));
 	}
 

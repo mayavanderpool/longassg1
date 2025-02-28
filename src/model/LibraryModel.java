@@ -20,6 +20,7 @@ public class LibraryModel {
 		this.songs = new ArrayList<Song>();
 		this.playLists = new ArrayList<PlayList>();
 		this.albums = new ArrayList<Album>();
+		this.artists = new ArrayList<String>();
 	}
 
 	public void addSong(String song) {
@@ -27,9 +28,9 @@ public class LibraryModel {
 		for (Song s : store.getSongList()) {
 			if (song.equals(s.getTitle())) {
 				songs.add(s);
-			}
-			if (!artists.contains(s.getArtist())) {
-				artists.add(s.getArtist());
+				if (!artists.contains(s.getArtist())) {
+					artists.add(s.getArtist());
+				}
 			}
 		}
 	}
@@ -43,20 +44,31 @@ public class LibraryModel {
 		for (Album a : store.getAlbumList()) {
 			if (album.equals(a.getTitle())) {
 				albums.add(a);
-			}
-			for (Song s : a.getSongList()) {
-				songs.add(s);
+				for (Song s : a.getSongList()) {
+					songs.add(s);
+				}
 			}
 		}
 	}
 
-	public Song getSong(String title){
+	public ArrayList<Song>  getSong(String title){
+		ArrayList<Song> matches = new ArrayList<Song>();
 		for(Song s : songs){
 			if(s.getTitle().equals(title)){
-				return s;
+				matches.add(new Song(s));
 			}
 		}
-		System.out.println("This song does not exist in the library.");
+		return matches;
+	}
+
+	public PlayList getPlayList(String name) {
+		ArrayList<PlayList> matches = new ArrayList<PlayList>();
+		for (PlayList list : playLists) {
+			if (list.getName().equals(name)) {
+				
+			}
+		}
+		System.out.println("This playlist does not exist in the library.");
 		return null;
 	}
 
@@ -107,15 +119,7 @@ public class LibraryModel {
 		return out;
 	}
 
-	public PlayList getPlayList(String name) {
-		for (PlayList list : playLists) {
-			if (list.getName().equals(name)) {
-				return list;
-			}
-		}
-		System.out.println("This playlist does not exist in the library.");
-		return null;
-	}
+	
 	
 	public ArrayList<Song> getSongs(){
 		ArrayList<Song> all = new ArrayList<Song>();
@@ -125,40 +129,41 @@ public class LibraryModel {
 		return all;
 	}
 
-	public String getPlaylists() {
-		String out = "";
-		for (PlayList list : playLists) {
-			out += list.getName();
+	public ArrayList<String> getPlaylists() {
+		ArrayList<String> list = new ArrayList<>();
+		for(PlayList play:playLists){
+			list.add(play.getName());
+			
 		}
-		return out;
+		return list;
 	}
 
 
-	public String getFavorites() {
-		String out = "";
+	public ArrayList<String>  getFavorites() {
+		ArrayList<String> list = new ArrayList<String>();
 		for (Song s : songs) {
 			if (s.getFavorite()) {
-				out += s.printSong();
+				list.add(s.printSong());
 			}
 		}
-		return out;
+		return list;
 	}
 
-	public String getArtists() {
-		String out = "";
+	public ArrayList<String> getArtists() {
+		ArrayList<String> list = new ArrayList<>();
 		for (String artist : artists) {
-			out += artist;
+			list.add(artist);
 		}
-		return out;
+		return list;
 	}
 
 
-	public String getAlbums() {
-		String out = "";
+	public  ArrayList<String> getAlbums() {
+		ArrayList<String> list = new ArrayList<>();
 		for (Album album : albums) {
-			out += album.getTitle();
+			list.add(album.getTitle());
 		}
-		return out;
+		return list;
 	}
 
 	

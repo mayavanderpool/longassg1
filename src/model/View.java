@@ -74,21 +74,30 @@ public class View {
 	private void rateSong() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
-		Song song = model.getSong(songName);
-
-		System.out.println("Enter rating (1-5): ");
-		String rating = scanner.nextLine().trim();
-
-		song.setRating(Integer.parseInt(rating));
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				System.out.println("Enter rating (1-5): ");
+				String rating = scanner.nextLine().trim();
+				s.setRating(Integer.parseInt(rating));
+			}
+		}
 
 	}
 
 	private void markFav() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
-		Song song = model.getSong(songName);
-
-		song.setFavorite();
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				s.setFavorite();
+			}
+		}
 
 	}
 
@@ -107,9 +116,14 @@ public class View {
 
 				System.out.println("Enter song title: ");
 				String songName = scanner.nextLine().trim();
-				Song song = model.getSong(songName);
-
-				list.addSong(song);
+				ArrayList<Song> songs = model.getSong(songName);
+				if (songs.size() == 0) {
+					System.out.println("This song does not exist in the library.");
+				} else {
+					for (Song s : songs) {
+						list.addSong(s);
+					}
+				}
 				break;
 			case "2":
 				System.out.println("Enter playlist name: ");
@@ -118,9 +132,14 @@ public class View {
 
 				System.out.println("Enter song title: ");
 				String songTitle = scanner.nextLine().trim();
-				Song songChoice = model.getSong(songTitle);
-
-				play_list.removeSong(songChoice);
+				ArrayList<Song> songs2 = model.getSong(songName);
+				if (songs2.size() == 0) {
+					System.out.println("This song does not exist in the library.");
+				} else {
+					for (Song son : songs2) {
+						play_list.removeSong(son)
+					}
+				}
 				break;
 			default:
 				System.out.println("Invalid Entry");
@@ -154,16 +173,30 @@ public class View {
 				}
 				break;
 			case "2":
-				System.out.println(model.getArtists());
+				ArrayList<String> artists = model.getArtists();
+				for (String art : artists) {
+					System.out.println(art);
+				}
 				break;
 			case "3":
-				System.out.println(model.getAlbums());
+				ArrayList<String> albums = model.getAlbums();
+				for (String al : albums) {
+					System.out.println(al);
+				}
 				break;
 			case "4":
-				System.out.println(model.getPlaylists());
+				ArrayList<String> lists = model.getPlaylists();
+				for (String li : lists) {
+					System.out.println(li);
+				}
 				break;
+
 			case "5":
-				System.out.println(model.getFavorites());
+				ArrayList<String> favs = model.getPlaylists();
+				for (String fav : favs) {
+					System.out.println(fav);
+				}
+				break;
 			default:
 				System.out.println("Invalid Entry");
 
@@ -209,8 +242,14 @@ public class View {
 			case "1":
 				System.out.println("Enter song title: ");
 				String title = scanner.nextLine().trim();
-				Song s = model.getSong(title);
-				System.out.println(s.getTitle() + "," + s.getArtist() + "," + s.getAlbum().getTitle());
+				ArrayList<Song> songs = model.getSong(title);
+				if (songs.size() == 0) {
+					System.out.println("This song does not exist in the library.");
+				} else {
+					for (Song s : songs) {
+						System.out.println(s.printSong());
+					}
+				}
 				break;
 			case "2":
 				System.out.println("Enter song artist: ");
