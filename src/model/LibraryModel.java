@@ -50,21 +50,14 @@ public class LibraryModel {
 		}
 	}
 
-	public String searchSongsByTitle(String title) {
-		boolean found = false;
-		String out = "";
-		for (Song s : songs) {
-			if (s.getTitle().equals(title)) {
-				found = true;
-				out += s.printSong();
+	public Song getSong(String title){
+		for(Song s : songs){
+			if(s.getTitle().equals(title)){
+				return s;
 			}
-
 		}
-		if (found == false) {
-			out += "This song does not exist in the library.";
-		}
-		return out;
-
+		System.out.println("This song does not exist in the library.");
+		return null;
 	}
 
 	public String searchSongsByArtist(String artist) {
@@ -97,6 +90,8 @@ public class LibraryModel {
 		return out;
 	}
 
+	
+
 	public String searchAlbumByArtist(String artist) {
 		boolean found = false;
 		String out = "";
@@ -112,47 +107,32 @@ public class LibraryModel {
 		return out;
 	}
 
-	public String searchPlayList(String name) {
-		boolean found = false;
-		String out = "";
-		for (PlayList playList : playLists) {
-			if (playList.getName().equals(name)) {
-				for (Song s : playList.getPlaylist()) {
-					out += s.printSong();
-
-				}
-			}
-		}
-		if (found == false) {
-			out += "This playlist does not exist in the library.";
-		}
-		return out;
-	}
-
 	public PlayList getPlayList(String name) {
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
 				return list;
 			}
 		}
+		System.out.println("This playlist does not exist in the library.");
 		return null;
 	}
-
-	public String getSongs() {
-		String out = "";
-		for (Song s : songs) {
-			out += s.printSong();
-		}
-		return out;
-	}
-
-	public ArrayList<Song> allSongs(){
+	
+	public ArrayList<Song> getSongs(){
 		ArrayList<Song> all = new ArrayList<Song>();
 		for(Song s : songs){
 			all.add(new Song(s));
 		}
 		return all;
 	}
+
+	public String getPlaylists() {
+		String out = "";
+		for (PlayList list : playLists) {
+			out += list.getName();
+		}
+		return out;
+	}
+
 
 	public String getFavorites() {
 		String out = "";
@@ -172,13 +152,6 @@ public class LibraryModel {
 		return out;
 	}
 
-	public String getPlaylists() {
-		String out = "";
-		for (PlayList list : playLists) {
-			out += list.getName();
-		}
-		return out;
-	}
 
 	public String getAlbums() {
 		String out = "";
@@ -188,13 +161,6 @@ public class LibraryModel {
 		return out;
 	}
 
-	public Song getSong(String title){
-		for(Song s : songs){
-			if(s.getTitle().equals(title)){
-				return s;
-			}
-		}
-		return null;
-	}
+	
 
 }
