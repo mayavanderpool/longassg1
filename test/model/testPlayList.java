@@ -1,4 +1,3 @@
-
 package model;
 
 /*
@@ -46,4 +45,11 @@ class testPlayList {
         assertEquals(1, songs.size());
        
     }
+    
+    @Test
+    void testDeepCopy() {
+    	 PlayList list = new PlayList("fun");
+    	 assertTrue(list.deepCopy().getName().equals("fun"));
+    }
+}
     

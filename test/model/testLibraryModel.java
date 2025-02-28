@@ -7,7 +7,6 @@ package model;
 *  and acheives 90% (or greater) code coverage.  
 */
 
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -85,6 +84,14 @@ public class testLibraryModel {
 		String other = "This song does not exist in the library.";
 		
 		assertTrue(other.equals(model.searchSongsByArtist("WRONG")));
+	}
+	
+	@Test
+	void testGetPlayList() {
+		MusicStore store = new MusicStore();
+		LibraryModel model = new LibraryModel();
+		
+		
 	}
 	
 
