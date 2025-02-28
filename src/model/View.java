@@ -132,12 +132,12 @@ public class View {
 
 				System.out.println("Enter song title: ");
 				String songTitle = scanner.nextLine().trim();
-				ArrayList<Song> songs2 = model.getSong(songName);
+				ArrayList<Song> songs2 = model.getSong(songTitle);
 				if (songs2.size() == 0) {
 					System.out.println("This song does not exist in the library.");
 				} else {
-					for (Song son : songs2) {
-						play_list.removeSong(son)
+					for (Song song : songs2) {
+						play_list.removeSong(song);
 					}
 				}
 				break;
