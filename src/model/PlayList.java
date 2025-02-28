@@ -19,6 +19,16 @@ public class PlayList {
         this.playlist = new ArrayList<Song>();
         this.name = name;
     }
+    
+    public PlayList deepCopy() {
+    	PlayList copy = new PlayList(this.getName());
+    	for(Song s : this.getPlaylist()) {
+    		copy.addSong(s);
+ 
+    		
+    	}
+    	return copy;
+    }
 
     
 

@@ -62,10 +62,9 @@ public class LibraryModel {
 	}
 
 	public PlayList getPlayList(String name) {
-		ArrayList<PlayList> matches = new ArrayList<PlayList>();
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
-				
+				return list.deepCopy();
 			}
 		}
 		System.out.println("This playlist does not exist in the library.");
