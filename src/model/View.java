@@ -120,7 +120,7 @@ public class View {
 			String songTitle = scanner.nextLine().trim();
 			Song songChoice = model.getSong(songTitle);
 			
-			list.removeSong(songChoice);
+			play_list.removeSong(songChoice);
 			break;
 		default:
 			System.out.println("Invalid Entry");
@@ -206,7 +206,8 @@ public class View {
 		case "1":
 			System.out.println("Enter song title: ");
 			String title = scanner.nextLine().trim();
-			System.out.println(model.searchSongsByTitle(title));
+			Song s = model.getSong(title);
+			System.out.println(s.getTitle() + "," + s.getArtist() + "," + s.getAlbum().getTitle());
 			break;
 		case "2":
 			System.out.println("Enter song artist: ");
@@ -226,7 +227,7 @@ public class View {
 		case "5":
 			System.out.println("Enter playlist name: ");
 			String name = scanner.nextLine().trim();
-			System.out.println(model.searchPlayList(name));
+			System.out.println(model.getPlayList(name));
 			break;
 		default:
 			System.out.println("Invalid Entry");
