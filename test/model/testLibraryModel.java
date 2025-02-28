@@ -1,4 +1,4 @@
-package model;
+package test;
 
 /*
 * File: testLibraryModel.java
@@ -9,6 +9,13 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import model.Album;
+import model.LibraryModel;
+import model.MusicStore;
+import model.PlayList;
+import model.Song;
+
 import java.util.ArrayList;
 
 public class testLibraryModel {
@@ -60,7 +67,7 @@ public class testLibraryModel {
 		
 		int length = ab.getSongList().size();
 		assertEquals(length, model.getSongs().size());
-		
+		assertEquals(model.getAlbums().get(0).getGenre(), ab.getGenre());
 		assertEquals(ab.getSongList(), model.getSongs());
 	}
 	
@@ -90,6 +97,14 @@ public class testLibraryModel {
 	void testGetPlayList() {
 		MusicStore store = new MusicStore();
 		LibraryModel model = new LibraryModel();
+		
+		PlayList list = new PlayList("my playlist");
+		Song song = store.getSongList().get(0);
+		model.addSong(song.getTitle());
+		list.addSong(song);
+		model.addPlaylist(list);
+		
+		assertEquals(model.getPlayList("my playlist").getName(), list.getName());
 		
 		
 	}

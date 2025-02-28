@@ -1,4 +1,4 @@
-package model;
+package test;
 
 /*
  * File: Song.java
@@ -9,6 +9,9 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import model.MusicStore;
+import model.Song;
 
 import static org.junit.jupiter.api.Assertions.*;
 
