@@ -94,7 +94,53 @@ public class testLibraryModel {
 		
 	}
 	
+	@Test
+	void testSearchAlbumByTitle() {
+		MusicStore store = new MusicStore();
+		LibraryModel model = new LibraryModel();
+		
+		Album al = store.getAlbumList().get(0);
+		
+		model.addAlbum(al.getTitle());
+	
+		String albums = model.searchAlbumByTitle(al.getTitle());
+		String out = "";
+		for(Album a : model.getAlbums()) {
+			if(al.getTitle().equals(a.getTitle())) {
+				out += a.printAlbum();
+			}
+		}
+		assertTrue(out.equals(albums));
+	}
+	
+	@Test
+	void testSearchAlbumByArtist() {
+		MusicStore store = new MusicStore();
+		LibraryModel model = new LibraryModel();
+		
+		Album al = store.getAlbumList().get(0);
+		
+		model.addAlbum(al.getTitle());
+	
+		String albums = model.searchAlbumByArtist(al.getArtist());
+		String out = "";
+		for(Album a : model.getAlbums()) {
+			if(al.getArtist().equals(a.getArtist())) {
+				out += a.printAlbum();
+			}
+		}
+		assertTrue(out.equals(albums));
+	}
+	
 
+	@Test
+	void testGetFavorites() {
+		LibraryModel model = new LibraryModel();
+	
+		assertEquals(0, model.getFavorites().size());
+		
+		
+	}
 	
 	
 }
