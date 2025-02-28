@@ -1,3 +1,4 @@
+
 package model;
 
 /*
@@ -13,20 +14,36 @@ class testPlayList {
 
     @Test
     void testName() {
-        PlayList list = new PlayList();
-
-        assertEquals(list.getName(), null);
-        list.setName("fun");
+        PlayList list = new PlayList("fun");
         assertEquals(list.getName(), "fun");
     }
 
     @Test
-    void testAdd() {
-        PlayList list = new PlayList();
+    void testAddRemove() {
+        PlayList list = new PlayList("fun");
         MusicStore store = new MusicStore();
+        
+		Song song1 = store.getSongList().get(0);
+		Song song2 = store.getSongList().get(1);
+		
+        list.addSong(song1);
+        list.removeSong(song2);
+        
+        assertEquals(1, list.getPlaylist().size());
+        list.removeSong(song1);
+        assertEquals(0, list.getPlaylist().size());
+    }
+    
+    @Test
+    void testGetPlaylist() {
+        PlayList list = new PlayList("fun");
+        MusicStore store = new MusicStore();
+        
 		Song song1 = store.getSongList().get(0);
         list.addSong(song1);
-        assertEquals(1, list.getPlaylist().size());
-
+        
+        ArrayList<Song> songs = list.getPlaylist();
+        assertEquals(1, songs.size());
+       
     }
-}
+    

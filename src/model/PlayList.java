@@ -20,6 +20,8 @@ public class PlayList {
         this.name = name;
     }
 
+    
+
     /* METHODS */
 
     public String getName() {
@@ -42,6 +44,9 @@ public class PlayList {
     public void removeSong(Song song) {
         if (playlist.contains(song)) {
             playlist.remove(song);
+        }
+        else{
+            System.out.println("This song is not in the playlist.");
         }
     }
 }
