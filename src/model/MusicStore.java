@@ -23,7 +23,7 @@ public class MusicStore {
 		this.albumList = new ArrayList<Album>();
 		this.songList = new ArrayList<Song>();
 		loadStore();
-	}
+	} 
 	
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
@@ -39,7 +39,7 @@ public class MusicStore {
 				if (split.length == 2) {
 					String title = split[0].trim();
 					String artist = split[1].trim();
-					
+					 
 					Album album = new Album(title, artist);
 					addAlbum(album);
 					
@@ -104,7 +104,7 @@ public class MusicStore {
 	public ArrayList<Album> getAlbumList(){
 		ArrayList<Album> albums = new ArrayList<Album>();
 		for (Album a : albumList) {
-			albums.add(new Album(a.getTitle(), a.getArtist()));
+			albums.add(a.deepCopy());
 		}
 		return albums;
 	}

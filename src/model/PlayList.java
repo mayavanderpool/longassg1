@@ -2,7 +2,7 @@ package model;
 
 /*
  * File: PlayList.java
- * Author: Maya Vanderpool
+ * Author: Maya Vanderpool and Rees Hart
  * Purpose: This class defines a PlayList object.
  */
 

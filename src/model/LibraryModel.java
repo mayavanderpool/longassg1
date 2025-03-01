@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /*
  * File: LibraryModel.java
- * Author: Maya Vanderpool
+ * Author: Maya Vanderpool and Rees Hart
  * Purpose: This is a test class for Song.java.
  */
 
@@ -23,32 +23,41 @@ public class LibraryModel {
 		this.artists = new ArrayList<String>();
 	}
 
-	public void addSong(String song) {
+	public boolean addSong(String song) {
 		MusicStore store = new MusicStore();
+		boolean found = false;
 		for (Song s : store.getSongList()) {
 			if (song.equals(s.getTitle())) {
+				found = true;
 				songs.add(s);
 				if (!artists.contains(s.getArtist())) {
 					artists.add(s.getArtist());
 				}
 			}
 		}
+		return found;
 	}
 
 	public void addPlaylist(PlayList playlist) {
 		playLists.add(playlist);
 	}
 
-	public void addAlbum(String album) {
+	public boolean addAlbum(String album) {
 		MusicStore store = new MusicStore();
+		boolean found = false;
 		for (Album a : store.getAlbumList()) {
 			if (album.equals(a.getTitle())) {
+				found = true;
 				albums.add(a.deepCopy());
 				for (Song s : a.getSongList()) {
 					songs.add(s);
 				}
+				if (!artists.contains(a.getArtist())) {
+					artists.add(a.getArtist());
+				}
 			}
 		}
+		return found;
 	}
 
 	public ArrayList<Song>  getSong(String title){
@@ -68,7 +77,7 @@ public class LibraryModel {
 
 			}
 		}
-		System.out.println("This playlist does not exist in the library.");
+		System.out.println("\nThis playlist does not exist in the library.\n");
 		return null;
 	}
 
@@ -77,12 +86,12 @@ public class LibraryModel {
 		String out = "";
 		for (Song s : songs) {
 			if (s.getArtist().equals(artist)) {
-				found = true;
+				found = true; 
 				out += s.printSong();
 			}
 		}
 		if (found == false) {
-			out +="This song does not exist in the library.";
+			out +="\n This song does not exist in the library.\n";
 		}
 		return out;
 	}
@@ -97,7 +106,7 @@ public class LibraryModel {
 			}
 		}
 		if (found == false) {
-			out += "This album does not exist in the library.";
+			out +=  "\nThis album does not exist in the library. \n";
 		}
 		return out;
 	}
@@ -114,7 +123,7 @@ public class LibraryModel {
 			}
 		}
 		if (found == false) {
-			out += "This album does not exist in the library.";
+			out += "\nThis album does not exist in the library.\n";
 		}
 		return out;
 	}

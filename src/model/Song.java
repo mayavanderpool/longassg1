@@ -2,7 +2,7 @@ package model;
 
 /*
  * File: Song.java
- * Author: Maya Vanderpool
+ * Author: Maya Vanderpool and Rees Hart
  * Purpose: This class defines a song object.
  */
 
