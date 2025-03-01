@@ -23,6 +23,7 @@ public class LibraryModel {
 		this.artists = new ArrayList<String>();
 	}
 
+	//addSong(String song) - returns a boolean whether or not to add a song
 	public boolean addSong(String song) {
 		MusicStore store = new MusicStore();
 		boolean found = false;
@@ -38,10 +39,12 @@ public class LibraryModel {
 		return found;
 	}
 
+	//addPlaylist(PlayList playlist) - adds a playlist the arraylist of playlists
 	public void addPlaylist(PlayList playlist) {
 		playLists.add(playlist);
 	}
 
+	//addAlbum(String album) - adds an album to the library returns a boolean
 	public boolean addAlbum(String album) {
 		MusicStore store = new MusicStore();
 		boolean found = false;
@@ -60,6 +63,7 @@ public class LibraryModel {
 		return found;
 	}
 
+	//getSong(String title) - adds a song to the arraylist of songs
 	public ArrayList<Song>  getSong(String title){
 		ArrayList<Song> matches = new ArrayList<Song>();
 		for(Song s : songs){
@@ -70,6 +74,7 @@ public class LibraryModel {
 		return matches;
 	}
 
+	//PlayList(String name) - returns a deep copy of the a PlayList object
 	public PlayList getPlayList(String name) {
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
@@ -81,6 +86,7 @@ public class LibraryModel {
 		return null;
 	}
 
+	//searchSongsByArtist(String artist) - returns a String of all the songs by given artist
 	public String searchSongsByArtist(String artist) {
 		boolean found = false;
 		String out = "";
@@ -96,6 +102,7 @@ public class LibraryModel {
 		return out;
 	}
 
+	//searchAlbumByTitle(String title) - returns a string of the albums with the given title
 	public String searchAlbumByTitle(String title) {
 		String out = "";
 		boolean found = false;
@@ -112,7 +119,7 @@ public class LibraryModel {
 	}
 
 	
-
+	//searchAlbumByArtist(String artist) - returns a string of the albums by the given artist
 	public String searchAlbumByArtist(String artist) {
 		boolean found = false;
 		String out = "";
@@ -129,7 +136,7 @@ public class LibraryModel {
 	}
 
 	
-	
+	//getSongs() - returns an arraylist of songs from the library
 	public ArrayList<Song> getSongs(){
 		ArrayList<Song> all = new ArrayList<Song>();
 		for(Song s : songs){
@@ -138,6 +145,7 @@ public class LibraryModel {
 		return all;
 	}
 
+	//getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
 		ArrayList<String> list = new ArrayList<>();
 		for(PlayList play:playLists){
@@ -147,7 +155,7 @@ public class LibraryModel {
 		return list;
 	}
 
-
+	//getFavorites() = returns an arraylist of strings of the favorited songs
 	public ArrayList<String>  getFavorites() {
 		ArrayList<String> list = new ArrayList<String>();
 		for (Song s : songs) {
@@ -158,6 +166,7 @@ public class LibraryModel {
 		return list; 
 	}
 
+	//getArtists() - returns an arraylist of strings of the artists in the library
 	public ArrayList<String> getArtists() {
 		ArrayList<String> list = new ArrayList<>();
 		for (String artist : artists) {
@@ -166,7 +175,7 @@ public class LibraryModel {
 		return list;
 	}
 
-
+	//getAlbums() - return an arraylist of albums of the albums in the library
 	public  ArrayList<Album> getAlbums() {
 		ArrayList<Album> list = new ArrayList<>();
 		for (Album album : albums) {
