@@ -7,6 +7,10 @@ import java.util.Scanner;
  * File: View.java
  * Author: Rees Hart and Maya Vanderpool
  * Purpose: This class represents the user interface
+ * Use of AI: I used chatGPT to get an idea of the overall
+ * format for the View class. It showed me how a couple of 
+ * the commands were structured and then I wrote my 
+ * own code 
  */
 
 public class View {
@@ -58,7 +62,7 @@ public class View {
 					exit();
 					break;
 				default:
-					System.out.println("Invalid Entry");
+					System.out.println("/nInvalid Entry/n");
 			}
 
 		}
@@ -125,7 +129,7 @@ public class View {
 				String songName = scanner.nextLine().trim();
 				ArrayList<Song> songs = model.getSong(songName);
 				if (songs.size() == 0) {
-					System.out.println("This song does not exist in the library.");
+					System.out.println("/nThis song does not exist in the library. /n");
 				} else {
 					for (Song s : songs) {
 						list.addSong(s);
@@ -151,7 +155,7 @@ public class View {
 				}
 				break;
 			default:
-				System.out.println("Invalid Entry");
+				System.out.println("\nInvalid Entry\n");
 		}
 
 	}
@@ -184,7 +188,7 @@ public class View {
 					System.out.println("\nNo songs in library \n");
 				}
 				for (Song s : songsList) {
-					System.out.println(s.printSong());
+					System.out.println(s.printSong() + "\n");
 				}
 				break;
 			case "2":
@@ -195,7 +199,7 @@ public class View {
 					System.out.println("\nNo artists in library \n");
 				}
 				for (String art : artists) {
-					System.out.println("\nArtists: " + art);
+					System.out.println(art + "/n");
 				}
 				break;
 			case "3":
@@ -206,7 +210,7 @@ public class View {
 					System.out.println("\nNo Albums in library \n");
 				}
 				for (Album al : albums) {
-					System.out.println(al.printAlbum());
+					System.out.println(al.printAlbum()+ "/n");
 				}
 				break;
 			case "4":
@@ -218,18 +222,23 @@ public class View {
 				}
 				
 				for (String li : lists) {
-					System.out.println(li);
+					System.out.println(li+ "\n");
 				}
 				break;
 
 			case "5":
-				ArrayList<String> favs = model.getPlaylists();
+				ArrayList<String> favs = model.getFavorites();
+				if (favs.size() != 0) {
+					System.out.println("\nFavorites: \n");
+				} else {
+					System.out.println("\nNo favorites in library \n");
+				}
 				for (String fav : favs) {
-					System.out.println(fav);
+					System.out.println(fav + "\n");
 				}
 				break;
 			default:
-				System.out.println("Invalid Entry");
+				System.out.println("\nInvalid Entry\n");
 
 		}
 
@@ -246,17 +255,25 @@ public class View {
 			case "1":
 				System.out.println("Enter song title: ");
 				String song = scanner.nextLine().trim();
-				model.addSong(song);
-				System.out.println("\nSong added to library \n");
+				boolean found = model.addSong(song);
+				if (found == true) {
+					System.out.println("\nSong added to library \n");
+				} else {
+					System.out.println("\nUnable to add song \n");
+				}
 				break;
 			case "2":
 				System.out.println("Enter album title: ");
 				String album = scanner.nextLine().trim();
-				model.addAlbum(album);
-				System.out.println("\nAlbum added to library \n");
+				boolean found2 = model.addAlbum(album);
+				if(found2 == true) {
+					System.out.println("\nAlbum added to library \n");
+				} else {
+					System.out.println("\nUnable to add album \n");
+				}
 				break;
 			default:
-				System.out.println("Invalid Entry");
+				System.out.println("\nInvalid Entry\n");
 		}
 	}
 
@@ -277,7 +294,7 @@ public class View {
 				String title = scanner.nextLine().trim();
 				ArrayList<Song> songs = model.getSong(title);
 				if (songs.size() == 0) {
-					System.out.println("This song does not exist in the library.");
+					System.out.println("\nThis song does not exist in the library.\n");
 				} else {
 					for (Song s : songs) {
 						System.out.println("\n" + s.printSong() + "\n");
@@ -308,11 +325,11 @@ public class View {
 						System.out.println("\n" + son.printSong() + "\n");
 					}
 				} else {
-					System.out.println("Playlist not found.");
+					System.out.println("/nPlaylist not found./n");
 				}
 				break;
 			default:
-				System.out.println("Invalid Entry");
+				System.out.println("\nInvalid Entry\n");
 		}
 
 	}
@@ -353,7 +370,7 @@ public class View {
 				System.out.println(store.searchAlbumByArtist(name) + "\n");
 				break;
 			default:
-				System.out.println("Invalid Entry");
+				System.out.println("\nInvalid Entry\n");
 		}
 
 	}

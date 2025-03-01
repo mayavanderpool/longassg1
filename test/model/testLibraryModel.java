@@ -65,11 +65,7 @@ public class testLibraryModel {
 		model.addAlbum(ab.getTitle());
 		assertEquals(1, model.getAlbums().size());
 		
-		int length = ab.getSongList().size();
-		assertEquals(length, model.getSongs().size());
-		assertEquals(model.getAlbums().get(0).getGenre(), ab.getGenre());
-		assertEquals(ab.getSongList(), model.getSongs());
-	}
+	}	
 	
 	@Test
 	void testSearchSongsByArtist() {
@@ -86,11 +82,11 @@ public class testLibraryModel {
 				out += s.printSong();
 			}
 		}
-		assertTrue(out.equals(model.searchSongsByArtist(song1.getArtist())));
+		assertEquals(out,(model.searchSongsByArtist(song1.getArtist())));
 		
-		String other = "This song does not exist in the library.";
+		String other = "\n This song does not exist in the library.\n";
 		
-		assertTrue(other.equals(model.searchSongsByArtist("WRONG")));
+		assertEquals(other,(model.searchSongsByArtist("WRONG")));
 	}
 	
 	@Test

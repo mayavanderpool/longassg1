@@ -37,7 +37,7 @@ class MusicStoreTest {
 	@Test 
 	void testSearchSongsByTitle() {
 		MusicStore store = new MusicStore();
-		assertEquals(store.searchSongsByTitle("Daydreamer"), "Daydreamer,Adele,19");
+		assertEquals(store.searchSongsByTitle("Daydreamer"), "Daydreamer,Adele,19\n");
 		assertEquals(store.searchSongsByTitle("Dayd"), "This song does not exist in the music store.");
 	}
 	
