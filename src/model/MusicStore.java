@@ -23,7 +23,7 @@ public class MusicStore {
 		this.albumList = new ArrayList<Album>();
 		this.songList = new ArrayList<Song>();
 		loadStore();
-	} 
+	}  
 	
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {

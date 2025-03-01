@@ -82,7 +82,7 @@ public class Album {
 		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear() + "\n";
 		String songs = "";
 		for (Song s : songList) {
-			songs += s.getTitle();
+			songs += s.getTitle(); 
 			songs += "\n";
 		}
 		albumInfo += songs;

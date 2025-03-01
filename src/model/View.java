@@ -127,6 +127,7 @@ public class View {
 
 				System.out.println("Enter song title: ");
 				String songName = scanner.nextLine().trim();
+				
 				ArrayList<Song> songs = model.getSong(songName);
 				if (songs.size() == 0) {
 					System.out.println("/nThis song does not exist in the library. /n");
@@ -135,6 +136,7 @@ public class View {
 						list.addSong(s);
 						System.out.println("\nSong added \n");
 					}
+					System.out.println(list.getPlaylist().size());
 				}
 				break;
 			case "2":
@@ -199,7 +201,7 @@ public class View {
 					System.out.println("\nNo artists in library \n");
 				}
 				for (String art : artists) {
-					System.out.println(art + "/n");
+					System.out.println(art + "\n");
 				}
 				break;
 			case "3":
@@ -319,14 +321,22 @@ public class View {
 			case "5":
 				System.out.println("Enter playlist name: ");
 				String name = scanner.nextLine().trim();
-				PlayList playlist = model.getPlayList(name);
-				if (playlist != null) {
-					for (Song son : playlist.getPlaylist()) {
-						System.out.println("\n" + son.printSong() + "\n");
+				
+				ArrayList<String> list = model.getPlaylists();
+		
+				for (String namePlay : list) {
+					if(namePlay.equals(name)) {
+						System.out.println("\n" + name + "\n");
+						
+						PlayList playList = model.getPlayList(name);
+						
+						ArrayList<Song> listSongs = playList.getPlaylist();
+						for(Song s : listSongs) {
+							System.out.println(s.printSong());
+						}
 					}
-				} else {
-					System.out.println("/nPlaylist not found./n");
 				}
+
 				break;
 			default:
 				System.out.println("\nInvalid Entry\n");

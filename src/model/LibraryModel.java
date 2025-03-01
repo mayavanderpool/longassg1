@@ -155,7 +155,7 @@ public class LibraryModel {
 				list.add(s.printSong());
 			}
 		}
-		return list;
+		return list; 
 	}
 
 	public ArrayList<String> getArtists() {
