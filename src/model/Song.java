@@ -70,7 +70,7 @@ public class Song {
     	String albumName = (this.getAlbum()).getTitle();
     	String songStr = this.getTitle() + "," + this.getArtist() + "," + albumName + "\n";
     	return songStr;
-    }
+    } 
 
     
 
