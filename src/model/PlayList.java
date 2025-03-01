@@ -20,6 +20,7 @@ public class PlayList {
         this.name = name;
     }
     
+    //deepCopy() - returns a deep copy of the playlist object
     public PlayList deepCopy() {
     	PlayList copy = new PlayList(this.getName());
     	for(Song s : this.getPlaylist()) {
@@ -30,14 +31,12 @@ public class PlayList {
     	return copy;
     }
 
-    
-
-    /* METHODS */
-
+    //getter
     public String getName() {
         return name;
     }
 
+    //getPlaylist() - returns an arraylist of song objects 
     public ArrayList<Song> getPlaylist() {
         ArrayList<Song> list = new ArrayList<>();
         for (Song s : playlist) {
@@ -47,10 +46,12 @@ public class PlayList {
 
     }
 
+    //addSong(Song song) - adds a song to the playlist
     public void addSong(Song song) {
         playlist.add(song);
     }
 
+    //removeSong(Song song) - removes a song from the playlist
     public void removeSong(Song song) {
         if (playlist.contains(song)) {
             playlist.remove(song);

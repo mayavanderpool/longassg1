@@ -24,6 +24,7 @@ public class View {
 		this.scanner = new Scanner(System.in);
 	}
 
+	//run() - begins program
 	public void run() {
 		System.out.println("Welcome to your Music Library");
 
@@ -68,6 +69,7 @@ public class View {
 		}
 	}
 
+	//exit() - exits program
 	private void exit() {
 		System.out.println("Exiting Music Library!");
 		scanner.close();
@@ -75,6 +77,7 @@ public class View {
 
 	}
 
+	//rateSong() - allows client to rate song
 	private void rateSong() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -97,6 +100,7 @@ public class View {
 
 	}
 
+	//markFav() - allows client to mark a song as favorite
 	private void markFav() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -112,6 +116,7 @@ public class View {
 
 	}
 
+	//addOrRemovePlaylist() - add or remove songs from the playlist in library
 	private void addOrRemovePlaylist() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add songs");
@@ -162,6 +167,7 @@ public class View {
 
 	}
 
+	//createPlaylist() - create a new playlist
 	private void createPlaylist() {
 		System.out.println("Enter playlist name: ");
 		String name = scanner.nextLine().trim();
@@ -171,6 +177,7 @@ public class View {
 
 	}
 
+	//seeLibrary() - view the library
 	private void seeLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - See songs");
@@ -246,6 +253,7 @@ public class View {
 
 	}
 
+	//addtoLibrary() - add songs or albums from the music store to library
 	private void addToLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add song");
@@ -279,6 +287,7 @@ public class View {
 		}
 	}
 
+	//searchLibrary() - search for specific songs, albums, and playlists in library
 	private void searchLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -344,6 +353,7 @@ public class View {
 
 	}
 
+	//searchMusicStore() - search for available songs and albums
 	private void searchMusicStore() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -385,6 +395,7 @@ public class View {
 
 	}
 
+	//displayOptions() - show the client options
 	private void displayOptions() {
 		System.out.println("How can I help you today?");
 		System.out.println("Menu:");
@@ -400,7 +411,7 @@ public class View {
 		System.out.println("9 - EXIT");
 
 	}
-	
+
 	public static void main(String[] args) {
 		View view = new View();
 		view.run();

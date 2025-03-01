@@ -35,9 +35,8 @@ public class Song {
         this.album = song.getAlbum();
     }
 
-    /* METHODS */
+    /* SETTERS/GETTERS */
 
-    //needs ENUM class
     public void setRating(int rating) {
         this.rating = rating;
     }
@@ -66,6 +65,7 @@ public class Song {
         return favorite;
     }
     
+    //printSong() - returns a string representation of the song object
     public String printSong() {
     	String albumName = (this.getAlbum()).getTitle();
     	String songStr = this.getTitle() + "," + this.getArtist() + "," + albumName + "\n";
