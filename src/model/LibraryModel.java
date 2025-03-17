@@ -15,12 +15,14 @@ public class LibraryModel {
 	private ArrayList<PlayList> playLists;
 	private ArrayList<Album> albums;
 	private ArrayList<String> artists;
+	private ArrayList<Song> favorites;
 
 	public LibraryModel() {
 		this.songs = new ArrayList<Song>();
 		this.playLists = new ArrayList<PlayList>();
 		this.albums = new ArrayList<Album>();
 		this.artists = new ArrayList<String>();
+		this.favorites = new ArrayList<Song>();
 	}
 
 	//addSong(String song) - returns a boolean whether or not to add a song
@@ -36,6 +38,34 @@ public class LibraryModel {
 				}
 			}
 		}
+		return found;
+	}
+	
+	public boolean removeSong(String song) {
+		boolean found = false;
+		
+		for (int i = songs.size() - 1; i >= 0; i--) {
+			if(song.equals(songs.get(i).getTitle())) {
+				found = true;
+				songs.remove(i);
+			}
+		}
+		return found;
+	}
+	
+	public boolean removeAlbum(String album) {
+		boolean found = false;
+		
+		for (int i = albums.size() - 1; i >= 0; i--) {
+			if(album.equals(albums.get(i).getTitle())) {
+				found = true;
+				albums.remove(i);
+				//this isnt working yet 
+				for(Song s: albums.get(i).getSongList()) {
+					removeSong(s.getTitle());
+				}
+				}
+			}
 		return found;
 	}
 
@@ -78,7 +108,7 @@ public class LibraryModel {
 	public PlayList getPlayList(String name) {
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
-				return list.deepCopy();
+				return list;
 
 			}
 		}
@@ -156,14 +186,8 @@ public class LibraryModel {
 	}
 
 	//getFavorites() = returns an arraylist of strings of the favorited songs
-	public ArrayList<String>  getFavorites() {
-		ArrayList<String> list = new ArrayList<String>();
-		for (Song s : songs) {
-			if (s.getFavorite()) {
-				list.add(s.printSong());
-			}
-		}
-		return list; 
+	public ArrayList<Song>  getFavorites() {
+		return this.favorites;
 	}
 
 	//getArtists() - returns an arraylist of strings of the artists in the library
@@ -183,7 +207,29 @@ public class LibraryModel {
 		}
 		return list;
 	}
+	
+	public void addFavorite(Song song) {
+		favorites.add(song);
+	}
 
 	
+	public String searchSongByGenre(String genre) {
+		boolean found = false;
+		String out = "";
+		for (Song s : this.songs) {
+			if (s.getGenre().equals(genre)) {
+				found = true;
+				out += s.printSong();
+			}
+		}
+		if (found == false) {
+			out += "\nThis genre does not exist in the library.\n";
+		}
+		return out;
+	}
+
+	
+	
+		
 
 }

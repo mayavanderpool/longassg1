@@ -10,12 +10,6 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import model.Album;
-import model.LibraryModel;
-import model.MusicStore;
-import model.PlayList;
-import model.Song;
-
 import java.util.ArrayList;
 
 public class testLibraryModel {
@@ -153,5 +147,43 @@ public class testLibraryModel {
 		
 	}
 	
+	@Test 
+	void testGenre() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(0);
+		
+		model.addAlbum(al.getTitle());
+		
+		
+		String songs = model.searchSongByGenre("Pop");
+		
+	}
+	
+	@Test 
+	void removeSong() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(0);
+		model.addAlbum(al.getTitle());
+		
+		assertEquals(model.getSongs().size(), 12);
+		model.removeSong("Tired");
+		assertEquals(model.getSongs().size(), 11);
+		model.removeSong("Daydreamer");
+		assertEquals(model.getSongs().size(), 10);
+	}
+	
+	@Test 
+	void removeAlbum() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(0);
+		model.addAlbum(al.getTitle());
+		
+		assertEquals(model.getAlbums().size(), 1);
+		model.removeAlbum("19");
+		assertEquals(model.getAlbums().size(), 0);
+	}
 	
 }

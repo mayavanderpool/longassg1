@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.MusicStore;
-import model.Song;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -71,5 +68,26 @@ class testSong {
 		String test = "Daydreamer,Adele,19\n";
 		assertTrue(song1.printSong().equals(test));
 	}
+	
+	@Test 
+	void testPlaying() {
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
+		song1.playSong();
+		assertEquals(song1.getPlays(), 1);
+		song1.playSong();
+		song1.playSong();
+		song1.playSong();
+		assertEquals(song1.getPlays(), 4);
+	}
+	
+	@Test 
+	void getGenre() {
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
+		assertEquals(song1.getGenre(), "Pop");
+	}
+	
+	
 
 }
