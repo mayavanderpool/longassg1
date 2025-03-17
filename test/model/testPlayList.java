@@ -8,11 +8,6 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import model.Album;
-import model.MusicStore;
-import model.PlayList;
-import model.Song;
-
 import java.util.ArrayList;
 
 class testPlayList {
@@ -33,11 +28,11 @@ class testPlayList {
 		
         list.addSong(song1);
         list.addSong(song2);
-        list.removeSong(song2);
         
-        assertEquals(1, list.getPlaylist().size());
+        
+        assertEquals(2, list.getPlaylist().size());
         list.removeSong(song1);
-        assertEquals(0, list.getPlaylist().size());
+        assertEquals(1, list.getPlaylist().size());
     }
     
     @Test

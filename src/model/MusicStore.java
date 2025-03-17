@@ -27,7 +27,7 @@ public class MusicStore {
 	
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
-		String file = "albums/albums.txt";
+		String file = "albums.txt";
 		
 		try {
 			Scanner scanner = new Scanner(new File(file));
@@ -64,7 +64,7 @@ public class MusicStore {
 	
 	// songFile(Album album) -- adds the songs to the music store from each album
 	private void songFile(Album album) {
-		String file = "albums/" + album.getTitle() + "_" + album.getArtist() +".txt";
+		String file = album.getTitle() + "_" + album.getArtist() +".txt";
 		
 		try {
 			Scanner scanner = new Scanner(new File(file));

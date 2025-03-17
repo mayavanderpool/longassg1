@@ -24,7 +24,6 @@ public class View {
 		this.scanner = new Scanner(System.in);
 	}
 
-	//run() - begins program
 	public void run() {
 		System.out.println("Welcome to your Music Library");
 
@@ -60,16 +59,69 @@ public class View {
 					rateSong();
 					break;
 				case "9":
+					playSong();
+					break;
+				case "10":
+					removeFromLib();
+					break;
+				case "11":
 					exit();
 					break;
 				default:
-					System.out.println("/nInvalid Entry/n");
+					System.out.println("\nInvalid Entry\n");
 			}
 
 		}
 	}
 
-	//exit() - exits program
+	private void removeFromLib() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Remove song");
+		System.out.println("2 - Remove album");
+		System.out.println("Enter your choice: ");
+
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+		case "1":
+			System.out.println("Enter song title: ");
+			String song = scanner.nextLine().trim();
+			boolean found = model.removeSong(song);
+			if (found == true) {
+				System.out.println("\nSong removed from library \n");
+			} else {
+				System.out.println("\nUnable to remove song \n");
+			}
+			break;
+		case "2":
+			System.out.println("Enter album title: ");
+			String album = scanner.nextLine().trim();
+			boolean found2 = model.removeAlbum(album);
+			if(found2 == true) {
+				System.out.println("\nAlbum removed from library \n");
+			} else {
+				System.out.println("\nUnable to remove album \n");
+			}
+			break;
+		default:
+			System.out.println("\nInvalid Entry\n");
+		}
+		
+	}
+
+	private void playSong() {
+		System.out.println("Enter song title: ");
+		String songName = scanner.nextLine().trim();
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				s.playSong();
+			}
+		}
+		
+	}
+
 	private void exit() {
 		System.out.println("Exiting Music Library!");
 		scanner.close();
@@ -77,7 +129,6 @@ public class View {
 
 	}
 
-	//rateSong() - allows client to rate song
 	private void rateSong() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -91,6 +142,9 @@ public class View {
 				int num = Integer.parseInt(rating);
 				if(num >= 1 && num <=5) {
 					s.setRating(num);
+					if(num == 5) {
+						model.addFavorite(s);
+					}
 					System.out.println("\n" + songName + " rated: " + num + "\n");
 				} else {
 					System.out.println("\nInvalid input! \n");
@@ -100,7 +154,6 @@ public class View {
 
 	}
 
-	//markFav() - allows client to mark a song as favorite
 	private void markFav() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -110,13 +163,13 @@ public class View {
 		} else {
 			for (Song s : songs) {
 				s.setFavorite();
+				model.addFavorite(s);
 				System.out.println("\n" + songName + " has been marked favorite \n");
 			}
 		}
 
 	}
 
-	//addOrRemovePlaylist() - add or remove songs from the playlist in library
 	private void addOrRemovePlaylist() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add songs");
@@ -135,13 +188,13 @@ public class View {
 				
 				ArrayList<Song> songs = model.getSong(songName);
 				if (songs.size() == 0) {
-					System.out.println("/nThis song does not exist in the library. /n");
+					System.out.println("\nThis song does not exist in the library. \n");
 				} else {
 					for (Song s : songs) {
 						list.addSong(s);
 						System.out.println("\nSong added \n");
 					}
-					System.out.println(list.getPlaylist().size());
+					
 				}
 				break;
 			case "2":
@@ -167,7 +220,6 @@ public class View {
 
 	}
 
-	//createPlaylist() - create a new playlist
 	private void createPlaylist() {
 		System.out.println("Enter playlist name: ");
 		String name = scanner.nextLine().trim();
@@ -177,7 +229,6 @@ public class View {
 
 	}
 
-	//seeLibrary() - view the library
 	private void seeLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - See songs");
@@ -219,7 +270,7 @@ public class View {
 					System.out.println("\nNo Albums in library \n");
 				}
 				for (Album al : albums) {
-					System.out.println(al.printAlbum()+ "/n");
+					System.out.println(al.printAlbum()+ "\n");
 				}
 				break;
 			case "4":
@@ -236,14 +287,14 @@ public class View {
 				break;
 
 			case "5":
-				ArrayList<String> favs = model.getFavorites();
+				ArrayList<Song> favs = model.getFavorites();
 				if (favs.size() != 0) {
 					System.out.println("\nFavorites: \n");
 				} else {
 					System.out.println("\nNo favorites in library \n");
 				}
-				for (String fav : favs) {
-					System.out.println(fav + "\n");
+				for (Song fav : favs) {
+					System.out.println(fav.printSong() + "\n");
 				}
 				break;
 			default:
@@ -253,7 +304,6 @@ public class View {
 
 	}
 
-	//addtoLibrary() - add songs or albums from the music store to library
 	private void addToLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add song");
@@ -287,7 +337,6 @@ public class View {
 		}
 	}
 
-	//searchLibrary() - search for specific songs, albums, and playlists in library
 	private void searchLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -295,6 +344,7 @@ public class View {
 		System.out.println("3 - Search album by title");
 		System.out.println("4 - Search album by artist");
 		System.out.println("5 - Search playlist");
+		System.out.println("6 - Search song by genre");
 		System.out.println("Enter your choice: ");
 
 		String choice = scanner.nextLine().trim();
@@ -340,6 +390,7 @@ public class View {
 						PlayList playList = model.getPlayList(name);
 						
 						ArrayList<Song> listSongs = playList.getPlaylist();
+						
 						for(Song s : listSongs) {
 							System.out.println(s.printSong());
 						}
@@ -347,13 +398,17 @@ public class View {
 				}
 
 				break;
+			case "6":
+				System.out.println("Enter song genre: ");
+				String genre = scanner.nextLine().trim();
+				System.out.println("\n" + model.searchSongByGenre(genre) + "\n");
+				break;
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
 
 	}
 
-	//searchMusicStore() - search for available songs and albums
 	private void searchMusicStore() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -395,7 +450,6 @@ public class View {
 
 	}
 
-	//displayOptions() - show the client options
 	private void displayOptions() {
 		System.out.println("How can I help you today?");
 		System.out.println("Menu:");
@@ -408,10 +462,12 @@ public class View {
 		System.out.println("6 - Add or remove songs from an existing playlist");
 		System.out.println("7 - Mark a song as 'favorite'");
 		System.out.println("8 - Rate a song");
-		System.out.println("9 - EXIT");
+		System.out.println("9 - Play a song");
+		System.out.println("10 - Remove from your library");
+		System.out.println("11 - EXIT");
 
 	}
-
+	
 	public static void main(String[] args) {
 		View view = new View();
 		view.run();

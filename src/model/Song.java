@@ -15,6 +15,7 @@ public class Song {
     private int rating;
     private boolean favorite;
     private Album album;
+    private int plays;
 
     /* CONSTRUCTOR */
 
@@ -24,6 +25,7 @@ public class Song {
         this.rating = 0;
         this.favorite = false;
         this.album = album;
+        this.plays = 0;
     }
 
     // copy constructor
@@ -65,12 +67,26 @@ public class Song {
         return favorite;
     }
     
+    public String getGenre() {
+    	return this.album.getGenre();
+    }
+    
     //printSong() - returns a string representation of the song object
     public String printSong() {
     	String albumName = (this.getAlbum()).getTitle();
     	String songStr = this.getTitle() + "," + this.getArtist() + "," + albumName + "\n";
     	return songStr;
     } 
+    
+    //playSong() - prints a message to indicate the song is being played and updates play count
+    public void playSong() {
+    	plays++;
+    	System.out.println("\n" + this.title + " is now playing........ \n");
+    }
+    
+    public int getPlays() {
+    	return this.plays;
+    }
 
     
 
