@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 /*
  * File: LibraryModel.java
@@ -227,8 +230,57 @@ public class LibraryModel {
 		}
 		return out;
 	}
-
 	
+	public void sortSongsTitle(){
+		int j = songs.size();
+		boolean swap = false;
+		do {
+			swap = false;
+			for(int i = 0; i<j - 1; i++ ) {
+				if (songs.get(i).getTitle().compareTo(songs.get(i+1).getTitle()) > 0) {
+						Song temp = new Song(songs.get(i));
+						songs.set(i, songs.get(i+1));
+						songs.set(i+1, temp);
+						swap = true;
+				}
+			}
+			j--;
+		}while (swap);
+	}
+
+	public void sortSongsArtist(){
+		int j = songs.size();
+		boolean swap = false;
+		do {
+			swap = false;
+			for(int i = 0; i<j - 1; i++ ) {
+				if (songs.get(i).getArtist().compareTo(songs.get(i+1).getArtist()) > 0) {
+						Song temp = new Song(songs.get(i));
+						songs.set(i, songs.get(i+1));
+						songs.set(i+1, temp);
+						swap = true;
+				}
+			}
+			j--;
+		}while (swap);
+	}
+	
+	public void sortSongsRating(){
+		int j = songs.size() - 1;
+		boolean swap = false;
+		do {
+			swap = false;
+			for(int i = 0; i<j - 1; i++ ) {
+				if (songs.get(i).getRating() > songs.get(i+1).getRating()) {
+						Song temp = new Song(songs.get(i));
+						songs.set(i, songs.get(i+1));
+						songs.set(i+1, temp);
+						swap = true;
+				}
+			}
+			j--;
+		}while (swap);
+	}
 	
 		
 
