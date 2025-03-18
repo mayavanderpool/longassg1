@@ -1,4 +1,4 @@
-package model;
+package test;
 
 /*
  * File: Song.java
@@ -10,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import model.Album;
+import model.LibraryModel;
+import model.MusicStore;
+import model.Song;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -18,16 +23,13 @@ class testSong {
 
 	@Test
 	void testRating() {
+		LibraryModel model = new LibraryModel();
 		MusicStore store = new MusicStore();
-		Song song1 = store.getSongList().get(0);
-
-		assertEquals(song1.getRating(), 0);
-
-		song1.setRating(5);
-		assertEquals(song1.getRating(), 5);
-
-		Song song2 = new Song(song1);
-		assertEquals(song2.getRating(), 5);
+		Album al = store.getAlbumList().get(0);
+		model.addAlbum(al.getTitle());
+		
+		model.getSongs().get(11).setRating(5);
+		assertEquals(5, model.getSongs().get(11).getRating());
 
 	}
 

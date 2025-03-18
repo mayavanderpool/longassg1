@@ -241,15 +241,7 @@ public class View {
 		String choice = scanner.nextLine().trim();
 		switch (choice) {
 			case "1":
-				ArrayList<Song> songsList = model.getSongs();
-				if (songsList.size() != 0) {
-				System.out.println("\nSongs: \n");
-				} else {
-					System.out.println("\nNo songs in library \n");
-				}
-				for (Song s : songsList) {
-					System.out.println(s.printSong() + "\n");
-				}
+				seeSongs();
 				break;
 			case "2":
 				ArrayList<String> artists = model.getArtists();
@@ -302,6 +294,57 @@ public class View {
 
 		}
 
+	}
+
+	private void seeSongs() {
+		System.out.println("See songs sorted by: ");
+		System.out.println("1 - Title");
+		System.out.println("2 - Artist");
+		System.out.println("3 - Rating");
+		System.out.println("Enter your choice: ");
+		
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				model.sortSongsTitle();
+				ArrayList<Song> songsList = model.getSongs();
+				if (songsList.size() != 0) {
+					System.out.println("\nSongs: \n");
+					} else {
+						System.out.println("\nNo songs in library \n");
+					}
+					for (Song s : songsList) {
+						System.out.println(s.printSong() + "\n");
+					}
+				break;
+			case "2":
+				model.sortSongsArtist();
+				ArrayList<Song> songsL = model.getSongs();
+				if (songsL.size() != 0) {
+					System.out.println("\nSongs: \n");
+					} else {
+						System.out.println("\nNo songs in library \n");
+					}
+					for (Song s : songsL) {
+						System.out.println(s.printSong() + "\n");
+					}
+				break;
+			case "3":
+				model.sortSongsRating();
+				ArrayList<Song> list = model.getSongs();
+				if (list.size() != 0) {
+					System.out.println("\nSongs: \n");
+					} else {
+						System.out.println("\nNo songs in library \n");
+					}
+					for (Song s : list) {
+						System.out.println(s.printSong() + "\n");
+					}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+		
 	}
 
 	private void addToLibrary() {

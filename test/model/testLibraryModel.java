@@ -1,4 +1,4 @@
-package model;
+package test;
 
 /*
 * File: testLibraryModel.java
@@ -10,7 +10,14 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import model.Album;
+import model.LibraryModel;
+import model.MusicStore;
+import model.PlayList;
+import model.Song;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class testLibraryModel {
 	
@@ -184,6 +191,47 @@ public class testLibraryModel {
 		assertEquals(model.getAlbums().size(), 1);
 		model.removeAlbum("19");
 		assertEquals(model.getAlbums().size(), 0);
+	}
+	
+	@Test 
+	void testSortByTitle() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(0);
+		model.addAlbum(al.getTitle());
+		
+		model.sortSongsTitle();
+		assertEquals(model.getSongs().get(0).getTitle(), "Best for Last");
+		assertEquals(model.getSongs().get(1).getTitle(), "Chasing Pavements");
+	}
+	
+	@Test 
+	void testSortByArtists() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(2);
+		model.addAlbum(al.getTitle());
+		Album al2 = store.getAlbumList().get(0);
+		model.addAlbum(al2.getTitle());
+		assertEquals(model.getSongs().get(0).getArtist(), "Norah Jones");
+		
+		model.sortSongsArtist();
+		
+		assertEquals(model.getSongs().get(0).getArtist(), "Adele");
+		
+	}
+	
+	@Test
+	void testSortByRating() {
+		LibraryModel model = new LibraryModel();
+		MusicStore store = new MusicStore();
+		Album al = store.getAlbumList().get(0);
+		model.addAlbum(al.getTitle());
+		
+		model.getSongs().get(11).setRating(5);
+		System.out.println(model.getSongs().get(11).getRating());
+		
+		assertEquals(model.getSongs().get(0).getTitle(), "Hometown Glory");
 	}
 	
 }
