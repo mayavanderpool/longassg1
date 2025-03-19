@@ -101,7 +101,7 @@ public class LibraryModel {
 		ArrayList<Song> matches = new ArrayList<Song>();
 		for(Song s : songs){
 			if(s.getTitle().equals(title)){
-				matches.add(new Song(s));
+				matches.add(s);
 			}
 		}
 		return matches;
@@ -173,7 +173,7 @@ public class LibraryModel {
 	public ArrayList<Song> getSongs(){
 		ArrayList<Song> all = new ArrayList<Song>();
 		for(Song s : songs){
-			all.add(new Song(s));
+			all.add(s);
 		}
 		return all;
 	}
@@ -266,12 +266,12 @@ public class LibraryModel {
 	}
 	
 	public void sortSongsRating(){
-		int j = songs.size() - 1;
+		int j = songs.size();
 		boolean swap = false;
 		do {
 			swap = false;
 			for(int i = 0; i<j - 1; i++ ) {
-				if (songs.get(i).getRating() > songs.get(i+1).getRating()) {
+				if (songs.get(i).getRating() < songs.get(i+1).getRating()) {
 						Song temp = new Song(songs.get(i));
 						songs.set(i, songs.get(i+1));
 						songs.set(i+1, temp);
