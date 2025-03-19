@@ -27,9 +27,10 @@ class testSong {
 		MusicStore store = new MusicStore();
 		Album al = store.getAlbumList().get(0);
 		model.addAlbum(al.getTitle());
+		model.getSong("Daydreamer").get(0).setRating(5);;
 		
-		model.getSongs().get(11).setRating(5);
-		assertEquals(5, model.getSongs().get(11).getRating());
+		
+		assertEquals(5, model.getSongs().get(0).getRating());
 
 	}
 
@@ -90,6 +91,16 @@ class testSong {
 		assertEquals(song1.getGenre(), "Pop");
 	}
 	
+	@Test 
+	void testCopy() {
+		MusicStore store = new MusicStore();
+		Song song1 = store.getSongList().get(0);
+		song1.setRating(4);
+		Song song2 = new Song(song1);
+		assertEquals(song2.getRating(), 4);
+		assertEquals(song1.getRating(), 4);
+		
+	}
 	
 
 }

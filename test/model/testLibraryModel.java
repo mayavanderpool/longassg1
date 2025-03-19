@@ -229,7 +229,7 @@ public class testLibraryModel {
 		model.addAlbum(al.getTitle());
 		
 		model.getSongs().get(11).setRating(5);
-		System.out.println(model.getSongs().get(11).getRating());
+		model.sortSongsRating();
 		
 		assertEquals(model.getSongs().get(0).getTitle(), "Hometown Glory");
 	}

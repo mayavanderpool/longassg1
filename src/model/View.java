@@ -338,7 +338,7 @@ public class View {
 						System.out.println("\nNo songs in library \n");
 					}
 					for (Song s : list) {
-						System.out.println(s.printSong() + "\n");
+						System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
 					}
 				break;
 			default:
