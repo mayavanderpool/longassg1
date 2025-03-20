@@ -27,6 +27,8 @@ public class MusicStore {
 	
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
+		System.out.println("Current working directory: " + System.getProperty("user.dir"));
+
 		String file = "albums.txt";
 		
 		try {
