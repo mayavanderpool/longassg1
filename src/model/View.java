@@ -403,12 +403,26 @@ public class View {
 					for (Song s : songs) {
 						System.out.println("\n" + s.printSong() + "\n");
 					}
+					System.out.println("Would you like to view the album info (yes/no)");
+					String answer = scanner.nextLine().trim();
+					
+					switch (answer) {
+					case "yes":
+						for (Song s : songs) {
+							System.out.println("\n" + s.getAlbum().printAlbum() + "\n");
+							System.out.println("This album exists in your library\n");
+						}
+						break;
+					case "no":
+					break;
+					}
 				}
 				break;
 			case "2":
 				System.out.println("Enter song artist: ");
 				String artist = scanner.nextLine().trim();
 				System.out.println("\n" + model.searchSongsByArtist(artist) + "\n");
+				
 				break;
 			case "3":
 				System.out.println("Enter album title: ");
