@@ -80,12 +80,7 @@ public class Album {
 	// printAlbum() -- prints the album info as well as all songs on the album
 	public String printAlbum() {
 		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear() + "\n";
-		String songs = "";
-		for (Song s : songList) {
-			songs += s.getTitle(); 
-			songs += "\n";
-		}
-		albumInfo += songs;
+
 		return albumInfo;
 		
 	}
