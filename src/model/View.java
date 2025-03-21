@@ -229,6 +229,7 @@ public class View {
 
 	}
 
+
 	private void seeLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - See songs");
@@ -301,6 +302,7 @@ public class View {
 		System.out.println("1 - Title");
 		System.out.println("2 - Artist");
 		System.out.println("3 - Rating");
+		System.out.println("4 - Shuffle Songs");
 		System.out.println("Enter your choice: ");
 		
 		String choice = scanner.nextLine().trim();
@@ -341,6 +343,18 @@ public class View {
 						System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
 					}
 				break;
+			case "4":
+				model.shuffleSongs(); 
+				ArrayList<Song> shuffledList = model.getSongs(); 
+				if (shuffledList.size() != 0) {
+					System.out.println("\nShuffled Songs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : shuffledList) {
+					System.out.println(s.printSong() + "\n");
+				}
+            break;
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
