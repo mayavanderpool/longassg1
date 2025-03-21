@@ -27,9 +27,9 @@ public class MusicStore {
 	
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
-		System.out.println("Current working directory: " + System.getProperty("user.dir"));
+		
+		String file = "src/albums/albums.txt";  // Relative path from src to albums folder
 
-		String file = "albums.txt";
 		
 		try {
 			Scanner scanner = new Scanner(new File(file));
@@ -66,7 +66,7 @@ public class MusicStore {
 	
 	// songFile(Album album) -- adds the songs to the music store from each album
 	private void songFile(Album album) {
-		String file = album.getTitle() + "_" + album.getArtist() +".txt";
+		String file = "src/albums/" + album.getTitle() + "_" + album.getArtist() +".txt";
 		
 		try {
 			Scanner scanner = new Scanner(new File(file));
@@ -192,5 +192,8 @@ public class MusicStore {
 		}
 		return out;
 	}
+	
+
+
 	
 }
