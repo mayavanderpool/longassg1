@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Collections;
 
 /*
  * File: LibraryModel.java
@@ -19,6 +20,7 @@ public class LibraryModel {
 	private ArrayList<Album> albums;
 	private ArrayList<String> artists;
 	private ArrayList<Song> favorites;
+	private PlayList favSongs;
 
 	public LibraryModel() {
 		this.songs = new ArrayList<Song>();
@@ -26,9 +28,11 @@ public class LibraryModel {
 		this.albums = new ArrayList<Album>();
 		this.artists = new ArrayList<String>();
 		this.favorites = new ArrayList<Song>();
+		this.favSongs = new PlayList("favorites");
+
 	}
 
-	//addSong(String song) - returns a boolean whether or not to add a song
+	// addSong(String song) - returns a boolean whether or not to add a song
 	public boolean addSong(String song) {
 		MusicStore store = new MusicStore();
 		boolean found = false;
@@ -43,41 +47,41 @@ public class LibraryModel {
 		}
 		return found;
 	}
-	
+
 	public boolean removeSong(String song) {
 		boolean found = false;
-		
+
 		for (int i = songs.size() - 1; i >= 0; i--) {
-			if(song.equals(songs.get(i).getTitle())) {
+			if (song.equals(songs.get(i).getTitle())) {
 				found = true;
 				songs.remove(i);
 			}
 		}
 		return found;
 	}
-	
+
 	public boolean removeAlbum(String album) {
 		boolean found = false;
-		
+
 		for (int i = albums.size() - 1; i >= 0; i--) {
-			if(album.equals(albums.get(i).getTitle())) {
+			if (album.equals(albums.get(i).getTitle())) {
 				found = true;
 				albums.remove(i);
-				//this isnt working yet 
-				for(Song s: albums.get(i).getSongList()) {
+				// this isnt working yet
+				for (Song s : albums.get(i).getSongList()) {
 					removeSong(s.getTitle());
 				}
-				}
 			}
+		}
 		return found;
 	}
 
-	//addPlaylist(PlayList playlist) - adds a playlist the arraylist of playlists
+	// addPlaylist(PlayList playlist) - adds a playlist the arraylist of playlists
 	public void addPlaylist(PlayList playlist) {
 		playLists.add(playlist);
 	}
 
-	//addAlbum(String album) - adds an album to the library returns a boolean
+	// addAlbum(String album) - adds an album to the library returns a boolean
 	public boolean addAlbum(String album) {
 		MusicStore store = new MusicStore();
 		boolean found = false;
@@ -96,18 +100,28 @@ public class LibraryModel {
 		return found;
 	}
 
-	//getSong(String title) - adds a song to the arraylist of songs
-	public ArrayList<Song>  getSong(String title){
+	public ArrayList<Song> shuffleSongs() {
+		Collections.shuffle(songs);
+		return songs;
+	}
+
+	public ArrayList<PlayList> shufflePlayLists() {
+		Collections.shuffle(playLists);
+		return playLists;
+	}
+
+	// getSong(String title) - adds a song to the arraylist of songs
+	public ArrayList<Song> getSong(String title) {
 		ArrayList<Song> matches = new ArrayList<Song>();
-		for(Song s : songs){
-			if(s.getTitle().equals(title)){
+		for (Song s : songs) {
+			if (s.getTitle().equals(title)) {
 				matches.add(s);
 			}
 		}
 		return matches;
 	}
 
-	//PlayList(String name) - returns a deep copy of the a PlayList object
+	// PlayList(String name) - returns a deep copy of the a PlayList object
 	public PlayList getPlayList(String name) {
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
@@ -119,23 +133,25 @@ public class LibraryModel {
 		return null;
 	}
 
-	//searchSongsByArtist(String artist) - returns a String of all the songs by given artist
+	// searchSongsByArtist(String artist) - returns a String of all the songs by
+	// given artist
 	public String searchSongsByArtist(String artist) {
 		boolean found = false;
 		String out = "";
 		for (Song s : songs) {
 			if (s.getArtist().equals(artist)) {
-				found = true; 
+				found = true;
 				out += s.printSong();
 			}
 		}
 		if (found == false) {
-			out +="\n This song does not exist in the library.\n";
+			out += "\n This song does not exist in the library.\n";
 		}
 		return out;
 	}
 
-	//searchAlbumByTitle(String title) - returns a string of the albums with the given title
+	// searchAlbumByTitle(String title) - returns a string of the albums with the
+	// given title
 	public String searchAlbumByTitle(String title) {
 		String out = "";
 		boolean found = false;
@@ -146,13 +162,13 @@ public class LibraryModel {
 			}
 		}
 		if (found == false) {
-			out +=  "\nThis album does not exist in the library. \n";
+			out += "\nThis album does not exist in the library. \n";
 		}
 		return out;
 	}
 
-	
-	//searchAlbumByArtist(String artist) - returns a string of the albums by the given artist
+	// searchAlbumByArtist(String artist) - returns a string of the albums by the
+	// given artist
 	public String searchAlbumByArtist(String artist) {
 		boolean found = false;
 		String out = "";
@@ -168,32 +184,40 @@ public class LibraryModel {
 		return out;
 	}
 
-	
-	//getSongs() - returns an arraylist of songs from the library
-	public ArrayList<Song> getSongs(){
+	// getSongs() - returns an arraylist of songs from the library
+	public ArrayList<Song> getSongs() {
 		ArrayList<Song> all = new ArrayList<Song>();
-		for(Song s : songs){
+		for (Song s : songs) {
 			all.add(s);
 		}
 		return all;
 	}
 
-	//getPlaylists() - returns an arraylist of strings from the library
+	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
 		ArrayList<String> list = new ArrayList<>();
-		for(PlayList play:playLists){
+		for (PlayList play : playLists) {
 			list.add(play.getName());
-			
+
 		}
 		return list;
 	}
 
-	//getFavorites() = returns an arraylist of strings of the favorited songs
-	public ArrayList<Song>  getFavorites() {
+	public PlayList favSongs(Song song) {
+		if (!playLists.contains(favSongs)) {
+			addPlaylist(favSongs);
+		}
+		favSongs.addSong(song);
+
+		return favSongs.deepCopy();
+	}
+
+	// getFavorites() = returns an arraylist of songs of the favorited songs
+	public ArrayList<Song> getFavorites() {
 		return this.favorites;
 	}
 
-	//getArtists() - returns an arraylist of strings of the artists in the library
+	// getArtists() - returns an arraylist of strings of the artists in the library
 	public ArrayList<String> getArtists() {
 		ArrayList<String> list = new ArrayList<>();
 		for (String artist : artists) {
@@ -202,20 +226,20 @@ public class LibraryModel {
 		return list;
 	}
 
-	//getAlbums() - return an arraylist of albums of the albums in the library
-	public  ArrayList<Album> getAlbums() {
+	// getAlbums() - return an arraylist of albums of the albums in the library
+	public ArrayList<Album> getAlbums() {
 		ArrayList<Album> list = new ArrayList<>();
 		for (Album album : albums) {
 			list.add(album.deepCopy());
 		}
 		return list;
 	}
-	
+
 	public void addFavorite(Song song) {
 		favorites.add(song);
+		favSongs(song);
 	}
 
-	
 	public String searchSongByGenre(String genre) {
 		boolean found = false;
 		String out = "";
@@ -230,58 +254,56 @@ public class LibraryModel {
 		}
 		return out;
 	}
-	
-	public void sortSongsTitle(){
+
+	public void sortSongsTitle() {
 		int j = songs.size();
 		boolean swap = false;
 		do {
 			swap = false;
-			for(int i = 0; i<j - 1; i++ ) {
-				if (songs.get(i).getTitle().compareTo(songs.get(i+1).getTitle()) > 0) {
-						Song temp = new Song(songs.get(i));
-						songs.set(i, songs.get(i+1));
-						songs.set(i+1, temp);
-						swap = true;
+			for (int i = 0; i < j - 1; i++) {
+				if (songs.get(i).getTitle().compareTo(songs.get(i + 1).getTitle()) > 0) {
+					Song temp = new Song(songs.get(i));
+					songs.set(i, songs.get(i + 1));
+					songs.set(i + 1, temp);
+					swap = true;
 				}
 			}
 			j--;
-		}while (swap);
+		} while (swap);
 	}
 
-	public void sortSongsArtist(){
+	public void sortSongsArtist() {
 		int j = songs.size();
 		boolean swap = false;
 		do {
 			swap = false;
-			for(int i = 0; i<j - 1; i++ ) {
-				if (songs.get(i).getArtist().compareTo(songs.get(i+1).getArtist()) > 0) {
-						Song temp = new Song(songs.get(i));
-						songs.set(i, songs.get(i+1));
-						songs.set(i+1, temp);
-						swap = true;
+			for (int i = 0; i < j - 1; i++) {
+				if (songs.get(i).getArtist().compareTo(songs.get(i + 1).getArtist()) > 0) {
+					Song temp = new Song(songs.get(i));
+					songs.set(i, songs.get(i + 1));
+					songs.set(i + 1, temp);
+					swap = true;
 				}
 			}
 			j--;
-		}while (swap);
+		} while (swap);
 	}
-	
-	public void sortSongsRating(){
+
+	public void sortSongsRating() {
 		int j = songs.size();
 		boolean swap = false;
 		do {
 			swap = false;
-			for(int i = 0; i<j - 1; i++ ) {
-				if (songs.get(i).getRating() < songs.get(i+1).getRating()) {
-						Song temp = new Song(songs.get(i));
-						songs.set(i, songs.get(i+1));
-						songs.set(i+1, temp);
-						swap = true;
+			for (int i = 0; i < j - 1; i++) {
+				if (songs.get(i).getRating() < songs.get(i + 1).getRating()) {
+					Song temp = new Song(songs.get(i));
+					songs.set(i, songs.get(i + 1));
+					songs.set(i + 1, temp);
+					swap = true;
 				}
 			}
 			j--;
-		}while (swap);
+		} while (swap);
 	}
-	
-		
 
 }
