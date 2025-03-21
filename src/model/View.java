@@ -302,6 +302,7 @@ public class View {
 		System.out.println("1 - Title");
 		System.out.println("2 - Artist");
 		System.out.println("3 - Rating");
+		System.out.println("4 - Shuffled");
 		System.out.println("Enter your choice: ");
 		
 		String choice = scanner.nextLine().trim();
@@ -341,6 +342,19 @@ public class View {
 					for (Song s : list) {
 						System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
 					}
+				break;
+			case "4":
+				model.shuffleSongs(); 
+				ArrayList<Song> shuffled = model.getSongs();
+				if (shuffled.size() != 0) {
+					System.out.println("\nSongs: \n");
+					} else {
+						System.out.println("\nNo songs in library \n");
+					}
+					for (Song s : shuffled) {
+						System.out.println(s.printSong() + "\n");
+					}
+
 				break;
 			default:
 				System.out.println("\nInvalid Entry\n");
@@ -404,7 +418,7 @@ public class View {
 					for (Song s : songs) {
 						System.out.println("\n" + s.printSong() + "\n");
 					}
-					System.out.println("Would you like to view the album info (yes/no)");
+					System.out.println("Would you like to view the album info (yes/no)\n");
 					String answer = scanner.nextLine().trim();
 					
 					switch (answer) {

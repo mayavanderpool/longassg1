@@ -29,7 +29,7 @@ public class LibraryModel {
 		this.albums = new ArrayList<Album>();
 		this.artists = new ArrayList<String>();
 		this.favorites = new ArrayList<Song>();
-		this.favSongs = new PlayList("favorites");
+		this.favSongs = new PlayList("Favorites");
 		this.topRated = new PlayList("Top Rated");
 
 	}
@@ -44,6 +44,9 @@ public class LibraryModel {
 				songs.add(s);
 				if (!artists.contains(s.getArtist())) {
 					artists.add(s.getArtist());
+				}
+				if (!albums.contains(s.getAlbum())) {
+					albums.add(s.getAlbum());
 				}
 			}
 		}
@@ -68,11 +71,10 @@ public class LibraryModel {
 		for (int i = albums.size() - 1; i >= 0; i--) {
 			if (album.equals(albums.get(i).getTitle())) {
 				found = true;
-				albums.remove(i);
-				// this isnt working yet
 				for (Song s : albums.get(i).getSongList()) {
 					removeSong(s.getTitle());
 				}
+				albums.remove(i);
 			}
 		}
 		return found;
@@ -201,6 +203,7 @@ public class LibraryModel {
 
 	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
+		topRated();
 		ArrayList<String> list = new ArrayList<>();
 		for (PlayList play : playLists) {
 			list.add(play.getName());
@@ -228,7 +231,7 @@ public class LibraryModel {
 			addPlaylist(topRated);
 		}
 		for(Song s : songs){
-			if (s.getRating() >= 4){
+			if (s.getRating() >= 4 && !(topRated.getPlaylist().contains(s))){
 				topRated.addSong(s);
 			}
 		}
