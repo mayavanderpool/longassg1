@@ -21,6 +21,7 @@ public class LibraryModel {
 	private ArrayList<String> artists;
 	private ArrayList<Song> favorites;
 	private PlayList favSongs;
+	private PlayList topRated;
 
 	public LibraryModel() {
 		this.songs = new ArrayList<Song>();
@@ -29,6 +30,7 @@ public class LibraryModel {
 		this.artists = new ArrayList<String>();
 		this.favorites = new ArrayList<Song>();
 		this.favSongs = new PlayList("favorites");
+		this.topRated = new PlayList("Top Rated");
 
 	}
 
@@ -109,6 +111,8 @@ public class LibraryModel {
 		Collections.shuffle(playLists);
 		return playLists;
 	}
+
+	
 
 	// getSong(String title) - adds a song to the arraylist of songs
 	public ArrayList<Song> getSong(String title) {
@@ -203,6 +207,11 @@ public class LibraryModel {
 		return list;
 	}
 
+	// getFavorites() = returns an arraylist of songs of the favorited songs
+	public ArrayList<Song> getFavorites() {
+		return this.favorites;
+	}
+	
 	public PlayList favSongs(Song song) {
 		if (!playLists.contains(favSongs)) {
 			addPlaylist(favSongs);
@@ -212,10 +221,19 @@ public class LibraryModel {
 		return favSongs.deepCopy();
 	}
 
-	// getFavorites() = returns an arraylist of songs of the favorited songs
-	public ArrayList<Song> getFavorites() {
-		return this.favorites;
+	public PlayList topRated(){
+		if(!playLists.contains(topRated)){
+			addPlaylist(topRated);
+		}
+		for(Song s : songs){
+			if (s.getRating() >= 4){
+				topRated.addSong(s);
+			}
+		}
+		return topRated;
 	}
+
+
 
 	// getArtists() - returns an arraylist of strings of the artists in the library
 	public ArrayList<String> getArtists() {
