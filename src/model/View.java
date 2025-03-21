@@ -302,7 +302,6 @@ public class View {
 		System.out.println("1 - Title");
 		System.out.println("2 - Artist");
 		System.out.println("3 - Rating");
-		System.out.println("4 - Shuffle Songs");
 		System.out.println("Enter your choice: ");
 		
 		String choice = scanner.nextLine().trim();
@@ -343,18 +342,6 @@ public class View {
 						System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
 					}
 				break;
-			case "4":
-				model.shuffleSongs(); 
-				ArrayList<Song> shuffledList = model.getSongs(); 
-				if (shuffledList.size() != 0) {
-					System.out.println("\nShuffled Songs: \n");
-				} else {
-					System.out.println("\nNo songs in library \n");
-				}
-				for (Song s : shuffledList) {
-					System.out.println(s.printSong() + "\n");
-				}
-            break;
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
@@ -448,27 +435,51 @@ public class View {
 				String albArtist = scanner.nextLine().trim();
 				System.out.println( "\n" + model.searchAlbumByArtist(albArtist) + "\n" );
 				break;
-			case "5":
+				case "5":
 				System.out.println("Enter playlist name: ");
 				String name = scanner.nextLine().trim();
 				
 				ArrayList<String> list = model.getPlaylists();
-		
+				boolean playlistFound = false; // Flag to check if the playlist is found
+			
 				for (String namePlay : list) {
-					if(namePlay.equals(name)) {
+					if (namePlay.equals(name)) {
+						playlistFound = true; // Playlist is found
+						
 						System.out.println("\n" + name + "\n");
-						
+			
 						PlayList playList = model.getPlayList(name);
-						
 						ArrayList<Song> listSongs = playList.getPlaylist();
-						
-						for(Song s : listSongs) {
+			
+						for (Song s : listSongs) {
 							System.out.println(s.printSong());
 						}
+			
+						System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
+						String response = scanner.nextLine().trim().toLowerCase();
+			
+						if (response.equals("yes")) {
+							// Call your shuffle method here
+							ArrayList<Song> shuffledSongs = model.shufflePlayLists(namePlay); 
+							for (Song s : shuffledSongs) {
+								System.out.println(s.printSong());
+							}
+
+						} else if (response.equals("no")) {
+							System.out.println("Playlist not shuffled.\n");
+						} else {
+							System.out.println("Invalid response. Please answer 'yes' or 'no'.\n");
+						}
+						break; // Exit the loop since the playlist is found
 					}
 				}
-
+			
+				// If no playlist was found, display an invalid entry message
+				if (!playlistFound) {
+					System.out.println("Invalid entry. Playlist not found in the library.\n");
+				}
 				break;
+			
 			case "6":
 				System.out.println("Enter song genre: ");
 				String genre = scanner.nextLine().trim();

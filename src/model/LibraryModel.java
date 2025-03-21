@@ -107,9 +107,11 @@ public class LibraryModel {
 		return songs;
 	}
 
-	public ArrayList<PlayList> shufflePlayLists() {
-		Collections.shuffle(playLists);
-		return playLists;
+	public ArrayList<Song> shufflePlayLists(String name) {
+		PlayList list = getPlayList(name);
+		ArrayList<Song> listSongs = list.getPlaylist();
+		Collections.shuffle(listSongs);
+		return listSongs;
 	}
 
 	
@@ -211,7 +213,7 @@ public class LibraryModel {
 	public ArrayList<Song> getFavorites() {
 		return this.favorites;
 	}
-	
+
 	public PlayList favSongs(Song song) {
 		if (!playLists.contains(favSongs)) {
 			addPlaylist(favSongs);
@@ -230,7 +232,7 @@ public class LibraryModel {
 				topRated.addSong(s);
 			}
 		}
-		return topRated;
+		return topRated.deepCopy();
 	}
 
 
