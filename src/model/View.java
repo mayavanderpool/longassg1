@@ -263,7 +263,7 @@ public class View {
 					System.out.println("\nNo Albums in library \n");
 				}
 				for (Album al : albums) {
-					System.out.println(al.printAlbum()+ "\n");
+					System.out.println(printAlbum(al)+ "\n");
 				}
 				break;
 			case "4":
@@ -424,7 +424,7 @@ public class View {
 					switch (answer) {
 					case "yes":
 						for (Song s : songs) {
-							System.out.println("\n" + s.getAlbum().printAlbum() + "\n");
+							System.out.println("\n" + printAlbum(s.getAlbum()) + "\n");
 							System.out.println("This album exists in your library\n");
 						}
 						break;
@@ -437,17 +437,40 @@ public class View {
 				System.out.println("Enter song artist: ");
 				String artist = scanner.nextLine().trim();
 				System.out.println("\n" + model.searchSongsByArtist(artist) + "\n");
+				System.out.println("Would you like to view the album info (yes/no)\n");
+				String answer = scanner.nextLine().trim();
 				
+				switch (answer) {
+				case "yes":
+					System.out.println("Enter song title: ");
+					String title2 = scanner.nextLine().trim();
+					ArrayList<Song> songsList = model.getSong(title2);
+					for (Song s : songsList) {
+						System.out.println("\n" + printAlbum(s.getAlbum()) + "\n");
+						System.out.println("This album exists in your library\n");
+					}
+					
+					break;
+				case "no":
+				break;
+				}
+		
 				break;
 			case "3":
 				System.out.println("Enter album title: ");
 				String albTitle = scanner.nextLine().trim();
-				System.out.println("\n" + model.searchAlbumByTitle(albTitle) + "\n");
+				ArrayList<Album> matches = model.searchAlbumByTitle(albTitle);
+				for(Album a : matches) {
+					printAlbum(a);
+				}
 				break;
 			case "4":
 				System.out.println("Enter album artist: ");
 				String albArtist = scanner.nextLine().trim();
-				System.out.println( "\n" + model.searchAlbumByArtist(albArtist) + "\n" );
+				ArrayList<Album> matches1 = model.searchAlbumByArtist(albArtist);
+				for(Album a : matches1) {
+					printAlbum(a);
+				}
 				break;
 				case "5":
 				System.out.println("Enter playlist name: ");
@@ -532,13 +555,19 @@ public class View {
 				System.out.println("Enter album title: ");
 				String albName = scanner.nextLine().trim();
 				System.out.println("\nRESULTS:");
-				System.out.println(store.searchAlbumByTitle(albName) + "\n");
+				ArrayList<Album> matches = store.searchAlbumByTitle(albName);
+				for(Album a : matches) {
+					printAlbum(a);
+				}
 				break;
 			case "4":
 				System.out.println("Enter album artist: ");
 				String name = scanner.nextLine().trim();
 				System.out.println("\nRESULTS:");
-				System.out.println(store.searchAlbumByArtist(name) + "\n");
+				ArrayList<Album> matches1 = store.searchAlbumByArtist(name);
+				for(Album a : matches1) {
+					printAlbum(a);
+				}
 				break;
 			default:
 				System.out.println("\nInvalid Entry\n");
@@ -562,6 +591,13 @@ public class View {
 		System.out.println("10 - Remove from your library");
 		System.out.println("11 - EXIT");
 
+	}
+	
+	public String printAlbum(Album album) {
+		String albumInfo = album.getTitle() + "," + album.getArtist() + "," + album.getGenre() + "," + album.getYear() + "\n";
+
+		return albumInfo;
+		
 	}
 	
 	public static void main(String[] args) {

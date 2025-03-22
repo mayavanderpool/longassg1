@@ -160,36 +160,26 @@ public class LibraryModel {
 
 	// searchAlbumByTitle(String title) - returns a string of the albums with the
 	// given title
-	public String searchAlbumByTitle(String title) {
-		String out = "";
-		boolean found = false;
+	public ArrayList<Album> searchAlbumByTitle(String title) {
+		ArrayList<Album> matches = new ArrayList<Album>();
 		for (Album a : albums) {
 			if (a.getTitle().equals(title)) {
-				found = true;
-				out += a.printAlbum();
+				matches.add(a);
 			}
 		}
-		if (found == false) {
-			out += "\nThis album does not exist in the library. \n";
-		}
-		return out;
+		return matches;
 	}
 
 	// searchAlbumByArtist(String artist) - returns a string of the albums by the
 	// given artist
-	public String searchAlbumByArtist(String artist) {
-		boolean found = false;
-		String out = "";
+	public ArrayList<Album> searchAlbumByArtist(String artist) {
+		ArrayList<Album> matches = new ArrayList<Album>();
 		for (Album a : albums) {
-			if (a.getArtist().equals(artist)) {
-				found = true;
-				out += a.printAlbum();
+			if (a.getTitle().equals(artist)) {
+				matches.add(a);
 			}
 		}
-		if (found == false) {
-			out += "\nThis album does not exist in the library.\n";
-		}
-		return out;
+		return matches;
 	}
 
 	// getSongs() - returns an arraylist of songs from the library

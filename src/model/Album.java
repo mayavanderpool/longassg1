@@ -77,13 +77,6 @@ public class Album {
 		songList.add(new Song(song));
 	}
 
-	// printAlbum() -- prints the album info as well as all songs on the album
-	public String printAlbum() {
-		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear() + "\n";
-
-		return albumInfo;
-		
-	}
 	
 
 }
