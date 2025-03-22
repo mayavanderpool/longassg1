@@ -162,35 +162,25 @@ public class MusicStore {
 	}
 	
 	// String searchAlbumByTitle(String title) -- return albums that have the title 
-	public String searchAlbumByTitle(String title) {
-		boolean found = false;
-		String out = "";
-		for (Album a: albumList) {
-			if(a.getTitle().equals(title)) {
-				out+= a.printAlbum() + "\n";
-				found = true;
+	public ArrayList<Album> searchAlbumByTitle(String title) {
+		ArrayList<Album> matches = new ArrayList<Album>();
+		for (Album a : albumList) {
+			if (a.getTitle().equals(title)) {
+				matches.add(a);
 			}
 		}
-		if (found == false) {
-			out += "This album does not exist in the music store.";
-		}
-		return out;
+		return matches;
 	}
 	
 	// searchAlbumByArtist(String artist) -- returns albums by artist
-	public String searchAlbumByArtist(String artist) {
-		boolean found = false;
-		String out = "";
-		for (Album a: albumList) {
-			if(a.getArtist().equals(artist)) {
-				out += a.printAlbum() + "\n";
-				found = true;
+	public ArrayList<Album>  searchAlbumByArtist(String artist) {
+		ArrayList<Album> matches = new ArrayList<Album>();
+		for (Album a : albumList) {
+			if (a.getTitle().equals(artist)) {
+				matches.add(a);
 			}
 		}
-		if (found == false) {
-			out += "This artist does not exist in the music store.";
-		}
-		return out;
+		return matches;
 	}
 	
 
