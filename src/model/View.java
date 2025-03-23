@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 
 public class View {
+
     private Scanner scanner;
     private LibraryModel model;
     private MusicStore store;
@@ -605,4 +606,4 @@ public class View {
         View view = new View();
         view.run();
     }
-}
+}	
