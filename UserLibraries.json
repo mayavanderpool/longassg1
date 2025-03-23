@@ -1,0 +1,13 @@
+{
+  "joe" : {
+    "username" : "joe",
+    "songTitles" : [ ],
+    "albumTitles" : [ ],
+    "playlistNames" : [ "Top Rated" ],
+    "playlists" : [ {
+      "songs" : [ ],
+      "name" : "Top Rated"
+    } ],
+    "favorites" : [ ]
+  }
+}
