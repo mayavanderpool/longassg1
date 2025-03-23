@@ -49,7 +49,6 @@ public class UserLibrary {
         }
     }
     
-    // Save all user libraries to JSON file
     @JsonIgnore
     public static void saveLibraries() {
         try {
@@ -60,67 +59,62 @@ public class UserLibrary {
         }
     }
     
-    // Save the current user's library
     @JsonIgnore
     public static void saveUserLibrary(String username, LibraryModel model) {
-        // Ensure libraries are loaded
+        
         if (userLibraries.isEmpty()) {
             loadLibraries();
         }
         
-        // Create user library object if it doesn't exist
+       
         if (!userLibraries.containsKey(username)) {
             userLibraries.put(username, new UserLibrary(username));
         }
         
         UserLibrary userLibrary = userLibraries.get(username);
         
-        // Update library with current model data
+        
         userLibrary.updateFromModel(model);
         
-        // Save to file
+       
         saveLibraries();
     }
     
-    // Load a user's library into the model
+   
     @JsonIgnore
     public static void loadUserLibrary(String username, LibraryModel model) {
-        // Ensure libraries are loaded
+    
         if (userLibraries.isEmpty()) {
             loadLibraries();
         }
         
-        // If user has a saved library, load it
+        
         if (userLibraries.containsKey(username)) {
             UserLibrary userLibrary = userLibraries.get(username);
             userLibrary.loadIntoModel(model);
         }
     }
     
-    // Update this library object from the model
+    
     @JsonIgnore
     private void updateFromModel(LibraryModel model) {
-        // Clear existing data
+       
         songTitles.clear();
         albumTitles.clear();
         playlistNames.clear();
         playlists.clear();
         favorites.clear();
         
-        // Save songs
         for (Song song : model.getSongs()) {
             songTitles.add(song.getTitle());
         }
         
-        // Save albums
         for (Album album : model.getAlbums()) {
             albumTitles.add(album.getTitle());
         }
         
-        // Save playlists
         playlistNames = model.getPlaylists();
         
-        // Save playlist content
         for (String playlistName : playlistNames) {
             PlayList playlist = model.getPlayList(playlistName);
             if (playlist != null) {
@@ -137,16 +131,14 @@ public class UserLibrary {
             }
         }
         
-        // Save favorites
         for (Song song : model.getFavorites()) {
             favorites.add(song.getTitle());
         }
     }
     
-    // Load data from this library into the model
     @JsonIgnore
     private void loadIntoModel(LibraryModel model) {
-        // Load songs and albums
+       
         for (String songTitle : songTitles) {
             model.addSong(songTitle);
         }
@@ -155,18 +147,15 @@ public class UserLibrary {
             model.addAlbum(albumTitle);
         }
         
-        // Load playlists
         for (Map<String, Object> playlistMap : playlists) {
             String name = (String) playlistMap.get("name");
             ArrayList<String> songList = (ArrayList<String>) playlistMap.get("songs");
             
-            // Create playlist if it doesn't exist
             if (!model.getPlaylists().contains(name)) {
                 PlayList newPlaylist = new PlayList(name);
                 model.addPlaylist(newPlaylist);
             }
             
-            // Add songs to playlist
             PlayList playlist = model.getPlayList(name);
             for (String songTitle : songList) {
                 ArrayList<Song> songs = model.getSong(songTitle);
@@ -176,7 +165,6 @@ public class UserLibrary {
             }
         }
         
-        // Load favorites
         for (String songTitle : favorites) {
             ArrayList<Song> songs = model.getSong(songTitle);
             for (Song song : songs) {
@@ -185,8 +173,7 @@ public class UserLibrary {
             }
         }
     }
-    
-    // Getters and setters for Jackson serialization
+
     
     @JsonProperty
     public String getUsername() {
