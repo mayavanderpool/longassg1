@@ -1,12 +1,7 @@
 {
-  "Maya" : {
-    "username" : "Maya",
-    "hashedPwd" : "xap5LDFHVpgac9bb2fAjEELniAbJ22PkH7EXpPUKWr4=",
-    "salt" : "AF4yKMjap/4+pNIaPTHGLg=="
-  },
-  "maya" : {
-    "username" : "maya",
-    "hashedPwd" : "zuUEGuYXSkBgfJs+V7Ni8kBAjwF8EGHbr8tRWz6YdGc=",
-    "salt" : "gzVFFeQ8hK78k1SseSPPgQ=="
+  "joe" : {
+    "username" : "joe",
+    "hashedPwd" : "XH1NLpRpeYRSuhVq5cOLIsTllQ1aJNGhe3LMdiG9yZc=",
+    "salt" : "NY7SJEp/3kp1M0mphGb5UA=="
   }
 }

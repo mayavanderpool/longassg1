@@ -1,4 +1,0 @@
-//serialize take the data type and turning it into a string representation  that can be read and converted back to a object
-//object to string  serialization back to object deserialization
-
-json file
