@@ -1,7 +1,7 @@
 {
-  "randy" : {
-    "username" : "randy",
-    "hashedPwd" : "FeqliZTBWOYFNPTdyCiHOpkujCAzhjyJF2gUqY/ujJw=",
-    "salt" : "+6Rg9bb19kab7zPyAZFEpw=="
+  "hello" : {
+    "username" : "hello",
+    "hashedPwd" : "C17n2sQUtcSTM58rkA9rHAtdZno54smeOQhfCeCcyz0=",
+    "salt" : "LIoxmk52pUHuKx0GW4y8Jw=="
   }
 }

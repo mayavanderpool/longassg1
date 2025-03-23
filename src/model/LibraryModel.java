@@ -193,7 +193,10 @@ public class LibraryModel {
 
 	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
-		topRated();
+		if(topRated.getLength() != 0){
+			topRated();
+		}
+		
 		ArrayList<String> list = new ArrayList<>();
 		for (PlayList play : playLists) {
 			list.add(play.getName());
