@@ -12,12 +12,15 @@
   },
   "h" : {
     "username" : "h",
-    "songTitles" : [ "Daydreamer", "Best for Last", "Chasing Pavements", "Cold Shoulder", "Crazy for You", "Melt My Heart to Stone", "First Love", "Right as Rain", "Make You Feel My Love", "My Same", "Tired", "Hometown Glory" ],
-    "albumTitles" : [ "19" ],
-    "playlistNames" : [ "Top Rated" ],
+    "songTitles" : [ ],
+    "albumTitles" : [ ],
+    "playlistNames" : [ "Recent Plays", "Most Played" ],
     "playlists" : [ {
       "songs" : [ ],
-      "name" : "Top Rated"
+      "name" : "Recent Plays"
+    }, {
+      "songs" : [ ],
+      "name" : "Most Played"
     } ],
     "favorites" : [ ]
   },
