@@ -23,6 +23,9 @@ public class User{
 	private static final String DB = "Users.json";
 	private static Map<String, User> users = new HashMap<>();
 
+	public User(){
+		
+	}
 	
     public User(String username, String password){
         this.username = username;

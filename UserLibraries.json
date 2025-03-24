@@ -56,5 +56,27 @@
       "name" : "Top Rated"
     } ],
     "favorites" : [ ]
+  },
+  "jay" : {
+    "username" : "jay",
+    "songTitles" : [ ],
+    "albumTitles" : [ ],
+    "playlistNames" : [ "Top Rated" ],
+    "playlists" : [ {
+      "songs" : [ ],
+      "name" : "Top Rated"
+    } ],
+    "favorites" : [ ]
+  },
+  "pitaa" : {
+    "username" : "pitaa",
+    "songTitles" : [ ],
+    "albumTitles" : [ ],
+    "playlistNames" : [ "Top Rated" ],
+    "playlists" : [ {
+      "songs" : [ ],
+      "name" : "Top Rated"
+    } ],
+    "favorites" : [ ]
   }
 }

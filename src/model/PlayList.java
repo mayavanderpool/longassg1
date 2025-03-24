@@ -46,10 +46,7 @@ public class PlayList {
 
     }
 
-	public int getLength(){
-		int length = playlist.size();
-		return length;
-	}
+	
 
     //addSong(Song song) - adds a song to the playlist
     public void addSong(Song song) {
