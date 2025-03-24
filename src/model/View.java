@@ -15,595 +15,631 @@ import java.util.Scanner;
 
 public class View {
 
-    private Scanner scanner;
-    private LibraryModel model;
-    private MusicStore store;
-    private String currentUser;
+	private Scanner scanner;
+	private LibraryModel model;
+	private MusicStore store;
+	private String currentUser;
 
-    public View() {
-        this.model = new LibraryModel();
-        this.store = new MusicStore();
-        this.scanner = new Scanner(System.in);
-    }
+	public View() {
+		this.model = new LibraryModel();
+		this.store = new MusicStore();
+		this.scanner = new Scanner(System.in);
+	}
 
-    public void run() {
-        // Start with login
-        login();
-        
-        boolean inputing = true;
-        while (inputing) {
-            displayOptions();
-            System.out.println("Enter your choice: ");
-            String choice = scanner.nextLine().trim();
+	public void run() {
+		// Start with login
+		login();
 
-            switch (choice) {
-                case "1":
-                    searchMusicStore();
-                    break;
-                case "2":
-                    searchLibrary();
-                    break;
-                case "3":
-                    addToLibrary();
-                    break;
-                case "4":
-                    seeLibrary();
-                    break;
-                case "5":
-                    createPlaylist();
-                    break;
-                case "6":
-                    addOrRemovePlaylist();
-                    break;
-                case "7":
-                    markFav();
-                    break;
-                case "8":
-                    rateSong();
-                    break;
-                case "9":
-                    playSong();
-                    break;
-                case "10":
-                    removeFromLib();
-                    break;
-                case "11":
-                    if(logout()) {
-                        // If logout returns true, it means the user wants to exit completely
-                        inputing = false;
-                    }
-                    break;
-                default:
-                    System.out.println("\nInvalid Entry\n");
-            }
-        }
-    }
+		boolean inputing = true;
+		while (inputing) {
+			displayOptions();
+			System.out.println("Enter your choice: ");
+			String choice = scanner.nextLine().trim();
 
-    private void removeFromLib() {
-        System.out.println("Menu: ");
-        System.out.println("1 - Remove song");
-        System.out.println("2 - Remove album");
-        System.out.println("Enter your choice: ");
+			switch (choice) {
+				case "1":
+					searchMusicStore();
+					break;
+				case "2":
+					searchLibrary();
+					break;
+				case "3":
+					addToLibrary();
+					break;
+				case "4":
+					seeLibrary();
+					break;
+				case "5":
+					createPlaylist();
+					break;
+				case "6":
+					addOrRemovePlaylist();
+					break;
+				case "7":
+					markFav();
+					break;
+				case "8":
+					rateSong();
+					break;
+				case "9":
+					playSong();
+					break;
+				case "10":
+					removeFromLib();
+					break;
+				case "11":
+					if (logout()) {
+						// If logout returns true, it means the user wants to exit completely
+						inputing = false;
+					}
+					break;
+				default:
+					System.out.println("\nInvalid Entry\n");
+			}
+		}
+	}
 
-        String choice = scanner.nextLine().trim();
-        switch (choice) {
-            case "1":
-                System.out.println("Enter song title: ");
-                String song = scanner.nextLine().trim();
-                boolean found = model.removeSong(song);
-                if (found == true) {
-                    System.out.println("\nSong removed from library \n");
-                } else {
-                    System.out.println("\nUnable to remove song \n");
-                }
-                break;
-            case "2":
-                System.out.println("Enter album title: ");
-                String album = scanner.nextLine().trim();
-                boolean found2 = model.removeAlbum(album);
-                if (found2 == true) {
-                    System.out.println("\nAlbum removed from library \n");
-                } else {
-                    System.out.println("\nUnable to remove album \n");
-                }
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+	private void removeFromLib() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Remove song");
+		System.out.println("2 - Remove album");
+		System.out.println("Enter your choice: ");
 
-    private void playSong() {
-        System.out.println("Enter song title: ");
-        String songName = scanner.nextLine().trim();
-        ArrayList<Song> songs = model.getSong(songName);
-        if (songs.size() == 0) {
-            System.out.println("This song does not exist in the library.");
-        } else {
-            for (Song s : songs) {
-                s.playSong();
-            }
-        }
-    }
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				System.out.println("Enter song title: ");
+				String song = scanner.nextLine().trim();
+				boolean found = model.removeSong(song);
+				if (found == true) {
+					System.out.println("\nSong removed from library \n");
+				} else {
+					System.out.println("\nUnable to remove song \n");
+				}
+				break;
+			case "2":
+				System.out.println("Enter album title: ");
+				String album = scanner.nextLine().trim();
+				boolean found2 = model.removeAlbum(album);
+				if (found2 == true) {
+					System.out.println("\nAlbum removed from library \n");
+				} else {
+					System.out.println("\nUnable to remove album \n");
+				}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-    // Modified to return a boolean indicating if the program should exit completely
-    private boolean logout() {
-        // Save the current user's library
-        if (currentUser != null) {
-            UserLibrary.saveUserLibrary(currentUser, model);
-            System.out.println("\nLogging out " + currentUser + ".\n");
+	private void playSong() {
+		System.out.println("Enter song title: ");
+		String songName = scanner.nextLine().trim();
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				s.playSong();
+			}
+		}
+	}
 
-            // Clear current user and reset model
-            currentUser = null;
-            model = new LibraryModel();
-            
-            // Return to login screen
-            login();
-            return false; // Don't exit the program, a new user is logging in
-        }
-        return true; // Default exit if currentUser is null
-    }
+	// Modified to return a boolean indicating if the program should exit completely
+	private boolean logout() {
+		// Save the current user's library
+		if (currentUser != null) {
+			UserLibrary.saveUserLibrary(currentUser, model);
+			System.out.println("\nLogging out " + currentUser + ".\n");
 
-    private void rateSong() {
-        System.out.println("Enter song title: ");
-        String songName = scanner.nextLine().trim();
-        ArrayList<Song> songs = model.getSong(songName);
-        if (songs.size() == 0) {
-            System.out.println("This song does not exist in the library.");
-        } else {
-            for (Song s : songs) {
-                System.out.println("Enter rating (1-5): ");
-                String rating = scanner.nextLine().trim();
-                int num = Integer.parseInt(rating);
-                if (num >= 1 && num <= 5) {
-                    s.setRating(num);
-                    if (num == 5) {
-                        model.addFavorite(s);
-                    }
-                    System.out.println("\n" + songName + " rated: " + num + "\n");
-                } else {
-                    System.out.println("\nInvalid input! \n");
-                }
-            }
-        }
-    }
+			// Clear current user and reset model
+			currentUser = null;
+			model = new LibraryModel();
 
-    private void markFav() {
-        System.out.println("Enter song title: ");
-        String songName = scanner.nextLine().trim();
-        ArrayList<Song> songs = model.getSong(songName);
-        if (songs.size() == 0) {
-            System.out.println("This song does not exist in the library.");
-        } else {
-            for (Song s : songs) {
-                s.setFavorite();
-                model.addFavorite(s);
-                System.out.println("\n" + songName + " has been marked favorite \n");
-            }
-        }
-    }
+			// Return to login screen
+			login();
+			return false; // Don't exit the program, a new user is logging in
+		}
+		return true; // Default exit if currentUser is null
+	}
 
-    private void addOrRemovePlaylist() {
-        System.out.println("Menu: ");
-        System.out.println("1 - Add songs");
-        System.out.println("2 - Remove songs");
-        System.out.println("Enter your choice: ");
+	private void rateSong() {
+		System.out.println("Enter song title: ");
+		String songName = scanner.nextLine().trim();
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				System.out.println("Enter rating (1-5): ");
+				String rating = scanner.nextLine().trim();
+				int num = Integer.parseInt(rating);
+				if (num >= 1 && num <= 5) {
+					s.setRating(num);
+					if (num == 5) {
+						model.addFavorite(s);
+					}
+					System.out.println("\n" + songName + " rated: " + num + "\n");
+				} else {
+					System.out.println("\nInvalid input! \n");
+				}
+			}
+		}
+	}
 
-        String choice = scanner.nextLine().trim();
-        switch (choice) {
-            case "1":
-                System.out.println("Enter playlist name: ");
-                String name = scanner.nextLine().trim();
-                PlayList list = model.getPlayList(name);
+	private void markFav() {
+		System.out.println("Enter song title: ");
+		String songName = scanner.nextLine().trim();
+		ArrayList<Song> songs = model.getSong(songName);
+		if (songs.size() == 0) {
+			System.out.println("This song does not exist in the library.");
+		} else {
+			for (Song s : songs) {
+				s.setFavorite();
+				model.addFavorite(s);
+				System.out.println("\n" + songName + " has been marked favorite \n");
+			}
+		}
+	}
 
-                System.out.println("Enter song title: ");
-                String songName = scanner.nextLine().trim();
+	private void addOrRemovePlaylist() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Add songs");
+		System.out.println("2 - Remove songs");
+		System.out.println("Enter your choice: ");
 
-                ArrayList<Song> songs = model.getSong(songName);
-                if (songs.size() == 0) {
-                    System.out.println("\nThis song does not exist in the library. \n");
-                } else {
-                    for (Song s : songs) {
-                        list.addSong(s);
-                        System.out.println("\nSong added \n");
-                    }
-                }
-                break;
-            case "2":
-                System.out.println("Enter playlist name: ");
-                String playName = scanner.nextLine().trim();
-                PlayList play_list = model.getPlayList(playName);
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				System.out.println("Enter playlist name: ");
+				String name = scanner.nextLine().trim();
+				PlayList list = model.getPlayList(name);
 
-                System.out.println("Enter song title: ");
-                String songTitle = scanner.nextLine().trim();
-                ArrayList<Song> songs2 = model.getSong(songTitle);
-                if (songs2.size() == 0) {
-                    System.out.println("This song does not exist in the library.");
-                } else {
-                    for (Song song : songs2) {
-                        play_list.removeSong(song);
-                        System.out.println("\nSong removed \n");
-                    }
-                }
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+				System.out.println("Enter song title: ");
+				String songName = scanner.nextLine().trim();
 
-    private void createPlaylist() {
-        System.out.println("Enter playlist name: ");
-        String name = scanner.nextLine().trim();
-        PlayList newPlay = new PlayList(name);
-        model.addPlaylist(newPlay);
-        System.out.println("\nNew Playlist: '" + name + "' created \n");
-    }
+				ArrayList<Song> songs = model.getSong(songName);
+				if (songs.size() == 0) {
+					System.out.println("\nThis song does not exist in the library. \n");
+				} else {
+					for (Song s : songs) {
+						list.addSong(s);
+						System.out.println("\nSong added \n");
+					}
+				}
+				break;
+			case "2":
+				System.out.println("Enter playlist name: ");
+				String playName = scanner.nextLine().trim();
+				PlayList play_list = model.getPlayList(playName);
 
-    private void seeLibrary() {
-        System.out.println("Menu: ");
-        System.out.println("1 - See songs");
-        System.out.println("2 - See artists");
-        System.out.println("3 - See albums");
-        System.out.println("4 - See playlists");
-        System.out.println("5 - See favorites");
-        System.out.println("Enter your choice: ");
+				System.out.println("Enter song title: ");
+				String songTitle = scanner.nextLine().trim();
+				ArrayList<Song> songs2 = model.getSong(songTitle);
+				if (songs2.size() == 0) {
+					System.out.println("This song does not exist in the library.");
+				} else {
+					for (Song song : songs2) {
+						play_list.removeSong(song);
+						System.out.println("\nSong removed \n");
+					}
+				}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-        String choice = scanner.nextLine().trim();
-        switch (choice) {
-            case "1":
-                seeSongs();
-                break;
-            case "2":
-                ArrayList<String> artists = model.getArtists();
-                if (artists.size() != 0) {
-                    System.out.println("\nArtists: \n");
-                } else {
-                    System.out.println("\nNo artists in library \n");
-                }
-                for (String art : artists) {
-                    System.out.println(art + "\n");
-                }
-                break;
-            case "3":
-                ArrayList<Album> albums = model.getAlbums();
-                if (albums.size() != 0) {
-                    System.out.println("\nAlbums: \n");
-                } else {
-                    System.out.println("\nNo Albums in library \n");
-                }
-                for (Album al : albums) {
-                    System.out.println(al.printAlbum() + "\n");
-                }
-                break;
-            case "4":
-                ArrayList<String> lists = model.getPlaylists();
-                if (lists.size() != 0) {
-                    System.out.println("\nPlaylists: \n");
-                } else {
-                    System.out.println("\nNo playlists in library \n");
-                }
+	private void createPlaylist() {
+		System.out.println("Enter playlist name: ");
+		String name = scanner.nextLine().trim();
+		PlayList newPlay = new PlayList(name);
+		model.addPlaylist(newPlay);
+		System.out.println("\nNew Playlist: '" + name + "' created \n");
+	}
 
-                for (String li : lists) {
-                    System.out.println(li + "\n");
-                }
-                break;
+	private void seeLibrary() {
+		System.out.println("Menu: ");
+		System.out.println("1 - See songs");
+		System.out.println("2 - See artists");
+		System.out.println("3 - See albums");
+		System.out.println("4 - See playlists");
+		System.out.println("5 - See favorites");
+		System.out.println("Enter your choice: ");
 
-            case "5":
-                ArrayList<Song> favs = model.getFavorites();
-                if (favs.size() != 0) {
-                    System.out.println("\nFavorites: \n");
-                } else {
-                    System.out.println("\nNo favorites in library \n");
-                }
-                for (Song fav : favs) {
-                    System.out.println(fav.printSong() + "\n");
-                }
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				seeSongs();
+				break;
+			case "2":
+				ArrayList<String> artists = model.getArtists();
+				if (artists.size() != 0) {
+					System.out.println("\nArtists: \n");
+				} else {
+					System.out.println("\nNo artists in library \n");
+				}
+				for (String art : artists) {
+					System.out.println(art + "\n");
+				}
+				break;
+			case "3":
+				ArrayList<Album> albums = model.getAlbums();
+				if (albums.size() != 0) {
+					System.out.println("\nAlbums: \n");
+				} else {
+					System.out.println("\nNo Albums in library \n");
+				}
+				for (Album al : albums) {
+					System.out.println(al.printAlbum() + "\n");
+				}
+				break;
+			case "4":
+				ArrayList<String> lists = model.getPlaylists();
+				if (lists.size() != 0) {
+					System.out.println("\nPlaylists: \n");
+				} else {
+					System.out.println("\nNo playlists in library \n");
+				}
 
-    private void seeSongs() {
-        System.out.println("See songs sorted by: ");
-        System.out.println("1 - Title");
-        System.out.println("2 - Artist");
-        System.out.println("3 - Rating");
-        System.out.println("4 - Shuffled");
-        System.out.println("Enter your choice: ");
+				for (String li : lists) {
+					System.out.println(li + "\n");
+				}
+				break;
 
-        String choice = scanner.nextLine().trim();
-        switch (choice) {
-            case "1":
-                model.sortSongsTitle();
-                ArrayList<Song> songsList = model.getSongs();
-                if (songsList.size() != 0) {
-                    System.out.println("\nSongs: \n");
-                } else {
-                    System.out.println("\nNo songs in library \n");
-                }
-                for (Song s : songsList) {
-                    System.out.println(s.printSong() + "\n");
-                }
-                break;
-            case "2":
-                model.sortSongsArtist();
-                ArrayList<Song> songsL = model.getSongs();
-                if (songsL.size() != 0) {
-                    System.out.println("\nSongs: \n");
-                } else {
-                    System.out.println("\nNo songs in library \n");
-                }
-                for (Song s : songsL) {
-                    System.out.println(s.printSong() + "\n");
-                }
-                break;
-            case "3":
-                model.sortSongsRating();
-                ArrayList<Song> list = model.getSongs();
-                if (list.size() != 0) {
-                    System.out.println("\nSongs: \n");
-                } else {
-                    System.out.println("\nNo songs in library \n");
-                }
-                for (Song s : list) {
-                    System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
-                }
-                break;
-            case "4":
-                model.shuffleSongs();
-                ArrayList<Song> shuffled = model.getSongs();
-                if (shuffled.size() != 0) {
-                    System.out.println("\nSongs: \n");
-                } else {
-                    System.out.println("\nNo songs in library \n");
-                }
-                for (Song s : shuffled) {
-                    System.out.println(s.printSong() + "\n");
-                }
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+			case "5":
+				ArrayList<Song> favs = model.getFavorites();
+				if (favs.size() != 0) {
+					System.out.println("\nFavorites: \n");
+				} else {
+					System.out.println("\nNo favorites in library \n");
+				}
+				for (Song fav : favs) {
+					System.out.println(fav.printSong() + "\n");
+				}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-    private void addToLibrary() {
-        System.out.println("Menu: ");
-        System.out.println("1 - Add song");
-        System.out.println("2 - Add album");
-        System.out.println("Enter your choice: ");
+	private void seeSongs() {
+		System.out.println("See songs sorted by: ");
+		System.out.println("1 - Title");
+		System.out.println("2 - Artist");
+		System.out.println("3 - Rating");
+		System.out.println("4 - Shuffled");
+		System.out.println("Enter your choice: ");
 
-        String choice = scanner.nextLine().trim();
-        switch (choice) {
-            case "1":
-                System.out.println("Enter song title: ");
-                String song = scanner.nextLine().trim();
-                boolean found = model.addSong(song);
-                if (found == true) {
-                    System.out.println("\nSong added to library \n");
-                } else {
-                    System.out.println("\nUnable to add song \n");
-                }
-                break;
-            case "2":
-                System.out.println("Enter album title: ");
-                String album = scanner.nextLine().trim();
-                boolean found2 = model.addAlbum(album);
-                if (found2 == true) {
-                    System.out.println("\nAlbum added to library \n");
-                } else {
-                    System.out.println("\nUnable to add album \n");
-                }
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				model.sortSongsTitle();
+				ArrayList<Song> songsList = model.getSongs();
+				if (songsList.size() != 0) {
+					System.out.println("\nSongs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : songsList) {
+					System.out.println(s.printSong() + "\n");
+				}
+				break;
+			case "2":
+				model.sortSongsArtist();
+				ArrayList<Song> songsL = model.getSongs();
+				if (songsL.size() != 0) {
+					System.out.println("\nSongs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : songsL) {
+					System.out.println(s.printSong() + "\n");
+				}
+				break;
+			case "3":
+				model.sortSongsRating();
+				ArrayList<Song> list = model.getSongs();
+				if (list.size() != 0) {
+					System.out.println("\nSongs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : list) {
+					System.out.println(s.printSong() + "Rated: " + s.getRating() + "\n");
+				}
+				break;
+			case "4":
+				model.shuffleSongs();
+				ArrayList<Song> shuffled = model.getSongs();
+				if (shuffled.size() != 0) {
+					System.out.println("\nSongs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : shuffled) {
+					System.out.println(s.printSong() + "\n");
+				}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-    private void searchLibrary() {
-        System.out.println("Menu: ");
-        System.out.println("1 - Search song by title");
-        System.out.println("2 - Search song by artist");
-        System.out.println("3 - Search album by title");
-        System.out.println("4 - Search album by artist");
-        System.out.println("5 - Search playlist");
-        System.out.println("6 - Search song by genre");
-        System.out.println("Enter your choice: ");
+	private void addToLibrary() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Add song");
+		System.out.println("2 - Add album");
+		System.out.println("Enter your choice: ");
 
-        String choice = scanner.nextLine().trim();
+		String choice = scanner.nextLine().trim();
+		switch (choice) {
+			case "1":
+				System.out.println("Enter song title: ");
+				String song = scanner.nextLine().trim();
+				boolean found = model.addSong(song);
+				if (found == true) {
+					System.out.println("\nSong added to library \n");
+				} else {
+					System.out.println("\nUnable to add song \n");
+				}
+				break;
+			case "2":
+				System.out.println("Enter album title: ");
+				String album = scanner.nextLine().trim();
+				boolean found2 = model.addAlbum(album);
+				if (found2 == true) {
+					System.out.println("\nAlbum added to library \n");
+				} else {
+					System.out.println("\nUnable to add album \n");
+				}
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-        switch (choice) {
-            case "1":
-                System.out.println("Enter song title: ");
-                String title = scanner.nextLine().trim();
-                ArrayList<Song> songs = model.getSong(title);
-                if (songs.size() == 0) {
-                    System.out.println("\nThis song does not exist in the library.\n");
-                } else {
-                    for (Song s : songs) {
-                        System.out.println("\n" + s.printSong() + "\n");
-                    }
-                    System.out.println("Would you like to view the album info (yes/no)\n");
-                    String answer = scanner.nextLine().trim();
+	private void searchLibrary() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Search song by title");
+		System.out.println("2 - Search song by artist");
+		System.out.println("3 - Search album by title");
+		System.out.println("4 - Search album by artist");
+		System.out.println("5 - Search playlist");
+		System.out.println("6 - Search song by genre");
+		System.out.println("Enter your choice: ");
 
-                    switch (answer) {
-                        case "yes":
-                            for (Song s : songs) {
-                                System.out.println("\n" + s.getAlbum().printAlbum() + "\n");
-                                System.out.println("This album exists in your library\n");
-                            }
-                            break;
-                        case "no":
-                            break;
-                    }
-                }
-                break;
-            case "2":
-                System.out.println("Enter song artist: ");
-                String artist = scanner.nextLine().trim();
-                System.out.println("\n" + model.searchSongsByArtist(artist) + "\n");
-                break;
-            case "3":
-                System.out.println("Enter album title: ");
-                String albTitle = scanner.nextLine().trim();
-                System.out.println("\n" + model.searchAlbumByTitle(albTitle) + "\n");
-                break;
-            case "4":
-                System.out.println("Enter album artist: ");
-                String albArtist = scanner.nextLine().trim();
-                System.out.println("\n" + model.searchAlbumByArtist(albArtist) + "\n");
-                break;
-            case "5":
-                System.out.println("Enter playlist name: ");
-                String name = scanner.nextLine().trim();
+		String choice = scanner.nextLine().trim();
 
-                ArrayList<String> list = model.getPlaylists();
-                boolean playlistFound = false; // Flag to check if the playlist is found
+		switch (choice) {
+			case "1":
+				System.out.println("Enter song title: ");
+				String title = scanner.nextLine().trim();
+				ArrayList<Song> songs = model.getSong(title);
+				if (songs.size() == 0) {
+					System.out.println("\nThis song does not exist in the library.\n");
+				} else {
+					for (Song s : songs) {
+						System.out.println("\n" + s.printSong() + "\n");
+					}
+					System.out.println("Would you like to view the album info (yes/no)\n");
+					String answer = scanner.nextLine().trim();
 
-                for (String namePlay : list) {
-                    if (namePlay.equals(name)) {
-                        playlistFound = true; // Playlist is found
+					switch (answer) {
+						case "yes":
+							for (Song s : songs) {
+								System.out.println("\n" + s.getAlbum().printAlbum() + "\n");
+								System.out.println("This album exists in your library\n");
+							}
+							break;
+						case "no":
+							break;
+					}
+				}
+				break;
+			case "2":
+				System.out.println("Enter song artist: ");
+				String artist = scanner.nextLine().trim();
+				System.out.println("\n" + model.searchSongsByArtist(artist) + "\n");
+				break;
+			case "3":
+				System.out.println("Enter album title: ");
+				String albTitle = scanner.nextLine().trim();
+				System.out.println("\n" + model.searchAlbumByTitle(albTitle) + "\n");
+				break;
+			case "4":
+				System.out.println("Enter album artist: ");
+				String albArtist = scanner.nextLine().trim();
+				System.out.println("\n" + model.searchAlbumByArtist(albArtist) + "\n");
+				break;
+			case "5":
+				System.out.println("Enter playlist name: ");
+				String name = scanner.nextLine().trim();
 
-                        System.out.println("\n" + name + "\n");
+				// Check if it's the Top Rated playlist first
+				if (name.equals("Top Rated")) {
+					// Force update of Top Rated playlist
+					PlayList topRatedList = model.topRated();
+					System.out.println("\nTop Rated Playlist:\n");
 
-                        PlayList playList = model.getPlayList(name);
-                        ArrayList<Song> listSongs = playList.getPlaylist();
+					ArrayList<Song> topRatedSongs = topRatedList.getPlaylist();
+					if (topRatedSongs.size() == 0) {
+						System.out.println(
+								"No songs in the Top Rated playlist. Rate songs 4 or higher to add them here.\n");
+					} else {
+						for (Song s : topRatedSongs) {
+							System.out.println(s.printSong());
+						}
 
-                        for (Song s : listSongs) {
-                            System.out.println(s.printSong());
-                        }
+						// Ask about shuffling
+						System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
+						String response = scanner.nextLine().trim().toLowerCase();
 
-                        System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
-                        String response = scanner.nextLine().trim().toLowerCase();
+						if (response.equals("yes")) {
+							ArrayList<Song> shuffledSongs = model.shufflePlayLists("Top Rated");
+							System.out.println("\nShuffled Top Rated Playlist:\n");
+							for (Song s : shuffledSongs) {
+								System.out.println(s.printSong());
+							}
+						} else if (response.equals("no")) {
+							System.out.println("Playlist not shuffled.\n");
+						} else {
+							System.out.println("Invalid response. Please answer 'yes' or 'no'.\n");
+						}
+					}
+				} else {
+					// Original code for other playlists
+					ArrayList<String> list = model.getPlaylists();
+					boolean playlistFound = false;
 
-                        if (response.equals("yes")) {
-                            // Call your shuffle method here
-                            ArrayList<Song> shuffledSongs = model.shufflePlayLists(namePlay);
-                            for (Song s : shuffledSongs) {
-                                System.out.println(s.printSong());
-                            }
+					for (String namePlay : list) {
+						if (namePlay.equals(name)) {
+							playlistFound = true;
 
-                        } else if (response.equals("no")) {
-                            System.out.println("Playlist not shuffled.\n");
-                        } else {
-                            System.out.println("Invalid response. Please answer 'yes' or 'no'.\n");
-                        }
-                        break; // Exit the loop since the playlist is found
-                    }
-                }
+							System.out.println("\n" + name + "\n");
 
-                // If no playlist was found, display an invalid entry message
-                if (!playlistFound) {
-                    System.out.println("Invalid entry. Playlist not found in the library.\n");
-                }
-                break;
+							PlayList playList = model.getPlayList(name);
+							ArrayList<Song> listSongs = playList.getPlaylist();
 
-            case "6":
-                System.out.println("Enter song genre: ");
-                String genre = scanner.nextLine().trim();
-                System.out.println("\n" + model.searchSongByGenre(genre) + "\n");
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+							if (listSongs.size() == 0) {
+								System.out.println("No songs in this playlist.\n");
+							} else {
+								for (Song s : listSongs) {
+									System.out.println(s.printSong());
+								}
 
-    private void searchMusicStore() {
-        System.out.println("Menu: ");
-        System.out.println("1 - Search song by title");
-        System.out.println("2 - Search song by artist");
-        System.out.println("3 - Search album by title");
-        System.out.println("4 - Search album by artist");
-        System.out.println("Enter your choice: ");
+								System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
+								String response = scanner.nextLine().trim().toLowerCase();
 
-        String choice = scanner.nextLine().trim();
+								if (response.equals("yes")) {
+									ArrayList<Song> shuffledSongs = model.shufflePlayLists(namePlay);
+									System.out.println("\nShuffled playlist:\n");
+									for (Song s : shuffledSongs) {
+										System.out.println(s.printSong());
+									}
+								} else if (response.equals("no")) {
+									System.out.println("Playlist not shuffled.\n");
+								} else {
+									System.out.println("Invalid response. Please answer 'yes' or 'no'.\n");
+								}
+							}
+							break;
+						}
+					}
 
-        switch (choice) {
-            case "1":
-                System.out.println("Enter song title: ");
-                String title = scanner.nextLine().trim();
-                System.out.println("\nRESULTS:");
-                System.out.println(store.searchSongsByTitle(title) + "\n");
-                break;
-            case "2":
-                System.out.println("Enter song artist: ");
-                String artist = scanner.nextLine().trim();
-                System.out.println("\nRESULTS:");
-                System.out.println(store.searchSongsByArtist(artist) + "\n");
-                break;
-            case "3":
-                System.out.println("Enter album title: ");
-                String albName = scanner.nextLine().trim();
-                System.out.println("\nRESULTS:");
-                System.out.println(store.searchAlbumByTitle(albName) + "\n");
-                break;
-            case "4":
-                System.out.println("Enter album artist: ");
-                String name = scanner.nextLine().trim();
-                System.out.println("\nRESULTS:");
-                System.out.println(store.searchAlbumByArtist(name) + "\n");
-                break;
-            default:
-                System.out.println("\nInvalid Entry\n");
-        }
-    }
+					if (!playlistFound) {
+						System.out.println("Invalid entry. Playlist not found in the library.\n");
+					}
+				}
+				break;
 
-    private void displayOptions() {
-        System.out.println("How can I help you today?");
-        System.out.println("Menu:");
+			case "6":
+				System.out.println("Enter song genre: ");
+				String genre = scanner.nextLine().trim();
+				System.out.println("\n" + model.searchSongByGenre(genre) + "\n");
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-        System.out.println("1 - Search the music store");
-        System.out.println("2 - Search your library");
-        System.out.println("3 - Add to your library");
-        System.out.println("4 - See contents of your library");
-        System.out.println("5 - Create a playlist");
-        System.out.println("6 - Add or remove songs from an existing playlist");
-        System.out.println("7 - Mark a song as 'favorite'");
-        System.out.println("8 - Rate a song");
-        System.out.println("9 - Play a song");
-        System.out.println("10 - Remove from your library");
-        System.out.println("11 - Logout");
-    }
+	private void searchMusicStore() {
+		System.out.println("Menu: ");
+		System.out.println("1 - Search song by title");
+		System.out.println("2 - Search song by artist");
+		System.out.println("3 - Search album by title");
+		System.out.println("4 - Search album by artist");
+		System.out.println("Enter your choice: ");
 
-    public void login() {
-        boolean loginSuccessful = false;
+		String choice = scanner.nextLine().trim();
 
-        while (!loginSuccessful) {
-            System.out.println("Please log in:");
+		switch (choice) {
+			case "1":
+				System.out.println("Enter song title: ");
+				String title = scanner.nextLine().trim();
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchSongsByTitle(title) + "\n");
+				break;
+			case "2":
+				System.out.println("Enter song artist: ");
+				String artist = scanner.nextLine().trim();
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchSongsByArtist(artist) + "\n");
+				break;
+			case "3":
+				System.out.println("Enter album title: ");
+				String albName = scanner.nextLine().trim();
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchAlbumByTitle(albName) + "\n");
+				break;
+			case "4":
+				System.out.println("Enter album artist: ");
+				String name = scanner.nextLine().trim();
+				System.out.println("\nRESULTS:");
+				System.out.println(store.searchAlbumByArtist(name) + "\n");
+				break;
+			default:
+				System.out.println("\nInvalid Entry\n");
+		}
+	}
 
-            System.out.print("Username: ");
-            String username = scanner.nextLine().trim();
+	private void displayOptions() {
+		System.out.println("How can I help you today?");
+		System.out.println("Menu:");
 
-            System.out.print("Password: ");
-            String password = scanner.nextLine().trim();
+		System.out.println("1 - Search the music store");
+		System.out.println("2 - Search your library");
+		System.out.println("3 - Add to your library");
+		System.out.println("4 - See contents of your library");
+		System.out.println("5 - Create a playlist");
+		System.out.println("6 - Add or remove songs from an existing playlist");
+		System.out.println("7 - Mark a song as 'favorite'");
+		System.out.println("8 - Rate a song");
+		System.out.println("9 - Play a song");
+		System.out.println("10 - Remove from your library");
+		System.out.println("11 - Logout");
+	}
 
-            if (User.validateUser(username, password)) {
-                loginSuccessful = true;
-                currentUser = username;
-                
-                // Load the user's library
-                UserLibrary.loadUserLibrary(username, model);
-                
-                System.out.println("\nWelcome to your Music Library!\n");
-            } else {
-                // Check if the user exists but password is wrong
-                boolean userExists = false;
-                
-                // Try to create a new user with the credentials
-                boolean newUserCreated = User.isUser(username, password);
-                
-                if (!newUserCreated) {
-                    System.out.println("\nPassword incorrect. Please try again.\n");
-                } else {
-                    currentUser = username;
-                    loginSuccessful = true;
-                    System.out.println("\nWelcome to your Music Library!\n");
-                }
-            }
-        }
-    }
+	public void login() {
+		boolean loginSuccessful = false;
 
-    public static void main(String[] args) {
-        View view = new View();
-        view.run();
-    }
-}	
+		while (!loginSuccessful) {
+			System.out.println("Please log in:");
+
+			System.out.print("Username: ");
+			String username = scanner.nextLine().trim();
+
+			System.out.print("Password: ");
+			String password = scanner.nextLine().trim();
+
+			if (User.validateUser(username, password)) {
+				loginSuccessful = true;
+				currentUser = username;
+
+				// Load the user's library
+				UserLibrary.loadUserLibrary(username, model);
+
+				System.out.println("\nWelcome to your Music Library!\n");
+			} else {
+				// Check if the user exists but password is wrong
+				boolean userExists = false;
+
+				// Try to create a new user with the credentials
+				boolean newUserCreated = User.isUser(username, password);
+
+				if (!newUserCreated) {
+					System.out.println("\nPassword incorrect. Please try again.\n");
+				} else {
+					currentUser = username;
+					loginSuccessful = true;
+					System.out.println("\nWelcome to your Music Library!\n");
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		View view = new View();
+		view.run();
+	}
+}

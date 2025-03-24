@@ -92,6 +92,8 @@ public class LibraryModel {
 		for (Album a : store.getAlbumList()) {
 			if (album.equals(a.getTitle())) {
 				found = true;
+
+
 				albums.add(a.deepCopy());
 				for (Song s : a.getSongList()) {
 					songs.add(s);
@@ -131,6 +133,10 @@ public class LibraryModel {
 
 	// PlayList(String name) - returns a deep copy of the a PlayList object
 	public PlayList getPlayList(String name) {
+		if(name.equals("Top Rated")){
+			return topRated();
+		}
+
 		for (PlayList list : playLists) {
 			if (list.getName().equals(name)) {
 				return list;
@@ -193,10 +199,12 @@ public class LibraryModel {
 
 	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
-		if(topRated.getLength() != 0){
-			topRated();
+		if(!playLists.contains(topRated)){
+			addPlaylist(topRated);
 		}
-		
+
+		topRated();
+
 		ArrayList<String> list = new ArrayList<>();
 		for (PlayList play : playLists) {
 			list.add(play.getName());
