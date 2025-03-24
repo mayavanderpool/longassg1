@@ -1,4 +1,8 @@
 {
+  "h" : {
+    "username" : "h",
+    "hashedPwd" : "RR2PNBRRT5RlWZfGmwrNElg1b0FxABl2sDe9MPig6WY=",
+    "salt" : "e/Dq3RF2K+Qi0w7hjR+alg=="
   "pitaa" : {
     "username" : "pitaa",
     "hashedPwd" : "NMVhxFq1Y0CycgiJ5EwU63Gm+qEjV9ZAgoTiWCiBBRw=",

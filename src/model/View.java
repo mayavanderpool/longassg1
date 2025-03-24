@@ -121,6 +121,7 @@ public class View {
 		} else {
 			for (Song s : songs) {
 				s.playSong();
+                model.addPlay(s);
 			}
 		}
 	}
@@ -309,6 +310,7 @@ public class View {
 		System.out.println("2 - Artist");
 		System.out.println("3 - Rating");
 		System.out.println("4 - Shuffled");
+        System.out.println("5");
 		System.out.println("Enter your choice: ");
 
 		String choice = scanner.nextLine().trim();
@@ -361,6 +363,18 @@ public class View {
 					System.out.println(s.printSong() + "\n");
 				}
 				break;
+            case "5":
+                model.sortSongPlays();
+                ArrayList<Song> list3 = model.getSongs();
+                if (list3.size() != 0) {
+                    System.out.println("\nSongs: \n");
+                } else {
+                    System.out.println("\nNo songs in library \n");
+                }
+                for (Song s : list3) {
+                    System.out.println(s.printSong() + "Played: " + s.getPlays() + "\n");
+                }
+                break;
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
