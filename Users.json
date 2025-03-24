@@ -1,16 +1,22 @@
 {
-  "h" : {
-    "username" : "h",
-    "hashedPwd" : "RR2PNBRRT5RlWZfGmwrNElg1b0FxABl2sDe9MPig6WY=",
-    "salt" : "e/Dq3RF2K+Qi0w7hjR+alg=="
-  "pitaa" : {
-    "username" : "pitaa",
-    "hashedPwd" : "NMVhxFq1Y0CycgiJ5EwU63Gm+qEjV9ZAgoTiWCiBBRw=",
-    "salt" : "MMHdI2vqhhzuKMtKE8Lp3w=="
+  "r" : {
+    "username" : "r",
+    "hashedPwd" : "kxJfNYzntTb1vJckzZuUwrI8oH4K/T4afGX+4Dg8+kU=",
+    "salt" : "uCuYhTsrxxUSoPAbSz9oqQ=="
   },
-  "daniela" : {
-    "username" : "daniela",
-    "hashedPwd" : "EFMaEd5wzRFwYLbWnvCCk2dYQ5WjRfNYO5ab3JEufG8=",
-    "salt" : "NwI5ZmtZjZxErqLPdtjdbA=="
+  "rees" : {
+    "username" : "rees",
+    "hashedPwd" : "fFO9MIZiFw9RmtsLn4kngyI/JQkBlCXcN9j5YHwlJtU=",
+    "salt" : "o5jqLHgoqUYRrBJ2suWgIA=="
+  },
+  "r1" : {
+    "username" : "r1",
+    "hashedPwd" : "jIDdAbBeiHnRgGQFiBRdyaJZCwt2Cw80Yu1/h/DQ8hg=",
+    "salt" : "zNnvzuUh4+xp9PZljYSMXQ=="
+  },
+  "test" : {
+    "username" : "test",
+    "hashedPwd" : "hFeUfiBJR8xaDH+KgQvRjfO2w6wk3FxBP7tSeYtpGt4=",
+    "salt" : "kRbp/D19Wh0AvlkMKyaJtQ=="
   }
 }
