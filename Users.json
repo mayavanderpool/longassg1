@@ -18,5 +18,30 @@
     "username" : "test",
     "hashedPwd" : "hFeUfiBJR8xaDH+KgQvRjfO2w6wk3FxBP7tSeYtpGt4=",
     "salt" : "kRbp/D19Wh0AvlkMKyaJtQ=="
+  },
+  "u" : {
+    "username" : "u",
+    "hashedPwd" : "fHZrghSXTHcZa1BbkrFcNT4Rwifqr5pdJycHrse90uw=",
+    "salt" : "2A/BkFkIT2N2vJbAM8gqOg=="
+  },
+  "i" : {
+    "username" : "i",
+    "hashedPwd" : "xsg8VEPH1aXhsJVBVAjqf1Cn+eQthCkckXbd1A4YkAc=",
+    "salt" : "Jo50UU6nCuUYK6QpKcwTrQ=="
+  },
+  "user" : {
+    "username" : "user",
+    "hashedPwd" : "2n4D6NOAAGDRopwoN/7v1tMc/yDiYVzd+CtmikthrhM=",
+    "salt" : "HLrFaK5Og07IRdhRA7pXvw=="
+  },
+  "user1" : {
+    "username" : "user1",
+    "hashedPwd" : "GWIXrLOPvHXuOQrbXlRcXWS1aL28dvOYcQKgllKQYCg=",
+    "salt" : "LRKNjaMwT50UYw1CazYKjQ=="
+  },
+  "u1" : {
+    "username" : "u1",
+    "hashedPwd" : "hoGwxjfvj3NZ5Hsfd2R+7OddTMOTPW5zEiXIZLu0rfE=",
+    "salt" : "LU4Cb3Kp4j8esBgUH8WUlw=="
   }
 }
