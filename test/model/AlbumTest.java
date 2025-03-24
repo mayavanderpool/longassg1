@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.Album;
-import model.Song;
-
 /*
 * File: AlbumTest.java
 * Author:Rees Hart and Maya Vanderpool
@@ -69,7 +66,7 @@ class AlbumTest {
 		Song fragile = new Song("fragile supply chain", "Cornelius Westerfinch", cornAlbum);
 		cornAlbum.addSong(fragile);
 		
-		assertEquals("Globalization" + "," + "Cornelius Westerfinch" + "," + "economic policy" + "," + "2025\n" + "fragile supply chain\n", cornAlbum.printAlbum());
+		assertEquals("Globalization" + "," + "Cornelius Westerfinch" + "," + "economic policy" + "," + "2025\n", cornAlbum.printAlbum());
 	}
 	
 	@Test

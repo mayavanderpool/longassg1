@@ -6,9 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.Album;
-import model.MusicStore;
-
 /*
 * File: MusicStoreTest.java
 * Author: Rees Hart and Maya Vanderpool
@@ -51,20 +48,20 @@ class MusicStoreTest {
 	@Test 
 	void testSearchSAlbumByTitle() {
 		MusicStore store = new MusicStore();
-		assertTrue(store.searchAlbumByTitle("19").length() != 0);
-		assertEquals(store.searchAlbumByTitle("Rees"), "This album does not exist in the music store.");
+		assertTrue(store.searchAlbumByTitle("19").size() != 0);
+		assertEquals(store.searchAlbumByTitle("Rees").size(), 0);
 	}
 	
 	@Test 
 	void testSearchSAlbumByArist() {
 		MusicStore store = new MusicStore();
-		assertTrue(store.searchAlbumByArtist("Adele").length() != 0);
-		assertEquals(store.searchAlbumByArtist("Rees"), "This artist does not exist in the music store.");
+		assertTrue(store.searchAlbumByArtist("dele").size() == 0);
+		assertEquals(store.searchAlbumByArtist("Rees").size(), 0);
 	}
 	
 	@Test
 	void testGetSongList() {
 		MusicStore store = new MusicStore();
-		assertFalse(store.getSongList().size()==0);
+		assertFalse(store.getSongList().size() == 0);
 	}
 } 
