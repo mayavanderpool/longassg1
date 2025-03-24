@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * File: LibraryModel.java
@@ -20,8 +22,11 @@ public class LibraryModel {
 	private ArrayList<Album> albums;
 	private ArrayList<String> artists;
 	private ArrayList<Song> favorites;
+	private Stack<Song> played;
 	private PlayList favSongs;
 	private PlayList topRated;
+	private PlayList recentPlays;
+	private PlayList mostPlayed;
 
 	public LibraryModel() {
 		this.songs = new ArrayList<Song>();
@@ -29,9 +34,16 @@ public class LibraryModel {
 		this.albums = new ArrayList<Album>();
 		this.artists = new ArrayList<String>();
 		this.favorites = new ArrayList<Song>();
+		this.played = new Stack<Song>();
 		this.favSongs = new PlayList("Favorites");
 		this.topRated = new PlayList("Top Rated");
+		this.recentPlays = new PlayList("Recent Plays");
+		this.mostPlayed = new PlayList("Most Played");
 
+	}
+
+	public Stack<Song> getPlayed(){
+		return played;
 	}
 
 	// addSong(String song) - returns a boolean whether or not to add a song
@@ -64,6 +76,8 @@ public class LibraryModel {
 		}
 		return found;
 	}
+
+
 
 	public boolean removeAlbum(String album) {
 		boolean found = false;
@@ -196,6 +210,9 @@ public class LibraryModel {
 		if(topRated.getLength() != 0){
 			topRated();
 		}
+		recentPlays();
+		mostPlayed();
+		genrePlaylists();
 		
 		ArrayList<String> list = new ArrayList<>();
 		for (PlayList play : playLists) {
@@ -204,6 +221,55 @@ public class LibraryModel {
 		}
 		return list;
 	}
+
+	public void recentPlays(){
+		if (!playLists.contains(recentPlays)) {
+			addPlaylist(recentPlays);
+		}
+		while(recentPlays.getPlaylist().size() <= 10 && !played.empty()){
+			recentPlays.addSong(played.pop());
+		}
+	}
+
+	public void genrePlaylists(){
+		Map<String, Integer> genres = new HashMap<>();
+		for (Song s : songs){
+			String genre = s.getGenre();
+			genres.put(genre, genres.getOrDefault(genre, 0) +1);
+		}
+		for(Map.Entry<String, Integer> entry : genres.entrySet()){
+			if(entry.getValue() > 10){
+				makeGenrePlay(entry.getKey());
+			}
+		}
+	}
+
+	public void makeGenrePlay(String genre){
+		PlayList newG = new PlayList(genre);
+		addPlaylist(newG);
+		for(Song s : songs){
+			if(s.getGenre().compareTo(genre) == 0){
+				newG.addSong(s);
+			}
+		}
+		}
+
+	public void mostPlayed(){
+		if (!playLists.contains(mostPlayed)) {
+			addPlaylist(mostPlayed);
+		} else {
+			for(Song s : mostPlayed.getPlaylist()){
+				mostPlayed.removeSong(s);
+			}
+		}
+		sortSongPlays();
+			for(Song s : songs){
+				if(mostPlayed.getPlaylist().size() <= 10 && s.getPlays() != 0){
+						mostPlayed.addSong(s);
+				}
+			}
+		}
+	
 
 	// getFavorites() = returns an arraylist of songs of the favorited songs
 	public ArrayList<Song> getFavorites() {
@@ -249,6 +315,10 @@ public class LibraryModel {
 			list.add(album.deepCopy());
 		}
 		return list;
+	}
+
+	public void addPlay(Song song){
+		played.push(song);
 	}
 
 	public void addFavorite(Song song) {
@@ -312,6 +382,23 @@ public class LibraryModel {
 			swap = false;
 			for (int i = 0; i < j - 1; i++) {
 				if (songs.get(i).getRating() < songs.get(i + 1).getRating()) {
+					Song temp = new Song(songs.get(i));
+					songs.set(i, songs.get(i + 1));
+					songs.set(i + 1, temp);
+					swap = true;
+				}
+			}
+			j--;
+		} while (swap);
+	}
+
+	public void sortSongPlays() {
+		int j = songs.size();
+		boolean swap = false;
+		do {
+			swap = false;
+			for (int i = 0; i < j - 1; i++) {
+				if (songs.get(i).getPlays() < songs.get(i + 1).getPlays()) {
 					Song temp = new Song(songs.get(i));
 					songs.set(i, songs.get(i + 1));
 					songs.set(i + 1, temp);
