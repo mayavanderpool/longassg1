@@ -213,9 +213,7 @@ public class LibraryModel {
 
 	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
-		if(!playLists.contains(topRated)){
-			addPlaylist(topRated);
-		}
+		
 		recentPlays();
 		mostPlayed();
 		genrePlaylists();
@@ -234,6 +232,10 @@ public class LibraryModel {
 	public void recentPlays(){
 		if (!playLists.contains(recentPlays)) {
 			addPlaylist(recentPlays);
+		}else {
+			for(Song s : recentPlays.getPlaylist()){
+				recentPlays.removeSong(s);
+			}
 		}
 		while(recentPlays.getPlaylist().size() <= 10 && !played.empty()){
 			recentPlays.addSong(played.pop());
