@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+/*CONSTRUCTORS */
 public class UserLibrary {
     private String username;
     private ArrayList<String> songTitles;
@@ -36,6 +36,7 @@ public class UserLibrary {
         this.username = username;
     }
     
+	//
     @JsonIgnore
     public static void loadLibraries() {
         File file = new File(LIBRARIES_FILE);

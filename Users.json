@@ -1,4 +1,15 @@
 {
+<<<<<<< HEAD
+  "maya" : {
+    "username" : "maya",
+    "hashedPwd" : "3mSa14r432T1NE6LxtUH2edonoOSYt/p6/jTkj/7JTI=",
+    "salt" : "JTnmC8T0WwMMxxx2IxmBeA=="
+  },
+  "h" : {
+    "username" : "h",
+    "hashedPwd" : "HVqdfHryRKXiMYk1FBdCyCB8K8ulUs29I19WDLK2IZw=",
+    "salt" : "KRVeS4RVJFuv1hJtIOCtzg=="
+=======
   "r" : {
     "username" : "r",
     "hashedPwd" : "kxJfNYzntTb1vJckzZuUwrI8oH4K/T4afGX+4Dg8+kU=",
@@ -43,5 +54,6 @@
     "username" : "u1",
     "hashedPwd" : "hoGwxjfvj3NZ5Hsfd2R+7OddTMOTPW5zEiXIZLu0rfE=",
     "salt" : "LU4Cb3Kp4j8esBgUH8WUlw=="
+>>>>>>> main
   }
 }

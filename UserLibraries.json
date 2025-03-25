@@ -12,15 +12,21 @@
   },
   "h" : {
     "username" : "h",
-    "songTitles" : [ ],
-    "albumTitles" : [ ],
-    "playlistNames" : [ "Recent Plays", "Most Played" ],
+    "songTitles" : [ "Daydreamer", "Best for Last", "Chasing Pavements", "Cold Shoulder", "Crazy for You", "Melt My Heart to Stone", "First Love", "Right as Rain", "Make You Feel My Love", "My Same", "Tired", "Hometown Glory" ],
+    "albumTitles" : [ "19" ],
+    "playlistNames" : [ "Top Rated", "Recent Plays", "Most Played", "Pop" ],
     "playlists" : [ {
+      "songs" : [ ],
+      "name" : "Top Rated"
+    }, {
       "songs" : [ ],
       "name" : "Recent Plays"
     }, {
       "songs" : [ ],
       "name" : "Most Played"
+    }, {
+      "songs" : [ "Daydreamer", "Best for Last", "Chasing Pavements", "Cold Shoulder", "Crazy for You", "Melt My Heart to Stone", "First Love", "Right as Rain", "Make You Feel My Love", "My Same", "Tired", "Hometown Glory" ],
+      "name" : "Pop"
     } ],
     "favorites" : [ ]
   },

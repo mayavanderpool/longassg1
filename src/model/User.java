@@ -23,6 +23,8 @@ public class User{
 	private static final String DB = "Users.json";
 	private static Map<String, User> users = new HashMap<>();
 
+	/*CONSTRUCTORS */
+
 	public User(){
 		
 	}
@@ -58,6 +60,7 @@ public class User{
 		this.salt = salt;
 	}
 
+	//loadUsers() - load users from database json file
 	private static void loadUsers(){
 		File file = new File(DB);
 		if(file.exists()){
@@ -71,6 +74,7 @@ public class User{
 		}
 	}
 
+	//saveUser() - save user to json file database
 	private static void saveUser(){
 		try{
 			ObjectMapper mapper = new ObjectMapper();
@@ -80,6 +84,7 @@ public class User{
 		}
 	}
 
+	//isUser() - returns whether the user exists, creating a new user if they do not and validating if they do
     public static boolean isUser(String username, String password){
 		if(users.isEmpty()){
 			loadUsers();
@@ -96,6 +101,7 @@ public class User{
 
     }
 
+	//validateUser() - validates password matches account
     public static boolean validateUser(String username, String password){
 		if(users.isEmpty()){
 			loadUsers();
@@ -108,13 +114,15 @@ public class User{
 		return false;
     }
 
+	//makeSalt() - generates a salt specific to a user
     public String makeSalt(){
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
         random.nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);
     }
-
+ 
+	//hashPwd() - hashes a password using message digest and adds salt
 	public String hashPwd(String password, String salt){
 		try{
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
