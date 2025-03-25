@@ -371,6 +371,7 @@ public class View {
 					System.out.println(s.printSong() + "\n");
 				}
 				break;
+<<<<<<< HEAD
 			case "5":
 				model.sortSongPlays();
 				ArrayList<Song> list3 = model.getSongs();
@@ -383,6 +384,8 @@ public class View {
 					System.out.println(s.printSong() + "Played: " + s.getPlays() + "\n");
 				}
 				break;
+=======
+>>>>>>> main
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}

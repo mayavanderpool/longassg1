@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 import java.util.Collections;
 import java.util.HashMap;
@@ -217,6 +215,7 @@ public class LibraryModel {
 		if (!playLists.contains(topRated)) {
 			addPlaylist(topRated);
 		}
+		
 		recentPlays();
 		mostPlayed();
 		genrePlaylists();
@@ -235,6 +234,10 @@ public class LibraryModel {
 	public void recentPlays() {
 		if (!playLists.contains(recentPlays)) {
 			addPlaylist(recentPlays);
+		}else {
+			for(Song s : recentPlays.getPlaylist()){
+				recentPlays.removeSong(s);
+			}
 		}
 		while (recentPlays.getPlaylist().size() <= 10 && !played.empty()) {
 			recentPlays.addSong(played.pop());
