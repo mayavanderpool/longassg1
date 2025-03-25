@@ -371,7 +371,6 @@ public class View {
 					System.out.println(s.printSong() + "\n");
 				}
 				break;
-<<<<<<< HEAD
 			case "5":
 				model.sortSongPlays();
 				ArrayList<Song> list3 = model.getSongs();
@@ -384,8 +383,7 @@ public class View {
 					System.out.println(s.printSong() + "Played: " + s.getPlays() + "\n");
 				}
 				break;
-=======
->>>>>>> main
+
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
@@ -472,19 +470,48 @@ public class View {
 			case "3":
 				System.out.println("Enter album title: ");
 				String albTitle = scanner.nextLine().trim();
-				System.out.println("\n" + model.searchAlbumByTitle(albTitle) + "\n");
+				ArrayList<Album> albumsByTitle = model.searchAlbumByTitle(albTitle);
+				if (albumsByTitle.isEmpty()) {
+					System.out.println("\nNo albums found with this title.\n");
+				} else {
+					System.out.println("\nAlbums found:\n");
+					// Use a Set to track unique albums when displaying
+					java.util.Set<String> uniqueAlbums = new java.util.HashSet<>();
+					for (Album album : albumsByTitle) {
+						// Create a unique identifier for each album
+						String albumIdentifier = album.getTitle() + "," + album.getArtist();
+						// Only print if this album hasn't been printed yet
+						if (uniqueAlbums.add(albumIdentifier)) {
+							System.out.println(album.printAlbum());
+						}
+					}
+				}
 				break;
 			case "4":
 				System.out.println("Enter album artist: ");
 				String albArtist = scanner.nextLine().trim();
-				System.out.println("\n" + model.searchAlbumByArtist(albArtist) + "\n");
+				ArrayList<Album> albumsByArtist = model.searchAlbumByArtist(albArtist);
+				if (albumsByArtist.isEmpty()) {
+					System.out.println("\nNo albums found by this artist.\n");
+				} else {
+					System.out.println("\nAlbums found:\n");
+					// Use a Set to track unique albums when displaying
+					java.util.Set<String> uniqueAlbums = new java.util.HashSet<>();
+					for (Album album : albumsByArtist) {
+						// Create a unique identifier for each album
+						String albumIdentifier = album.getTitle() + "," + album.getArtist();
+						// Only print if this album hasn't been printed yet
+						if (uniqueAlbums.add(albumIdentifier)) {
+							System.out.println(album.printAlbum());
+						}
+					}
+				}
 				break;
 			case "5":
 				System.out.println("Enter playlist name: ");
 				String name = scanner.nextLine().trim();
 
 				if (name.equals("Top Rated")) {
-					// Force update of Top Rated playlist
 					PlayList topRatedList = model.topRated();
 					System.out.println("\nTop Rated Playlist:\n");
 
@@ -493,8 +520,12 @@ public class View {
 						System.out.println(
 								"No songs in the Top Rated playlist. Rate songs 4 or higher to add them here.\n");
 					} else {
+						java.util.Set<String> uniqueSongs = new java.util.HashSet<>();
 						for (Song s : topRatedSongs) {
-							System.out.println(s.printSong());
+							String songIdentifier = s.getTitle() + "," + s.getArtist() + "," + s.getAlbum().getTitle();
+							if (uniqueSongs.add(songIdentifier)) {
+								System.out.println(s.printSong());
+							}
 						}
 
 						System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
@@ -503,8 +534,14 @@ public class View {
 						if (response.equals("yes")) {
 							ArrayList<Song> shuffledSongs = model.shufflePlayLists("Top Rated");
 							System.out.println("\nShuffled Top Rated Playlist:\n");
+
+							uniqueSongs.clear();
 							for (Song s : shuffledSongs) {
-								System.out.println(s.printSong());
+								String songIdentifier = s.getTitle() + "," + s.getArtist() + ","
+										+ s.getAlbum().getTitle();
+								if (uniqueSongs.add(songIdentifier)) {
+									System.out.println(s.printSong());
+								}
 							}
 						} else if (response.equals("no")) {
 							System.out.println("Playlist not shuffled.\n");
@@ -528,8 +565,13 @@ public class View {
 							if (listSongs.size() == 0) {
 								System.out.println("No songs in this playlist.\n");
 							} else {
+								java.util.Set<String> uniqueSongs = new java.util.HashSet<>();
 								for (Song s : listSongs) {
-									System.out.println(s.printSong());
+									String songIdentifier = s.getTitle() + "," + s.getArtist() + ","
+											+ s.getAlbum().getTitle();
+									if (uniqueSongs.add(songIdentifier)) {
+										System.out.println(s.printSong());
+									}
 								}
 
 								System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
@@ -538,8 +580,14 @@ public class View {
 								if (response.equals("yes")) {
 									ArrayList<Song> shuffledSongs = model.shufflePlayLists(namePlay);
 									System.out.println("\nShuffled playlist:\n");
+
+									uniqueSongs.clear();
 									for (Song s : shuffledSongs) {
-										System.out.println(s.printSong());
+										String songIdentifier = s.getTitle() + "," + s.getArtist() + ","
+												+ s.getAlbum().getTitle();
+										if (uniqueSongs.add(songIdentifier)) {
+											System.out.println(s.printSong());
+										}
 									}
 								} else if (response.equals("no")) {
 									System.out.println("Playlist not shuffled.\n");

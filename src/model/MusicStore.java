@@ -17,78 +17,73 @@ public class MusicStore {
 	private ArrayList<Album> albumList;
 	private ArrayList<Song> songList;
 
-	
-	/* CONSTRUCTOR*/
+	/* CONSTRUCTOR */
 	public MusicStore() {
 		this.albumList = new ArrayList<Album>();
 		this.songList = new ArrayList<Song>();
 		loadStore();
-	}  
-	
+	}
+
 	// loadStore() -- reads from albums.txt and creates album objects for each line
 	public void loadStore() {
-		
-		String file = "src/albums/albums.txt";  // Relative path from src to albums folder
 
-		
+		String file = "src/albums/albums.txt"; // Relative path from src to albums folder
+
 		try {
 			Scanner scanner = new Scanner(new File(file));
-			
+
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				String[] split = line.split(",");
-				
+
 				if (split.length == 2) {
 					String title = split[0].trim();
 					String artist = split[1].trim();
-					 
+
 					Album album = new Album(title, artist);
 					addAlbum(album);
-					
+
 					songFile(album);
-					
+
 					addSongs(album);
-					
+
 				} else {
 					System.out.println("Invalid line");
 				}
 			}
-			
+
 			scanner.close();
 		} catch (FileNotFoundException exception) {
 			System.out.println("File does not exist");
 			exception.printStackTrace();
 		}
-		
-		
-		
+
 	}
-	
+
 	// songFile(Album album) -- adds the songs to the music store from each album
 	private void songFile(Album album) {
-		String file = "src/albums/" + album.getTitle() + "_" + album.getArtist() +".txt";
-		
+		String file = "src/albums/" + album.getTitle() + "_" + album.getArtist() + ".txt";
+
 		try {
 			Scanner scanner = new Scanner(new File(file));
-			
+
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				String[] split = line.split(",", 4);
-				
-				if(split.length == 4) {
+
+				if (split.length == 4) {
 					album.setGenre(split[2].trim());
 					album.setYear(Integer.parseInt(split[3].trim()));
 				}
-				
+
 				while (scanner.hasNextLine()) {
 					String songLine = scanner.nextLine().trim();
-					if(!songLine.isEmpty()) {
+					if (!songLine.isEmpty()) {
 						Song song = new Song(songLine, album.getArtist(), album);
 						album.addSong(song);
 					}
 				}
-				
-				
+
 			}
 			scanner.close();
 		} catch (FileNotFoundException exception) {
@@ -96,43 +91,44 @@ public class MusicStore {
 			exception.printStackTrace();
 		}
 	}
-		
+
 	// addAlbum(Album album) -- adds an album to the music stores album list
 	public void addAlbum(Album album) {
 		albumList.add(album);
 	}
-	
+
 	/* GETTERS */
-	public ArrayList<Album> getAlbumList(){
+	public ArrayList<Album> getAlbumList() {
 		ArrayList<Album> albums = new ArrayList<Album>();
 		for (Album a : albumList) {
 			albums.add(a.deepCopy());
 		}
 		return albums;
 	}
-	
 
-	public ArrayList<Song> getSongList(){
+	public ArrayList<Song> getSongList() {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for (Song s : songList) {
 			songs.add(new Song(s));
 		}
 		return songs;
 	}
-	
-	// addSongs(Album album) -- adds the songs from album to the music store song list
+
+	// addSongs(Album album) -- adds the songs from album to the music store song
+	// list
 	public void addSongs(Album album) {
 		ArrayList<Song> albumsSongs = album.getSongList();
-		for (Song s: albumsSongs) {
+		for (Song s : albumsSongs) {
 			songList.add(s);
 		}
 	}
-	
-	// searchSongsByTitle (String title) -- searches for a song by title and returns the song info if found
-	public String searchSongsByTitle (String title) {
+
+	// searchSongsByTitle (String title) -- searches for a song by title and returns
+	// the song info if found
+	public String searchSongsByTitle(String title) {
 		boolean found = false;
 		String out = "";
-		for(Song s: songList) {
+		for (Song s : songList) {
 			if (s.getTitle().equals(title)) {
 				found = true;
 				out += s.printSong();
@@ -143,25 +139,26 @@ public class MusicStore {
 		}
 		return out;
 	}
-	
-	//searchSongsByArtist (String artist) -- returns songs by artist if there are any 
-	public String searchSongsByArtist (String artist) {
+
+	// searchSongsByArtist (String artist) -- returns songs by artist if there are
+	// any
+	public String searchSongsByArtist(String artist) {
 		boolean found = false;
 		String out = "";
-		for(Song s: songList) {
+		for (Song s : songList) {
 			if (s.getArtist().equals(artist)) {
 				found = true;
 				out += s.printSong() + "\n";
 			}
-			
+
 		}
 		if (found == false) {
 			out += "This artist does not exist in the music store.";
 		}
 		return out;
 	}
-	
-	// String searchAlbumByTitle(String title) -- return albums that have the title 
+
+	// String searchAlbumByTitle(String title) -- return albums that have the title
 	public ArrayList<Album> searchAlbumByTitle(String title) {
 		ArrayList<Album> matches = new ArrayList<Album>();
 		for (Album a : albumList) {
@@ -171,9 +168,9 @@ public class MusicStore {
 		}
 		return matches;
 	}
-	
+
 	// searchAlbumByArtist(String artist) -- returns albums by artist
-	public ArrayList<Album>  searchAlbumByArtist(String artist) {
+	public ArrayList<Album> searchAlbumByArtist(String artist) {
 		ArrayList<Album> matches = new ArrayList<Album>();
 		for (Album a : albumList) {
 			if (a.getTitle().equals(artist)) {
@@ -182,8 +179,5 @@ public class MusicStore {
 		}
 		return matches;
 	}
-	
 
-
-	
 }

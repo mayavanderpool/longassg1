@@ -194,7 +194,7 @@ public class LibraryModel {
 	public ArrayList<Album> searchAlbumByArtist(String artist) {
 		ArrayList<Album> matches = new ArrayList<Album>();
 		for (Album a : albums) {
-			if (a.getTitle().equals(artist)) {
+			if (a.getArtist().equals(artist)) {
 				matches.add(a);
 			}
 		}

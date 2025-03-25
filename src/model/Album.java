@@ -27,7 +27,7 @@ public class Album {
 		this.genre = "genre";
 		this.songList = new ArrayList<Song>();
 	}
-	
+
 	public Album deepCopy() {
 		Album copy = new Album(this.getTitle(), this.getArtist());
 		copy.setGenre(this.genre);
@@ -59,11 +59,11 @@ public class Album {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
+
 	// getSongList() - return list of songs in the album
 	public ArrayList<Song> getSongList() {
 		ArrayList<Song> songs = new ArrayList<Song>();
@@ -80,11 +80,11 @@ public class Album {
 
 	// printAlbum() -- prints the album info as well as all songs on the album
 	public String printAlbum() {
-		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear() + "\n";
+		String albumInfo = this.getTitle() + "," + this.getArtist() + "," + this.getGenre() + "," + this.getYear()
+				+ "\n";
 
 		return albumInfo;
-		
+
 	}
-	
 
 }
