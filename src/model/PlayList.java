@@ -19,6 +19,11 @@ public class PlayList {
         this.playlist = new ArrayList<Song>();
         this.name = name;
     }
+
+	/* GETTER */
+    public String getName() {
+        return name;
+    }
     
     //deepCopy() - returns a deep copy of the playlist object
     public PlayList deepCopy() {
@@ -29,11 +34,6 @@ public class PlayList {
     		
     	}
     	return copy;
-    }
-
-    //getter
-    public String getName() {
-        return name;
     }
 
     //getPlaylist() - returns an arraylist of song objects 

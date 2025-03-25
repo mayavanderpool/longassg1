@@ -1,16 +1,12 @@
 {
+  "maya" : {
+    "username" : "maya",
+    "hashedPwd" : "3mSa14r432T1NE6LxtUH2edonoOSYt/p6/jTkj/7JTI=",
+    "salt" : "JTnmC8T0WwMMxxx2IxmBeA=="
+  },
   "h" : {
     "username" : "h",
-    "hashedPwd" : "RR2PNBRRT5RlWZfGmwrNElg1b0FxABl2sDe9MPig6WY=",
-    "salt" : "e/Dq3RF2K+Qi0w7hjR+alg=="
-  "pitaa" : {
-    "username" : "pitaa",
-    "hashedPwd" : "NMVhxFq1Y0CycgiJ5EwU63Gm+qEjV9ZAgoTiWCiBBRw=",
-    "salt" : "MMHdI2vqhhzuKMtKE8Lp3w=="
-  },
-  "daniela" : {
-    "username" : "daniela",
-    "hashedPwd" : "EFMaEd5wzRFwYLbWnvCCk2dYQ5WjRfNYO5ab3JEufG8=",
-    "salt" : "NwI5ZmtZjZxErqLPdtjdbA=="
+    "hashedPwd" : "HVqdfHryRKXiMYk1FBdCyCB8K8ulUs29I19WDLK2IZw=",
+    "salt" : "KRVeS4RVJFuv1hJtIOCtzg=="
   }
 }

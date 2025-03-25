@@ -87,6 +87,7 @@ public class Song {
     	System.out.println("\n" + this.title + " is now playing........ \n");
     }
     
+	//getPlays() - get the number of times a song is played
     public int getPlays() {
     	return this.plays;
     }

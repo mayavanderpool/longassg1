@@ -64,6 +64,7 @@ public class Album {
 		this.genre = genre;
 	}
 	
+	// getSongList() - return list of songs in the album
 	public ArrayList<Song> getSongList() {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for (Song s : songList) {

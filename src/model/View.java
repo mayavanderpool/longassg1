@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class View {
 
+	/* INSTANCE VARIABLES */
 	private Scanner scanner;
 	private LibraryModel model;
 	private MusicStore store;
@@ -26,8 +27,9 @@ public class View {
 		this.scanner = new Scanner(System.in);
 	}
 
+	// run() - begins program
 	public void run() {
-		// Start with login
+
 		login();
 
 		boolean inputing = true;
@@ -79,6 +81,7 @@ public class View {
 		}
 	}
 
+	// removes a song/album from library
 	private void removeFromLib() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Remove song");
@@ -112,6 +115,7 @@ public class View {
 		}
 	}
 
+	// playSong() - plays a song in the user library
 	private void playSong() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -121,29 +125,28 @@ public class View {
 		} else {
 			for (Song s : songs) {
 				s.playSong();
-                model.addPlay(s);
+				model.addPlay(s);
 			}
 		}
 	}
 
-	// Modified to return a boolean indicating if the program should exit completely
+	// logout() - logs a user out of the library and brings them back to login
 	private boolean logout() {
-		// Save the current user's library
+
 		if (currentUser != null) {
 			UserLibrary.saveUserLibrary(currentUser, model);
 			System.out.println("\nLogging out " + currentUser + ".\n");
 
-			// Clear current user and reset model
 			currentUser = null;
 			model = new LibraryModel();
 
-			// Return to login screen
 			login();
-			return false; // Don't exit the program, a new user is logging in
+			return false;
 		}
-		return true; // Default exit if currentUser is null
+		return true;
 	}
 
+	// rateSong() - allows client to rate song
 	private void rateSong() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -168,6 +171,7 @@ public class View {
 		}
 	}
 
+	// markFav() - allows client to mark a song as favorite
 	private void markFav() {
 		System.out.println("Enter song title: ");
 		String songName = scanner.nextLine().trim();
@@ -183,6 +187,7 @@ public class View {
 		}
 	}
 
+	// addOrRemovePlaylist() - add or remove songs from the playlist in library
 	private void addOrRemovePlaylist() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add songs");
@@ -231,6 +236,7 @@ public class View {
 		}
 	}
 
+	// createPlaylist() - create a new playlist
 	private void createPlaylist() {
 		System.out.println("Enter playlist name: ");
 		String name = scanner.nextLine().trim();
@@ -239,6 +245,7 @@ public class View {
 		System.out.println("\nNew Playlist: '" + name + "' created \n");
 	}
 
+	// seeLibrary() - view the library
 	private void seeLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - See songs");
@@ -304,13 +311,14 @@ public class View {
 		}
 	}
 
+	// seeSongs() - choose how to see songs in the library outputted by different
+	// sorting methods
 	private void seeSongs() {
 		System.out.println("See songs sorted by: ");
 		System.out.println("1 - Title");
 		System.out.println("2 - Artist");
 		System.out.println("3 - Rating");
 		System.out.println("4 - Shuffled");
-        System.out.println("5");
 		System.out.println("Enter your choice: ");
 
 		String choice = scanner.nextLine().trim();
@@ -363,23 +371,24 @@ public class View {
 					System.out.println(s.printSong() + "\n");
 				}
 				break;
-            case "5":
-                model.sortSongPlays();
-                ArrayList<Song> list3 = model.getSongs();
-                if (list3.size() != 0) {
-                    System.out.println("\nSongs: \n");
-                } else {
-                    System.out.println("\nNo songs in library \n");
-                }
-                for (Song s : list3) {
-                    System.out.println(s.printSong() + "Played: " + s.getPlays() + "\n");
-                }
-                break;
+			case "5":
+				model.sortSongPlays();
+				ArrayList<Song> list3 = model.getSongs();
+				if (list3.size() != 0) {
+					System.out.println("\nSongs: \n");
+				} else {
+					System.out.println("\nNo songs in library \n");
+				}
+				for (Song s : list3) {
+					System.out.println(s.printSong() + "Played: " + s.getPlays() + "\n");
+				}
+				break;
 			default:
 				System.out.println("\nInvalid Entry\n");
 		}
 	}
 
+	// addtoLibrary() - add songs or albums from the music store to library
 	private void addToLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Add song");
@@ -413,6 +422,7 @@ public class View {
 		}
 	}
 
+	// searchLibrary() - search for specific songs, albums, and playlists in library
 	private void searchLibrary() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -470,7 +480,6 @@ public class View {
 				System.out.println("Enter playlist name: ");
 				String name = scanner.nextLine().trim();
 
-				// Check if it's the Top Rated playlist first
 				if (name.equals("Top Rated")) {
 					// Force update of Top Rated playlist
 					PlayList topRatedList = model.topRated();
@@ -485,7 +494,6 @@ public class View {
 							System.out.println(s.printSong());
 						}
 
-						// Ask about shuffling
 						System.out.println("\nWould you like to shuffle this playlist? (yes/no) \n");
 						String response = scanner.nextLine().trim().toLowerCase();
 
@@ -502,7 +510,6 @@ public class View {
 						}
 					}
 				} else {
-					// Original code for other playlists
 					ArrayList<String> list = model.getPlaylists();
 					boolean playlistFound = false;
 
@@ -557,6 +564,7 @@ public class View {
 		}
 	}
 
+	// searchMusicStore() - search for available songs and albums
 	private void searchMusicStore() {
 		System.out.println("Menu: ");
 		System.out.println("1 - Search song by title");
@@ -597,6 +605,7 @@ public class View {
 		}
 	}
 
+	// displayOptions() - show the client options
 	private void displayOptions() {
 		System.out.println("How can I help you today?");
 		System.out.println("Menu:");
@@ -614,6 +623,8 @@ public class View {
 		System.out.println("11 - Logout");
 	}
 
+	// login() - allows user to login to music library can create users saving them
+	// to database
 	public void login() {
 		boolean loginSuccessful = false;
 
@@ -652,6 +663,7 @@ public class View {
 		}
 	}
 
+	// main(String[] args) - entry point of program
 	public static void main(String[] args) {
 		View view = new View();
 		view.run();

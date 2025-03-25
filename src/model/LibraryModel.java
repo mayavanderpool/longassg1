@@ -28,6 +28,7 @@ public class LibraryModel {
 	private PlayList recentPlays;
 	private PlayList mostPlayed;
 
+	/*CONSTRUCTOR */
 	public LibraryModel() {
 		this.songs = new ArrayList<Song>();
 		this.playLists = new ArrayList<PlayList>();
@@ -42,7 +43,8 @@ public class LibraryModel {
 
 	}
 
-	public Stack<Song> getPlayed(){
+	/* GETTER */
+	public Stack<Song> getPlayed() {
 		return played;
 	}
 
@@ -65,6 +67,7 @@ public class LibraryModel {
 		return found;
 	}
 
+	// removeSong(String song) - remove inputted song from library
 	public boolean removeSong(String song) {
 		boolean found = false;
 
@@ -77,8 +80,7 @@ public class LibraryModel {
 		return found;
 	}
 
-
-
+	// removeAlbum(String album) _ remove inputted album from library
 	public boolean removeAlbum(String album) {
 		boolean found = false;
 
@@ -107,7 +109,6 @@ public class LibraryModel {
 			if (album.equals(a.getTitle())) {
 				found = true;
 
-
 				albums.add(a.deepCopy());
 				for (Song s : a.getSongList()) {
 					songs.add(s);
@@ -120,19 +121,19 @@ public class LibraryModel {
 		return found;
 	}
 
+	// shuffleSongs() - shuffle the songs in library
 	public ArrayList<Song> shuffleSongs() {
 		Collections.shuffle(songs);
 		return songs;
 	}
 
+	// shufflePlayLists(String name) - shuffles the songs in a playlist
 	public ArrayList<Song> shufflePlayLists(String name) {
 		PlayList list = getPlayList(name);
 		ArrayList<Song> listSongs = list.getPlaylist();
 		Collections.shuffle(listSongs);
 		return listSongs;
 	}
-
-	
 
 	// getSong(String title) - adds a song to the arraylist of songs
 	public ArrayList<Song> getSong(String title) {
@@ -147,7 +148,7 @@ public class LibraryModel {
 
 	// PlayList(String name) - returns a deep copy of the a PlayList object
 	public PlayList getPlayList(String name) {
-		if(name.equals("Top Rated")){
+		if (name.equals("Top Rated")) {
 			return topRated();
 		}
 
@@ -213,13 +214,12 @@ public class LibraryModel {
 
 	// getPlaylists() - returns an arraylist of strings from the library
 	public ArrayList<String> getPlaylists() {
-		if(!playLists.contains(topRated)){
+		if (!playLists.contains(topRated)) {
 			addPlaylist(topRated);
 		}
 		recentPlays();
 		mostPlayed();
 		genrePlaylists();
-		
 
 		topRated();
 
@@ -231,60 +231,65 @@ public class LibraryModel {
 		return list;
 	}
 
-	public void recentPlays(){
+	// recentPlays() - adds songs to recently played playlist
+	public void recentPlays() {
 		if (!playLists.contains(recentPlays)) {
 			addPlaylist(recentPlays);
 		}
-		while(recentPlays.getPlaylist().size() <= 10 && !played.empty()){
+		while (recentPlays.getPlaylist().size() <= 10 && !played.empty()) {
 			recentPlays.addSong(played.pop());
 		}
 	}
 
-	public void genrePlaylists(){
+	// genrePlaylists() - makes a hashmap for genre playlist
+	public void genrePlaylists() {
 		Map<String, Integer> genres = new HashMap<>();
-		for (Song s : songs){
+		for (Song s : songs) {
 			String genre = s.getGenre();
-			genres.put(genre, genres.getOrDefault(genre, 0) +1);
+			genres.put(genre, genres.getOrDefault(genre, 0) + 1);
 		}
-		for(Map.Entry<String, Integer> entry : genres.entrySet()){
-			if(entry.getValue() > 10){
+		for (Map.Entry<String, Integer> entry : genres.entrySet()) {
+			if (entry.getValue() > 10) {
 				makeGenrePlay(entry.getKey());
 			}
 		}
 	}
 
-	public void makeGenrePlay(String genre){
+	// makeGenrePlay(String genre) - generates automatic playlist for any genre that
+	// has at least 10 songs
+	public void makeGenrePlay(String genre) {
 		PlayList newG = new PlayList(genre);
 		addPlaylist(newG);
-		for(Song s : songs){
-			if(s.getGenre().compareTo(genre) == 0){
+		for (Song s : songs) {
+			if (s.getGenre().compareTo(genre) == 0) {
 				newG.addSong(s);
 			}
 		}
-		}
+	}
 
-	public void mostPlayed(){
+	// mostPlayed() - adds most frequently played playlist to playlists
+	public void mostPlayed() {
 		if (!playLists.contains(mostPlayed)) {
 			addPlaylist(mostPlayed);
 		} else {
-			for(Song s : mostPlayed.getPlaylist()){
+			for (Song s : mostPlayed.getPlaylist()) {
 				mostPlayed.removeSong(s);
 			}
 		}
 		sortSongPlays();
-			for(Song s : songs){
-				if(mostPlayed.getPlaylist().size() <= 10 && s.getPlays() != 0){
-						mostPlayed.addSong(s);
-				}
+		for (Song s : songs) {
+			if (mostPlayed.getPlaylist().size() <= 10 && s.getPlays() != 0) {
+				mostPlayed.addSong(s);
 			}
 		}
-	
+	}
 
-	// getFavorites() = returns an arraylist of songs of the favorited songs
+	// getFavorites() - returns an arraylist of songs of the favorited songs
 	public ArrayList<Song> getFavorites() {
 		return this.favorites;
 	}
 
+	// favSongs(Song song) - creates a playlist of favorite songs
 	public PlayList favSongs(Song song) {
 		if (!playLists.contains(favSongs)) {
 			addPlaylist(favSongs);
@@ -294,19 +299,18 @@ public class LibraryModel {
 		return favSongs.deepCopy();
 	}
 
-	public PlayList topRated(){
-		if(!playLists.contains(topRated)){
+	// topRated() - creates playlist of top rated songs
+	public PlayList topRated() {
+		if (!playLists.contains(topRated)) {
 			addPlaylist(topRated);
 		}
-		for(Song s : songs){
-			if (s.getRating() >= 4 && !(topRated.getPlaylist().contains(s))){
+		for (Song s : songs) {
+			if (s.getRating() >= 4 && !(topRated.getPlaylist().contains(s))) {
 				topRated.addSong(s);
 			}
 		}
 		return topRated.deepCopy();
 	}
-
-
 
 	// getArtists() - returns an arraylist of strings of the artists in the library
 	public ArrayList<String> getArtists() {
@@ -326,15 +330,18 @@ public class LibraryModel {
 		return list;
 	}
 
-	public void addPlay(Song song){
+	// addPlay(Song song) - pushes song on to the stack
+	public void addPlay(Song song) {
 		played.push(song);
 	}
 
+	// addFavorite(Song song) - add song to favorites
 	public void addFavorite(Song song) {
 		favorites.add(song);
 		favSongs(song);
 	}
 
+	// searchSongByGenre(String genre) - allows user to search for song by genre
 	public String searchSongByGenre(String genre) {
 		boolean found = false;
 		String out = "";
@@ -350,6 +357,7 @@ public class LibraryModel {
 		return out;
 	}
 
+	// SortSongsTitle() - allows user to sort songs in library by title
 	public void sortSongsTitle() {
 		int j = songs.size();
 		boolean swap = false;
@@ -367,6 +375,7 @@ public class LibraryModel {
 		} while (swap);
 	}
 
+	// SortSongsArtist() - allows user to sort songs in library by artist
 	public void sortSongsArtist() {
 		int j = songs.size();
 		boolean swap = false;
@@ -384,6 +393,7 @@ public class LibraryModel {
 		} while (swap);
 	}
 
+	// sortSongsRating() - allows user to sort songs in library by rating
 	public void sortSongsRating() {
 		int j = songs.size();
 		boolean swap = false;
@@ -401,6 +411,7 @@ public class LibraryModel {
 		} while (swap);
 	}
 
+	// sortSongPlays() - allows user to sort songs in library by frequency played
 	public void sortSongPlays() {
 		int j = songs.size();
 		boolean swap = false;
