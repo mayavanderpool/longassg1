@@ -10,6 +10,12 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+* File: ueserTest.java
+* Author: Rees Hart and Maya Vanderpool
+* Purpose: This test file tests the various methods in the user.java class
+*  and acheives 90% (or greater) code coverage.  
+*/
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
